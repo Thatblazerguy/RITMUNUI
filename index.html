@@ -1,0 +1,1134 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="theme-light.css">
+<script src="theme-engine.js"></script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>RITMUNSOC | Diplomacy Refracted</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:ital,wght@0,600;0,700;1,600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container": "#231f1c",
+                    "on-secondary-fixed": "#161a32",
+                    "on-primary": "#2e2e48",
+                    "surface-bright": "#3d3835",
+                    "surface-container-low": "#1f1b18",
+                    "primary-fixed-dim": "#c5c3e4",
+                    "on-error": "#690005",
+                    "on-secondary": "#2b2f48",
+                    "tertiary-container": "#2b212b",
+                    "on-background": "#eae1dc",
+                    "on-error-container": "#ffdad6",
+                    "outline": "#928f98",
+                    "error-container": "#93000a",
+                    "surface": "#161310",
+                    "surface-variant": "#383431",
+                    "on-surface-variant": "#c8c5ce",
+                    "on-tertiary": "#372d37",
+                    "on-primary-fixed-variant": "#44445f",
+                    "inverse-on-surface": "#34302c",
+                    "tertiary-fixed-dim": "#d2c2cf",
+                    "primary": "#c5c3e4",
+                    "on-surface": "#eae1dc",
+                    "error": "#ffb4ab",
+                    "surface-container-highest": "#383431",
+                    "outline-variant": "#47464d",
+                    "secondary-container": "#414560",
+                    "on-primary-container": "#8a89a7",
+                    "inverse-surface": "#eae1dc",
+                    "on-secondary-fixed-variant": "#414560",
+                    "surface-dim": "#161310",
+                    "secondary-fixed-dim": "#c1c4e5",
+                    "primary-fixed": "#e2dfff",
+                    "secondary": "#c1c4e5",
+                    "tertiary": "#d2c2cf",
+                    "on-primary-fixed": "#191932",
+                    "primary-container": "#22223b",
+                    "on-tertiary-fixed": "#221922",
+                    "on-secondary-container": "#b0b3d3",
+                    "surface-container-high": "#2d2926",
+                    "on-tertiary-container": "#958793",
+                    "surface-tint": "#c5c3e4",
+                    "background": "#161310",
+                    "tertiary-fixed": "#eedeeb",
+                    "secondary-fixed": "#dee0ff",
+                    "on-tertiary-fixed-variant": "#4e434e",
+                    "inverse-primary": "#5c5c78",
+                    "surface-container-lowest": "#110e0b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "section-gap": "4rem",
+                    "glass-padding": "1.25rem",
+                    "container-padding": "2rem",
+                    "gutter": "1.5rem"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "caption": ["Inter"],
+                    "display-lg": ["Playfair Display"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Playfair Display"],
+                    "display-lg-mobile": ["Playfair Display"],
+                    "headline-sm": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "500"}],
+                    "caption": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "headline-sm": ["20px", {"lineHeight": "1.5", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #161310;
+            overflow-x: hidden;
+        }
+        .liquid-glass {
+            backdrop-filter: blur(20px);
+            background: rgba(34, 34, 59, 0.4);
+            border: 1px solid rgba(154, 140, 152, 0.2);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .carousel-container .liquid-glass:hover {
+            transform: scale(1.05);
+            border-color: rgba(201, 173, 167, 0.6);
+            box-shadow: 0 0 20px rgba(201, 173, 167, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+        }
+        .liquid-glass-floating {
+            backdrop-filter: blur(40px);
+            background: rgba(74, 78, 105, 0.6);
+            border: 1px solid rgba(154, 140, 152, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 2px rgba(255, 255, 255, 0.15);
+        }
+        .reflective-edge {
+            border-top: 1px solid rgba(154, 140, 152, 0.5);
+            border-left: 1px solid rgba(154, 140, 152, 0.3);
+        }
+        canvas#bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .command-block {
+            background: rgba(17, 14, 11, 0.8);
+            border-left: 4px solid #c5c3e4;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Carousel */
+        .carousel-container {
+            mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+        }
+        .carousel-scroller {
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+        .carousel-track {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 1.5rem;
+            padding: 0.5rem 2rem 1.25rem;
+            width: max-content;
+        }
+        /* Custom scrubber */
+        .carousel-scrubber {
+            -webkit-appearance: none;
+            appearance: none;
+            display: block;
+            width: calc(100% - 4rem);
+            margin: 0.5rem auto 0;
+            height: 3px;
+            background: rgba(197,195,228,0.1);
+            border-radius: 2px;
+            outline: none;
+            cursor: pointer;
+        }
+        .carousel-scrubber::-webkit-slider-runnable-track {
+            height: 3px;
+            background: rgba(197,195,228,0.1);
+            border-radius: 2px;
+        }
+        .carousel-scrubber::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 52px;
+            height: 3px;
+            background: rgba(197,195,228,0.5);
+            border-radius: 2px;
+            cursor: grab;
+            margin-top: 0;
+            transition: background 0.2s;
+        }
+        .carousel-scrubber::-webkit-slider-thumb:hover { background: rgba(197,195,228,0.85); }
+        .carousel-scrubber::-webkit-slider-thumb:active { cursor: grabbing; background: #c5c3e4; }
+        .carousel-scrubber::-moz-range-track {
+            height: 3px;
+            background: rgba(197,195,228,0.1);
+            border-radius: 2px;
+        }
+        .carousel-scrubber::-moz-range-thumb {
+            width: 52px; height: 3px;
+            background: rgba(197,195,228,0.5);
+            border-radius: 2px; border: none;
+            cursor: grab;
+        }
+        .carousel-scrubber::-moz-range-thumb:active { cursor: grabbing; background: #c5c3e4; }
+        
+
+
+        /* Navbar ticker */
+        @keyframes ticker-rtl {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .ticker-mask {
+            mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+        }
+        .ticker-track {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            width: max-content;
+            animation: ticker-rtl 32s linear infinite;
+            will-change: transform;
+        }
+        .ticker-track > span {
+            display: inline-flex;
+            align-items: center;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .ticker-wrap:hover .ticker-track {
+            animation-play-state: paused;
+        }
+        .mobile-menu-overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+        .mobile-menu-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .mobile-menu-drawer {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu-drawer.open {
+            transform: translateX(0);
+        }
+        .mobile-menu-drawer {
+            background:
+                radial-gradient(circle at 15% 10%, rgba(197, 195, 228, 0.2), transparent 45%),
+                radial-gradient(circle at 85% 90%, rgba(193, 196, 229, 0.18), transparent 42%),
+                rgba(45, 41, 38, 0.92);
+            box-shadow: -24px 0 60px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+        .mobile-menu-link {
+            border: 1px solid rgba(71, 70, 77, 0.55);
+            background: rgba(17, 14, 11, 0.42);
+            backdrop-filter: blur(10px);
+            border-radius: 9999px;
+            padding: 0.72rem 1rem;
+            transition: all 0.25s ease;
+        }
+        .mobile-menu-link:hover {
+            color: #c5c3e4;
+            border-color: rgba(197, 195, 228, 0.55);
+            background: rgba(34, 34, 59, 0.45);
+            transform: translateX(-3px);
+        }
+        .mobile-menu-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(154, 140, 152, 0.6), transparent);
+        }
+        .nav-link {
+            position: relative;
+            transition: color 180ms cubic-bezier(0.23, 1, 0.32, 1), transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -7px;
+            height: 2px;
+            border-radius: 9999px;
+            background: rgba(197, 195, 228, 0.9);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .nav-link:hover::after,
+        .nav-link[data-active="true"]::after {
+            transform: scaleX(1);
+        }
+        .nav-link:active {
+            transform: scale(0.97);
+        }
+        .mobile-nav-link {
+            transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), color 180ms cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .mobile-nav-link:active {
+            transform: scale(0.98);
+        }
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(to right, #c5c3e4, #e2dfff);
+            z-index: 9999;
+            transition: width 0.1s ease;
+            box-shadow: 0 0 10px rgba(197, 195, 228, 0.5);
+        }
+        /* Cursor Orb */
+        .cursor-orb {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(197, 195, 228, 0.15) 0%, rgba(197, 195, 228, 0) 70%);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 1;
+            transition: width 0.3s, height 0.3s;
+        }
+        /* Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Gradient Border Card */
+        .gradient-border-card {
+            position: relative;
+            background: #161310;
+            border-radius: 1.5rem;
+            z-index: 1;
+        }
+        .gradient-border-card::before {
+            content: "";
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, rgba(197, 195, 228, 0.1), rgba(197, 195, 228, 0.5), rgba(197, 195, 228, 0.1));
+            z-index: -1;
+            border-radius: calc(1.5rem + 2px);
+            transition: opacity 0.3s ease;
+            opacity: 0.5;
+        }
+        .gradient-border-card:hover::before {
+            opacity: 1;
+        }
+    
+        /* ── Native cross-document View Transitions (Chrome 126+) ── */
+        @view-transition { navigation: auto; }
+
+        /* ── Page content ── */
+        main, .page-content-root {
+            contain: layout;
+        }
+
+        /* ── Outgoing page content ── */
+        @keyframes vt-page-out {
+            from { opacity: 1; transform: translateY(0) scale(1); }
+            to   { opacity: 0; transform: translateY(-16px) scale(0.985); }
+        }
+
+        /* ── Incoming page content ── */
+        @keyframes vt-page-in {
+            from { opacity: 0; transform: translateY(24px) scale(0.985); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        ::view-transition-old(page-content) {
+            animation: vt-page-out 240ms cubic-bezier(0.4, 0, 0.2, 1) both;
+        }
+        ::view-transition-new(page-content) {
+            animation: vt-page-in  460ms cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        /* Navbar locks in place */
+        ::view-transition-old(site-header),
+        ::view-transition-new(site-header) { animation: none; }
+
+        /* Logo glow sweep */
+        @keyframes vt-logo-glow-native {
+            0%   { filter: drop-shadow(0 0 0px  rgba(197,195,228,0)); }
+            50%  { filter: drop-shadow(0 0 30px rgba(197,195,228,1)); }
+            100% { filter: drop-shadow(0 0 4px  rgba(197,195,228,0.15)); }
+        }
+        ::view-transition-old(site-logo) { animation: none; }
+        ::view-transition-new(site-logo) {
+            animation: vt-logo-glow-native 600ms cubic-bezier(0.22,1,0.36,1) both;
+        }
+
+        /* Nav pill stays locked */
+        ::view-transition-old(nav-pill),
+        ::view-transition-new(nav-pill) { animation: none; }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+        }
+
+    
+        /* Page transition loader */
+        @keyframes intense-glow {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(197, 195, 228, 0.4)); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 60px rgba(197, 195, 228, 1)); transform: scale(1.05); }
+        }
+        .animate-glow {
+            animation: intense-glow 2s ease-in-out infinite;
+            will-change: transform, filter;
+        }
+</style>
+</head>
+<body class="text-on-surface selection:bg-primary/30">
+    <!-- Loading Overlay (Reused for Transitions) -->
+    <div id="page-loader" class="fixed inset-0 z-[100] bg-background flex flex-col items-center justify-center transition-opacity duration-700 ease-in-out">
+        <img src="RITMUNLogo.png" alt="Loading..." class="h-32 md:h-48 w-auto animate-glow">
+    </div>
+
+
+<!-- Global Premium UI Elements -->
+<div class="scroll-progress" id="scroll-progress"></div>
+<div class="cursor-orb" id="cursor-orb"></div>
+<canvas id="bg-canvas" width="1280" height="3385"></canvas>
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 px-container-padding py-4 bg-primary-container/40 dark:bg-primary-container/40 backdrop-blur-[20px] border-b border-outline-variant/20 shadow-lg" style="view-transition-name:site-header">
+<div class="flex justify-between items-center">
+<a href="index.html" class="flex items-center gap-3 group cursor-pointer">
+<img src="RITMUNLogo.png" alt="RITMUNSOC Logo" class="h-10 w-auto transition-transform group-hover:scale-105" style="view-transition-name:site-logo">
+<div class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface tracking-tighter transition-colors group-hover:text-primary">RITMUNSOC</div>
+</a>
+<nav class="hidden md:flex items-center gap-8 bg-surface-container-lowest/30 px-6 py-2 rounded-full border border-outline-variant/10 backdrop-blur-md" style="view-transition-name:nav-pill">
+<a class="nav-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:backdrop-blur-[40px] transition-all duration-300" href="index.html" data-page="index">Home</a>
+<a class="nav-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:backdrop-blur-[40px] transition-all duration-300" href="committee.html" data-page="committees">Committees</a>
+<a class="nav-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:backdrop-blur-[40px] transition-all duration-300" href="sec.html" data-page="secretariat">Secretariat</a>
+<a class="nav-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:backdrop-blur-[40px] transition-all duration-300" href="registration.html" data-page="register">Register</a>
+<a class="nav-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:backdrop-blur-[40px] transition-all duration-300" href="#" data-page="history">History</a>
+<a class="nav-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:backdrop-blur-[40px] transition-all duration-300" href="resources.html" data-page="resources">Resources</a>
+</nav>
+<div class="flex items-center gap-2">
+<a class="hidden md:inline-block bg-primary text-on-primary px-6 py-2 rounded-full font-label-md text-label-md uppercase tracking-widest active:scale-95 transition-transform hover:shadow-[0_0_20px_rgba(197,195,228,0.4)] text-center" href="login.html">Login</a>
+<button id="mobile-menu-toggle" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-full border border-outline-variant/30 bg-surface-container-lowest/40 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+</div>
+
+</div>
+<div class="ticker-wrap mt-3 h-9 rounded-full border border-outline-variant/20 bg-surface-container-lowest/40 overflow-hidden ticker-mask flex items-center">
+<div class="ticker-track" id="ticker-track">
+<!-- Ticker content will be populated by JavaScript -->
+</div>
+</div>
+</header>
+<div id="mobile-menu-overlay" class="mobile-menu-overlay fixed inset-0 z-[60] bg-black/50 md:hidden"></div>
+<aside id="mobile-menu" class="mobile-menu-drawer fixed top-0 right-0 h-full w-[82%] max-w-[340px] z-[70] md:hidden border-l border-outline-variant/30 p-6 flex flex-col">
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">apps</span>
+<div class="font-display-lg text-[24px] leading-tight text-on-surface tracking-tight">Navigation</div>
+</div>
+<button id="mobile-menu-close" aria-label="Close menu" class="inline-flex items-center justify-center h-9 w-9 rounded-full border border-outline-variant/30 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="mobile-menu-divider mb-6"></div>
+<nav class="flex flex-col gap-3">
+<a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="index.html">Home</a>
+<a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="committee.html">Committees</a>
+<a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="sec.html">Secretariat</a>
+<a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="registration.html">Register</a>
+<a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="#">History</a>
+<a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="resources.html">Resources</a>
+</nav>
+<a class="mt-8 bg-primary/90 text-on-primary px-6 py-3 rounded-full font-label-md text-label-md uppercase tracking-widest active:scale-95 transition-all hover:brightness-110 hover:shadow-[0_0_22px_rgba(197,195,228,0.45)] inline-block text-center" href="login.html">
+    Login
+  </a>
+<p class="mt-5 font-label-md text-[12px] uppercase text-on-surface-variant/75 tracking-[0.22em]">Dialogue.Diplomacy.Leadership</p>
+</aside>
+<main class="relative pt-44 md:pt-40 px-container-padding" style="view-transition-name:page-content">
+<!-- Hero Section -->
+<section class="min-h-[80vh] flex flex-col items-center justify-center text-center max-w-5xl mx-auto mb-section-gap">
+<div class="mb-8 flex justify-center">
+    <img src="RITMUNLogo.png" alt="RITMUNSOC Logo" class="h-40 md:h-52 w-auto drop-shadow-[0_0_40px_rgba(197,195,228,0.5)] animate-float">
+</div>
+<div class="mb-6 inline-flex items-center gap-2 px-4 py-1 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm">
+<span class="material-symbols-outlined text-[18px] text-primary">language</span>
+<span class="font-label-md text-label-md uppercase tracking-widest text-primary">Global Summit 2024</span>
+</div>
+<div class="mb-4">
+<h2 class="font-display-lg text-[80px] md:text-[120px] lg:text-[160px] text-[#eae1dc] font-black leading-none tracking-tighter transition-all duration-500 ease-out hover:scale-[1.05] hover:drop-shadow-[0_0_30px_rgba(197,195,228,0.6)] cursor-default" style="text-shadow: rgba(197, 195, 228, 0.3) 0px 0px 20px;">
+        RITMUNSOC
+    </h2>
+<div class="font-label-md text-[14px] md:text-[16px] tracking-[0.4em] text-[#c8c5ce] uppercase mt-2 mb-8">
+        DIALOGUE. DIPLOMACY. LEADERSHIP.
+    </div>
+</div>
+</section>
+<!-- Bento Grid Features -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-section-gap">
+<div class="md:col-span-4 liquid-glass rounded-[1.5rem] p-8 reflective-edge reveal">
+<span class="material-symbols-outlined text-primary text-4xl mb-6">groups</span>
+<h3 class="font-headline-sm text-headline-sm mb-2">Events</h3>
+<p class="font-display-lg text-[44px] font-bold text-on-surface leading-none"><span class="stat-counter" data-target="15">0</span>+</p>
+</div>
+<div class="md:col-span-4 liquid-glass rounded-[1.5rem] p-8 reflective-edge reveal" style="transition-delay: 100ms;">
+<span class="material-symbols-outlined text-primary text-4xl mb-6">diversity_3</span>
+<h3 class="font-headline-sm text-headline-sm mb-2">Members</h3>
+<p class="font-display-lg text-[44px] font-bold text-on-surface leading-none"><span class="stat-counter" data-target="40">0</span>+</p>
+</div>
+<div class="md:col-span-4 liquid-glass rounded-[1.5rem] p-8 reflective-edge reveal" style="transition-delay: 200ms;">
+<span class="material-symbols-outlined text-primary text-4xl mb-6">workspace_premium</span>
+<h3 class="font-headline-sm text-headline-sm mb-2">Individual Achievements</h3>
+<p class="font-display-lg text-[44px] font-bold text-on-surface leading-none"><span class="stat-counter" data-target="20">0</span>+</p>
+</div>
+<div class="md:col-span-12 liquid-glass rounded-[1.5rem] p-10 reflective-edge flex flex-col items-center justify-center text-center gap-4 reveal">
+<p class="font-display-lg text-[80px] md:text-[120px] lg:text-[140px] text-[#eae1dc] font-black leading-none tracking-tighter transition-all duration-500 ease-out hover:scale-[1.05] hover:drop-shadow-[0_0_30px_rgba(197,195,228,0.6)] cursor-default" style="text-shadow: rgba(197, 195, 228, 0.3) 0px 0px 20px;">
+RITMUN'26
+</p>
+<p class="font-headline-sm text-headline-sm font-bold tracking-[0.2em] text-on-surface">
+COMING SOON
+</p>
+
+<!-- Countdown Timer -->
+<div class="flex gap-4 md:gap-8 my-6">
+    <div class="flex flex-col items-center liquid-glass rounded-xl p-4 md:p-6 w-20 md:w-28 border border-primary/20">
+        <span id="days" class="font-display-lg text-3xl md:text-5xl font-bold text-primary">00</span>
+        <span class="font-label-md text-[10px] md:text-xs uppercase tracking-widest text-on-surface-variant mt-2">Days</span>
+    </div>
+    <div class="flex flex-col items-center liquid-glass rounded-xl p-4 md:p-6 w-20 md:w-28 border border-primary/20">
+        <span id="hours" class="font-display-lg text-3xl md:text-5xl font-bold text-primary">00</span>
+        <span class="font-label-md text-[10px] md:text-xs uppercase tracking-widest text-on-surface-variant mt-2">Hours</span>
+    </div>
+    <div class="flex flex-col items-center liquid-glass rounded-xl p-4 md:p-6 w-20 md:w-28 border border-primary/20">
+        <span id="minutes" class="font-display-lg text-3xl md:text-5xl font-bold text-primary">00</span>
+        <span class="font-label-md text-[10px] md:text-xs uppercase tracking-widest text-on-surface-variant mt-2">Mins</span>
+    </div>
+    <div class="flex flex-col items-center liquid-glass rounded-xl p-4 md:p-6 w-20 md:w-28 border border-primary/20">
+        <span id="seconds" class="font-display-lg text-3xl md:text-5xl font-bold text-primary">00</span>
+        <span class="font-label-md text-[10px] md:text-xs uppercase tracking-widest text-on-surface-variant mt-2">Secs</span>
+    </div>
+</div>
+
+<a class="nav-link bg-primary text-on-primary px-6 py-2 rounded-full font-label-md text-label-md uppercase tracking-widest active:scale-95 transition-transform hover:shadow-[0_0_20px_rgba(197,195,228,0.4)]" href="committee.html">
+Explore Committees
+</a>
+</div>
+</section>
+
+<!-- Achievements Carousel Section -->
+<section class="mb-section-gap carousel-container" id="achievements-section">
+<div class="max-w-7xl mx-auto mb-8">
+<h2 class="font-display-lg text-[48px] font-bold text-[#f2e9e4] text-center w-full">Achievements</h2>
+</div>
+<div class="carousel-scroller" id="achievements-carousel">
+<div class="carousel-track" id="achievements-track">
+<a href="mun-archive.html" class="w-[350px] flex-shrink-0 liquid-glass rounded-xl p-6 reflective-edge card-3d block cursor-pointer">
+<img alt="Achievement" class="w-full h-48 object-cover rounded-lg mb-4 opacity-80 border border-outline-variant/30 pointer-events-none" src="https://lh3.googleusercontent.com/aida/ADBb0uhnXmPwbYFmV60z5OClIB3jQYPAQEC_GUIcIRIzRdonClcWqjTQiUNhqkH9AAyDsCak37GxNQelrtk0BaxW4j44zhOz7mK_V67ut78lErUA2VCumI8YqJi3CPlImmocrEv3GjxosNNrPDvKpEV8bVDR2E2ASd3Jf7z9EPgMm1AzINdI1JuT-rhsfDaiMlmSQx45sIWxucXwaG6d2Dxij77N4JpF0FqN2nuG4Bm61QsdXnesg2C8SyC0XLY">
+<h4 class="font-headline-sm text-lg text-on-surface mb-2 pointer-events-none">Best Delegation - Harvard WorldMUN</h4>
+<p class="font-caption text-on-surface-variant pointer-events-none">Exceptional performance in international diplomacy and strategic resolution crafting.</p>
+</a>
+<a href="mun-archive.html" class="w-[350px] flex-shrink-0 liquid-glass rounded-xl p-6 reflective-edge card-3d block cursor-pointer">
+<img alt="Achievement" class="w-full h-48 object-cover rounded-lg mb-4 opacity-80 border border-outline-variant/30 pointer-events-none" src="https://lh3.googleusercontent.com/aida/ADBb0uhnXmPwbYFmV60z5OClIB3jQYPAQEC_GUIcIRIzRdonClcWqjTQiUNhqkH9AAyDsCak37GxNQelrtk0BaxW4j44zhOz7mK_V67ut78lErUA2VCumI8YqJi3CPlImmocrEv3GjxosNNrPDvKpEV8bVDR2E2ASd3Jf7z9EPgMm1AzINdI1JuT-rhsfDaiMlmSQx45sIWxucXwaG6d2Dxij77N4JpF0FqN2nuG4Bm61QsdXnesg2C8SyC0XLY">
+<h4 class="font-headline-sm text-lg text-on-surface mb-2 pointer-events-none">Outstanding Diplomacy Award</h4>
+<p class="font-caption text-on-surface-variant pointer-events-none">Recognized for bridge-building and multi-lateral consensus during the Global Summit.</p>
+</a>
+<a href="mun-archive.html" class="w-[350px] flex-shrink-0 liquid-glass rounded-xl p-6 reflective-edge card-3d block cursor-pointer">
+<img alt="Achievement" class="w-full h-48 object-cover rounded-lg mb-4 opacity-80 border border-outline-variant/30 pointer-events-none" src="https://lh3.googleusercontent.com/aida/ADBb0uhnXmPwbYFmV60z5OClIB3jQYPAQEC_GUIcIRIzRdonClcWqjTQiUNhqkH9AAyDsCak37GxNQelrtk0BaxW4j44zhOz7mK_V67ut78lErUA2VCumI8YqJi3CPlImmocrEv3GjxosNNrPDvKpEV8bVDR2E2ASd3Jf7z9EPgMm1AzINdI1JuT-rhsfDaiMlmSQx45sIWxucXwaG6d2Dxij77N4JpF0FqN2nuG4Bm61QsdXnesg2C8SyC0XLY">
+<h4 class="font-headline-sm text-lg text-on-surface mb-2 pointer-events-none">Crisis Management Excellence</h4>
+<p class="font-caption text-on-surface-variant pointer-events-none">Navigated complex geopolitical scenarios with unparalleled strategic foresight.</p>
+</a>
+<a href="mun-archive.html" class="w-[350px] flex-shrink-0 liquid-glass rounded-xl p-6 reflective-edge card-3d block cursor-pointer">
+<img alt="Achievement" class="w-full h-48 object-cover rounded-lg mb-4 opacity-80 border border-outline-variant/30 pointer-events-none" src="https://lh3.googleusercontent.com/aida/ADBb0uhnXmPwbYFmV60z5OClIB3jQYPAQEC_GUIcIRIzRdonClcWqjTQiUNhqkH9AAyDsCak37GxNQelrtk0BaxW4j44zhOz7mK_V67ut78lErUA2VCumI8YqJi3CPlImmocrEv3GjxosNNrPDvKpEV8bVDR2E2ASd3Jf7z9EPgMm1AzINdI1JuT-rhsfDaiMlmSQx45sIWxucXwaG6d2Dxij77N4JpF0FqN2nuG4Bm61QsdXnesg2C8SyC0XLY">
+<h4 class="font-headline-sm text-lg text-on-surface mb-2 pointer-events-none">Innovation in Policy Design</h4>
+<p class="font-caption text-on-surface-variant pointer-events-none">Pioneered new frameworks for sustainable development in developing nations.</p>
+</a>
+</div>
+</div>
+<input type="range" class="carousel-scrubber" id="achievements-scrubber" min="0" max="100" value="0" aria-label="Scroll through achievements">
+</section>
+<!-- Events Carousel Section -->
+<section class="mb-section-gap carousel-container" id="events-section">
+<div class="max-w-7xl mx-auto mb-8">
+<h2 class="font-display-lg text-[48px] font-bold text-[#f2e9e4] text-center w-full">Events</h2>
+</div>
+<div class="carousel-scroller" id="events-carousel">
+<div class="carousel-track" id="events-track">
+<a href="mun-archive.html" class="w-[400px] flex-shrink-0 liquid-glass rounded-xl p-6 reflective-edge card-3d block cursor-pointer">
+<img alt="Event" class="w-full h-56 object-cover rounded-lg mb-4 opacity-80 border border-outline-variant/30 pointer-events-none" src="https://lh3.googleusercontent.com/aida/ADBb0uj1M7Un8cktngowzhk8ovYBHIxdIJeYq1ZSzPsNBpBSr080lH2bPjvNFYqkS2BBW2naXBKKL2ChpRHfCsW46XzHj2-CmLHxRORofymVVrIfACwjD76uL1p2-twBkfecWcSqa9e240ddpYxQZFasyBqbYf_HXWE_pgge9Q3YhigvQnl_JEW-m02wBR3ub2STXSAmajhoAz8MTA06lFZZdlNvHKYZCKpf-aS05FLOevoWesp7XaxlBedSZdY">
+<h4 class="font-headline-sm text-lg text-on-surface mb-2 pointer-events-none">UNEP Security Crisis 2026</h4>
+<p class="font-caption text-on-surface-variant pointer-events-none">A high-stakes simulation of environmental security and resource warfare.</p>
+</a>
+<a href="mun-archive.html" class="w-[400px] flex-shrink-0 liquid-glass rounded-xl p-6 reflective-edge card-3d block cursor-pointer">
+<img alt="Event" class="w-full h-56 object-cover rounded-lg mb-4 opacity-80 border border-outline-variant/30 pointer-events-none" src="https://lh3.googleusercontent.com/aida/ADBb0uhFC_XtaqojaLWA5aM_LtCAXDx8cFf6XpG_tNWxTpdG9py-dqPXqGM1jxP7mayzO5Jt5QkdyLk8_h6w6Hdl5nrA-SJmvZEQsWg8hF3A2eeX0R1VulSbffNvNMcsPJQtnD1xsuu_ji2KRl83SdDCAx3XUtJfpq2gZHGkUN2EmDIlZUscLJwgiZINeyYjG9viHv-mHQvFRStR5Ocg3-Xoawkk6OJBkEhoLnJk4uVt0E-bYqyoZAfbZjYikajC">
+<h4 class="font-headline-sm text-lg text-on-surface mb-2 pointer-events-none">Disarmament Summit</h4>
+<p class="font-caption text-on-surface-variant pointer-events-none">Negotiating the future of global security in an era of technological acceleration.</p>
+</a>
+<a href="mun-archive.html" class="w-[400px] flex-shrink-0 liquid-glass rounded-xl p-6 reflective-edge card-3d block cursor-pointer">
+<img alt="Event" class="w-full h-56 object-cover rounded-lg mb-4 opacity-80 border border-outline-variant/30 pointer-events-none" src="https://lh3.googleusercontent.com/aida/ADBb0uj1M7Un8cktngowzhk8ovYBHIxdIJeYq1ZSzPsNBpBSr080lH2bPjvNFYqkS2BBW2naXBKKL2ChpRHfCsW46XzHj2-CmLHxRORofymVVrIfACwjD76uL1p2-twBkfecWcSqa9e240ddpYxQZFasyBqbYf_HXWE_pgge9Q3YhigvQnl_JEW-m02wBR3ub2STXSAmajhoAz8MTA06lFZZdlNvHKYZCKpf-aS05FLOevoWesp7XaxlBedSZdY">
+<h4 class="font-headline-sm text-lg text-on-surface mb-2 pointer-events-none">Maritime Border Dispute</h4>
+<p class="font-caption text-on-surface-variant pointer-events-none">Settling historic territorial claims through advanced naval protocol.</p>
+</a>
+</div>
+</div>
+<input type="range" class="carousel-scrubber" id="events-scrubber" min="0" max="100" value="0" aria-label="Scroll through events">
+</section>
+
+<!-- Testimonials Section -->
+<section class="mb-section-gap reveal relative overflow-hidden">
+<div class="max-w-4xl mx-auto liquid-glass rounded-[2rem] p-10 md:p-16 text-center relative border border-primary/20 shadow-[0_0_30px_rgba(197,195,228,0.05)]">
+    <span class="material-symbols-outlined text-primary/20 text-[80px] absolute top-4 left-8 pointer-events-none">format_quote</span>
+    
+    <div class="testimonial-slider relative min-h-[160px] flex items-center justify-center">
+        <!-- Testimonial 1 -->
+        <div class="testimonial-slide absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-1000 opacity-100 z-10">
+            <p class="font-display-lg text-2xl md:text-3xl text-on-surface mb-6 leading-relaxed italic">"RITMUNSOC provided me with the platform to understand global diplomacy intimately. The debates are rigorous and the community is incredibly supportive."</p>
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center font-bold text-primary">A</div>
+                <div class="text-left">
+                    <h4 class="font-label-md text-on-surface font-bold">Aarav Sharma</h4>
+                    <p class="font-caption text-primary/80">Secretary General, RITMUN'23</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Testimonial 2 -->
+        <div class="testimonial-slide absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-1000 opacity-0 z-0">
+            <p class="font-display-lg text-2xl md:text-3xl text-on-surface mb-6 leading-relaxed italic">"The simulation of crisis committees here is unparalleled. It pushes your strategic thinking to the limit while demanding cooperative leadership."</p>
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center font-bold text-primary">N</div>
+                <div class="text-left">
+                    <h4 class="font-label-md text-on-surface font-bold">Neha Gupta</h4>
+                    <p class="font-caption text-primary/80">Best Delegate, UNSC '24</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Testimonial 3 -->
+        <div class="testimonial-slide absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-1000 opacity-0 z-0">
+            <p class="font-display-lg text-2xl md:text-3xl text-on-surface mb-6 leading-relaxed italic">"From learning how to draft resolutions to making lifelong friends, my journey with RITMUNSOC has been the highlight of my college experience."</p>
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center font-bold text-primary">R</div>
+                <div class="text-left">
+                    <h4 class="font-label-md text-on-surface font-bold">Rohan Mehta</h4>
+                    <p class="font-caption text-primary/80">Under-Secretary General, RITMUN'25</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="flex justify-center gap-2 mt-8 z-20 relative">
+        <button class="testimonial-dot w-2 h-2 rounded-full bg-primary transition-all duration-300"></button>
+        <button class="testimonial-dot w-2 h-2 rounded-full bg-primary/30 transition-all duration-300 hover:bg-primary/60"></button>
+        <button class="testimonial-dot w-2 h-2 rounded-full bg-primary/30 transition-all duration-300 hover:bg-primary/60"></button>
+    </div>
+</div>
+</section>
+
+<!-- Newsletter / CTA -->
+<section class="max-w-4xl mx-auto liquid-glass-floating rounded-[2rem] p-12 text-center mb-section-gap relative overflow-hidden">
+<div class="absolute -top-24 -left-24 w-64 h-64 bg-primary/10 blur-[80px] rounded-full"></div>
+<div class="absolute -bottom-24 -right-24 w-64 h-64 bg-secondary/10 blur-[80px] rounded-full"></div>
+<h2 class="font-headline-md text-headline-md mb-6 relative z-10">Step Into the Inner Circle</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 relative z-10">Receive exclusive briefings on committee allocations and early-bird registration details.</p>
+<form class="flex flex-col md:flex-row gap-4 max-w-lg mx-auto relative z-10" onsubmit="event.preventDefault()">
+<input class="flex-1 bg-surface-container-lowest/50 border-b border-outline-variant text-on-surface px-6 py-4 rounded-xl focus:border-primary focus:ring-0 transition-all outline-none" placeholder="Enter diplomatic email" type="email">
+<button class="bg-primary text-on-primary px-10 py-4 rounded-xl font-label-md text-label-md uppercase tracking-widest hover:brightness-110 transition-all">
+                    Subscribe
+                </button>
+</form>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full px-container-padding py-8 flex flex-col md:flex-row justify-between items-center gap-4 bg-surface-container-lowest/60 dark:bg-surface-container-lowest/60 backdrop-blur-[20px] border-t border-outline-variant/10 text-on-surface dark:text-on-surface">
+<div class="flex flex-col items-center md:items-start">
+<div class="font-headline-sm text-headline-sm font-bold text-primary mb-2">RITMUNSOC</div>
+<div class="font-caption text-caption text-on-surface-variant/70">© 2024 RITMUNSOC. All rights reserved.</div>
+</div>
+<div class="flex gap-8 items-center">
+<a class="font-caption text-caption text-on-surface-variant/70 hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-caption text-caption text-on-surface-variant/70 hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-caption text-caption text-on-surface-variant/70 hover:text-primary transition-colors" href="#">Contact Us</a>
+<a class="font-caption text-caption text-on-surface-variant/70 hover:text-primary transition-colors" href="#">Press Kit</a>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-surface-variant/70 hover:text-primary cursor-pointer transition-colors">share</span>
+<span class="material-symbols-outlined text-on-surface-variant/70 hover:text-primary cursor-pointer transition-colors">forum</span>
+<span class="material-symbols-outlined text-on-surface-variant/70 hover:text-primary cursor-pointer transition-colors">smart_display</span>
+</div>
+</footer>
+<script>
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let mouse = { x: 0, y: 0 };
+        let points = [];
+
+        function init() {
+            width = window.innerWidth;
+            height = document.documentElement.scrollHeight; // Change to full height of document
+            canvas.width = window.innerWidth;
+            canvas.height = height;
+            
+            points = [];
+            for(let i = 0; i < 5; i++) {
+                points.push({
+                    y: Math.random() * height,
+                    amplitude: 50 + Math.random() * 100,
+                    frequency: 0.001 + Math.random() * 0.002,
+                    speed: 0.005 + Math.random() * 0.008,
+                    offset: Math.random() * 100,
+                    color: i % 3 === 0 ? '#22223b' : (i % 3 === 1 ? '#4a4e69' : '#9a8c98')
+                });
+            }
+        }
+
+        window.addEventListener('resize', init);
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.pageY; // Use pageY for scrolled height
+        });
+
+        function animate(t) {
+            // Need to clear background properly for full scroll height
+            ctx.fillStyle = '#161310';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            points.forEach((p, index) => {
+                ctx.beginPath();
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = p.color;
+                ctx.globalAlpha = 0.4;
+
+                for(let x = 0; x < canvas.width; x += 10) {
+                    const wave = Math.sin(x * p.frequency + t * p.speed + p.offset) * p.amplitude;
+                    // Scale interaction relative to section centers
+                    const mouseInfluence = Math.exp(-Math.pow(x - mouse.x, 2) / 50000) * (mouse.y - canvas.height/2) * 0.2;
+                    const y = (canvas.height / 2) + wave + mouseInfluence;
+                    
+                    if(x === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+            });
+
+            ctx.globalAlpha = 0.1;
+            ctx.strokeStyle = '#c9ada7';
+            for(let i = 0; i < 3; i++) {
+                ctx.beginPath();
+                const x = (t * 0.05 + i * 500) % canvas.width;
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x + 200, canvas.height);
+                ctx.stroke();
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate(0);
+
+        // 3D Card Interactivity
+        const cards = document.querySelectorAll('.carousel-container .liquid-glass');
+        
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+            });
+        });
+        
+        // Re-calculate height after everything loads to ensure canvas covers full page
+        window.addEventListener('load', () => {
+            init();
+            
+            const loader = document.getElementById('page-loader');
+            if (loader) {
+                setTimeout(() => {
+                    loader.style.opacity = '0';
+                    loader.style.pointerEvents = 'none';
+                }, 500);
+            }
+        });
+
+        // Highlight active nav link
+        function highlightActiveNav() {
+            const navLinks = document.querySelectorAll('.nav-link[data-page]');
+            navLinks.forEach(link => {
+                link.classList.remove('text-primary');
+                link.removeAttribute('data-active');
+            });
+            const homeLink = document.querySelector('.nav-link[data-page="index"]');
+            if (homeLink) {
+                homeLink.classList.add('text-primary');
+                homeLink.setAttribute('data-active', 'true');
+            }
+        }
+        highlightActiveNav();
+
+        function setupMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileOverlay = document.getElementById('mobile-menu-overlay');
+            const mobileToggle = document.getElementById('mobile-menu-toggle');
+            const mobileClose = document.getElementById('mobile-menu-close');
+            const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+            if (!mobileMenu || !mobileOverlay || !mobileToggle || !mobileClose) return;
+
+            const openMenu = () => {
+                mobileMenu.classList.add('open');
+                mobileOverlay.classList.add('open');
+                mobileToggle.setAttribute('aria-expanded', 'true');
+                document.body.style.overflow = 'hidden';
+            };
+
+            const closeMenu = () => {
+                mobileMenu.classList.remove('open');
+                mobileOverlay.classList.remove('open');
+                mobileToggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            };
+
+            mobileToggle.addEventListener('click', openMenu);
+            mobileClose.addEventListener('click', closeMenu);
+            mobileOverlay.addEventListener('click', closeMenu);
+            mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') closeMenu();
+            });
+        }
+        setupMobileMenu();
+
+        // Page transitions handled by transitions.js
+
+        // 1. Scroll Progress Bar
+        const scrollProgress = document.getElementById('scroll-progress');
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercentage = (scrollTop / scrollHeight) * 100;
+            if(scrollProgress) scrollProgress.style.width = scrollPercentage + '%';
+        });
+
+        // 2. Cursor Orb
+        const cursorOrb = document.getElementById('cursor-orb');
+        if (cursorOrb && !window.matchMedia("(max-width: 768px)").matches) {
+            document.addEventListener('mousemove', (e) => {
+                cursorOrb.style.left = e.clientX + 'px';
+                cursorOrb.style.top = e.clientY + 'px';
+            });
+            document.addEventListener('mousedown', () => {
+                cursorOrb.style.transform = 'translate(-50%, -50%) scale(0.8)';
+                cursorOrb.style.background = 'radial-gradient(circle, rgba(197, 195, 228, 0.25) 0%, rgba(197, 195, 228, 0) 70%)';
+            });
+            document.addEventListener('mouseup', () => {
+                cursorOrb.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursorOrb.style.background = 'radial-gradient(circle, rgba(197, 195, 228, 0.15) 0%, rgba(197, 195, 228, 0) 70%)';
+            });
+        }
+
+        // 3. Scroll Reveal & Stat Counters
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    
+                    // Trigger counters if this element has them
+                    const counters = entry.target.querySelectorAll('.stat-counter');
+                    if (counters.length > 0 || entry.target.classList.contains('stat-counter')) {
+                        const targetCounters = counters.length > 0 ? counters : [entry.target];
+                        targetCounters.forEach(counter => {
+                            if (!counter.classList.contains('counted')) {
+                                const target = +counter.getAttribute('data-target');
+                                const duration = 2000; // 2 seconds
+                                const increment = target / (duration / 16); // 60fps
+                                let current = 0;
+                                
+                                const updateCounter = () => {
+                                    current += increment;
+                                    if (current < target) {
+                                        counter.innerText = Math.ceil(current);
+                                        requestAnimationFrame(updateCounter);
+                                    } else {
+                                        counter.innerText = target;
+                                        counter.classList.add('counted');
+                                    }
+                                };
+                                updateCounter();
+                            }
+                        });
+                    }
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // 4. Countdown Timer
+        const targetDate = new Date();
+        targetDate.setDate(targetDate.getDate() + 120); // 120 days from now
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate.getTime() - now;
+            
+            if (distance < 0) return;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            const dEl = document.getElementById('days');
+            const hEl = document.getElementById('hours');
+            const mEl = document.getElementById('minutes');
+            const sEl = document.getElementById('seconds');
+            
+            if(dEl) dEl.innerText = days.toString().padStart(2, '0');
+            if(hEl) hEl.innerText = hours.toString().padStart(2, '0');
+            if(mEl) mEl.innerText = minutes.toString().padStart(2, '0');
+            if(sEl) sEl.innerText = seconds.toString().padStart(2, '0');
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // 5. Testimonial Rotator
+        const slides = document.querySelectorAll('.testimonial-slide');
+        const dots = document.querySelectorAll('.testimonial-dot');
+        let currentSlide = 0;
+        
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                if (i === index) {
+                    slide.classList.remove('opacity-0', 'z-0');
+                    slide.classList.add('opacity-100', 'z-10');
+                    dots[i].classList.replace('bg-primary/30', 'bg-primary');
+                } else {
+                    slide.classList.remove('opacity-100', 'z-10');
+                    slide.classList.add('opacity-0', 'z-0');
+                    dots[i].classList.replace('bg-primary', 'bg-primary/30');
+                }
+            });
+            currentSlide = index;
+        }
+        
+        if (slides.length > 0) {
+            setInterval(() => {
+                showSlide((currentSlide + 1) % slides.length);
+            }, 5000);
+            
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => showSlide(index));
+            });
+        }
+    </script>
+
+    <script>
+        /**
+         * Infinite Carousel System
+         * JS-driven scrollLeft loop with 3 copies — no blank gap, seamless.
+         * Scrubber input lets users manually browse the content.
+         */
+        function initInfiniteCarousel(carouselId, scrubId, speed) {
+            const carousel = document.getElementById(carouselId);
+            const scrubber = document.getElementById(scrubId);
+            if (!carousel) return;
+            const track = carousel.querySelector('.carousel-track');
+            if (!track) return;
+
+            // Duplicate the cards so we have enough content to scroll back and forth
+            const origHTML = track.innerHTML;
+            track.innerHTML = origHTML + origHTML;
+
+            // Wait two frames for layout to resolve
+            requestAnimationFrame(() => requestAnimationFrame(() => {
+                let pos = 0;
+                let direction = 1;
+                carousel.scrollLeft = pos;
+
+                let userControl = false;
+                let resumeTimer = null;
+
+                function pauseAuto(resumeAfterMs) {
+                    userControl = true;
+                    clearTimeout(resumeTimer);
+                    if (resumeAfterMs) {
+                        resumeTimer = setTimeout(() => { userControl = false; }, resumeAfterMs);
+                    }
+                }
+
+                // Hover pauses auto-scroll
+                carousel.addEventListener('mouseenter', () => pauseAuto(0));
+                carousel.addEventListener('mouseleave', () => { userControl = false; });
+
+                // Scrubber: user drags to desired position
+                if (scrubber) {
+                    scrubber.addEventListener('mousedown', () => pauseAuto(0));
+                    scrubber.addEventListener('touchstart', () => pauseAuto(0), { passive: true });
+                    scrubber.addEventListener('input', () => {
+                        const maxScroll = Math.max(0, track.scrollWidth - carousel.clientWidth);
+                        pos = (scrubber.value / 100) * maxScroll;
+                        carousel.scrollLeft = pos;
+                    });
+                    scrubber.addEventListener('mouseup',   () => pauseAuto(2000));
+                    scrubber.addEventListener('touchend',  () => pauseAuto(2000));
+                }
+
+                // Animation loop
+                function tick() {
+                    const maxScroll = Math.max(0, track.scrollWidth - carousel.clientWidth);
+                    if (!userControl && maxScroll > 0) {
+                        pos += speed * direction;
+                        
+                        // Ping-pong bounce
+                        if (pos >= maxScroll) {
+                            pos = maxScroll;
+                            direction = -1;
+                        } else if (pos <= 0) {
+                            pos = 0;
+                            direction = 1;
+                        }
+                        
+                        carousel.scrollLeft = pos;
+
+                        // Sync scrubber thumb position
+                        if (scrubber) {
+                            scrubber.value = (pos / maxScroll) * 100;
+                        }
+                    }
+                    requestAnimationFrame(tick);
+                }
+                requestAnimationFrame(tick);
+            }));
+        }
+
+        // Achievements: 0.55 px/frame ≈ 33px/s  |  Events: 0.45 px/frame
+        initInfiniteCarousel('achievements-carousel', 'achievements-scrubber', 0.55);
+        initInfiniteCarousel('events-carousel',       'events-scrubber',       0.45);
+    </script>
+
+    <script>
+        /**
+         * Live Ticker System
+         * Easily update ticker items by modifying the tickerItems array
+         */
+        const tickerItems = [
+            "RITMUNSOC Core Team Orientation Begins This Week",
+            "RITMUN'26 Committee Matrix Draft Under Review",
+            "Delegate Prep Sessions For RITMUN'26 Launching Soon",
+            "RITMUNSOC Recruitment Window Opens With New Leadership Tracks"
+        ];
+
+        function initTicker() {
+            const tickerTrack = document.getElementById('ticker-track');
+            if (!tickerTrack) return;
+
+            // Build a single segment of content
+            const buildSegment = () => {
+                const items = [
+                    { type: 'label', text: '⬤ Live Updates' },
+                    ...tickerItems.flatMap(item => [
+                        { type: 'sep', text: '●' },
+                        { type: 'item', text: item }
+                    ])
+                ];
+
+                return items.map(({ type, text }) => {
+                    if (type === 'label') {
+                        return `<span style="color:#c5c3e4;font-weight:600;margin-right:1.2rem;letter-spacing:0.12em;">${text}</span>`;
+                    } else if (type === 'sep') {
+                        return `<span style="color:rgba(197,195,228,0.45);margin:0 0.9rem;font-size:0.45rem;vertical-align:middle;">${text}</span>`;
+                    } else {
+                        return `<span style="color:rgba(220,218,240,0.82);">${text}</span>`;
+                    }
+                }).join('');
+            };
+
+            const seg = buildSegment();
+            const baseStyle = 'display:inline-flex;align-items:center;padding:0 2rem;font-size:11px;letter-spacing:0.13em;text-transform:uppercase;flex-shrink:0;white-space:nowrap;';
+
+            // Two identical copies — animation moves exactly one copy's width (50% of total track)
+            tickerTrack.innerHTML =
+                `<span style="${baseStyle}">${seg}</span>` +
+                `<span style="${baseStyle}">${seg}</span>`;
+
+            // Restart animation cleanly
+            tickerTrack.style.animation = 'none';
+            // Force reflow
+            void tickerTrack.offsetWidth;
+            tickerTrack.style.animation = '';
+        }
+
+        // Initialize ticker when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initTicker);
+        } else {
+            initTicker();
+        }
+    </script>
+
+    <script src="transitions.js" defer></script>
+</body></html>

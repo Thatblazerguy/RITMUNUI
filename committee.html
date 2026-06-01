@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<link rel="stylesheet" href="theme-light.css">
+<script src="theme-engine.js"></script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Committees | RITMUNSOC</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#dee0ff",
+                        "on-primary-fixed-variant": "#44445f",
+                        "on-error": "#690005",
+                        "outline": "#928f98",
+                        "surface-tint": "#c5c3e4",
+                        "secondary": "#c1c4e5",
+                        "tertiary-fixed": "#eedeeb",
+                        "secondary-container": "#414560",
+                        "primary-fixed": "#e2dfff",
+                        "on-background": "#eae1dc",
+                        "surface-variant": "#383431",
+                        "on-secondary-container": "#b0b3d3",
+                        "surface-container-low": "#1f1b18",
+                        "surface-container-lowest": "#110e0b",
+                        "on-tertiary-fixed": "#221922",
+                        "on-surface": "#eae1dc",
+                        "on-tertiary": "#372d37",
+                        "surface-container-high": "#2d2926",
+                        "tertiary": "#d2c2cf",
+                        "primary-fixed-dim": "#c5c3e4",
+                        "on-surface-variant": "#c8c5ce",
+                        "primary-container": "#22223b",
+                        "background": "#161310",
+                        "surface-bright": "#3d3835",
+                        "inverse-on-surface": "#34302c",
+                        "on-secondary-fixed": "#161a32",
+                        "tertiary-fixed-dim": "#d2c2cf",
+                        "tertiary-container": "#2b212b",
+                        "error": "#ffb4ab",
+                        "surface-container": "#231f1c",
+                        "outline-variant": "#47464d",
+                        "inverse-primary": "#5c5c78",
+                        "on-primary-fixed": "#191932",
+                        "surface": "#161310",
+                        "inverse-surface": "#eae1dc",
+                        "error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#4e434e",
+                        "secondary-fixed-dim": "#c1c4e5",
+                        "on-secondary-fixed-variant": "#414560",
+                        "on-primary": "#2e2e48",
+                        "on-primary-container": "#8a89a7",
+                        "on-error-container": "#ffdad6",
+                        "surface-dim": "#161310",
+                        "on-secondary": "#2b2f48",
+                        "surface-container-highest": "#383431",
+                        "primary": "#c5c3e4",
+                        "on-tertiary-container": "#958793",
+                        "dusty-grape": "#4a4e69",
+                        "lilac-ash": "#9a8c98",
+                        "almond-silk": "#c9ada7",
+                        "seashell": "#f2e9e4",
+                        "space-indigo": "#22223b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "glass-padding": "1.25rem",
+                        "unit": "8px",
+                        "section-gap": "4rem",
+                        "gutter": "1.5rem",
+                        "container-padding": "2rem"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "display-lg-mobile": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"],
+                        "headline-md": ["Playfair Display"],
+                        "body-lg": ["Inter"],
+                        "caption": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "1.5", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "caption": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #161310;
+            color: #f2e9e4;
+            overflow-x: hidden;
+        }
+
+        .glass-panel {
+            background: rgba(74, 78, 105, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(154, 140, 152, 0.2);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-panel-active {
+            background: rgba(74, 78, 105, 0.6);
+            backdrop-filter: blur(40px);
+            border: 1px solid rgba(154, 140, 152, 0.4);
+            box-shadow: 0 0 32px 0 rgba(201, 173, 167, 0.2), 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transform: scale(1.02);
+        }
+
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.2), transparent);
+        }
+
+        .glare-effect {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: skewX(-25deg);
+            transition: 0.75s;
+        }
+
+        .glass-panel:hover .glare-effect {
+            left: 150%;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .watermark-text {
+            font-family: 'Playfair Display';
+            font-size: 8rem;
+            line-height: 1;
+            color: rgba(242, 233, 228, 0.03);
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .liquid-chrome {
+            filter: drop-shadow(0 0 10px rgba(197, 195, 228, 0.3));
+        }
+
+        .nav-blur {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+
+
+        .mobile-menu-overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+        .mobile-menu-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .mobile-menu-drawer {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            background:
+                radial-gradient(circle at 15% 10%, rgba(197, 195, 228, 0.2), transparent 45%),
+                radial-gradient(circle at 85% 90%, rgba(193, 196, 229, 0.18), transparent 42%),
+                rgba(45, 41, 38, 0.92);
+            box-shadow: -24px 0 60px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+        .mobile-menu-drawer.open {
+            transform: translateX(0);
+        }
+        .mobile-menu-link {
+            border: 1px solid rgba(71, 70, 77, 0.55);
+            background: rgba(17, 14, 11, 0.42);
+            backdrop-filter: blur(10px);
+            border-radius: 9999px;
+            padding: 0.72rem 1rem;
+            transition: all 0.25s ease;
+        }
+        .mobile-menu-link:hover {
+            color: #c5c3e4;
+            border-color: rgba(197, 195, 228, 0.55);
+            background: rgba(34, 34, 59, 0.45);
+            transform: translateX(-3px);
+        }
+        .mobile-menu-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(154, 140, 152, 0.6), transparent);
+        }
+    
+        .nav-link {
+            position: relative;
+            transition: color 180ms cubic-bezier(0.23, 1, 0.32, 1), transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -7px;
+            height: 2px;
+            border-radius: 9999px;
+            background: rgba(197, 195, 228, 0.9);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .nav-link:hover::after,
+        .nav-link[data-active="true"]::after { transform: scaleX(1); }
+        .nav-link:active { transform: scale(0.97); }
+        .mobile-nav-link {
+            transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), color 180ms cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .mobile-nav-link:active { transform: scale(0.98); }
+
+    
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(to right, #c5c3e4, #e2dfff);
+            z-index: 9999;
+            transition: width 0.1s ease;
+            box-shadow: 0 0 10px rgba(197, 195, 228, 0.5);
+        }
+        /* Cursor Orb */
+        .cursor-orb {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(197, 195, 228, 0.15) 0%, rgba(197, 195, 228, 0) 70%);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 1;
+            transition: width 0.3s, height 0.3s;
+        }
+        /* Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* ── Native cross-document View Transitions (Chrome 126+) ── */
+        @view-transition { navigation: auto; }
+
+        /* ── Page content ── */
+        main, .page-content-root {
+            contain: layout;
+        }
+
+        /* ── Outgoing page content ── */
+        @keyframes vt-page-out {
+            from { opacity: 1; transform: translateY(0) scale(1); }
+            to   { opacity: 0; transform: translateY(-16px) scale(0.985); }
+        }
+
+        /* ── Incoming page content ── */
+        @keyframes vt-page-in {
+            from { opacity: 0; transform: translateY(24px) scale(0.985); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        ::view-transition-old(page-content) {
+            animation: vt-page-out 240ms cubic-bezier(0.4, 0, 0.2, 1) both;
+        }
+        ::view-transition-new(page-content) {
+            animation: vt-page-in  460ms cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        /* Navbar locks in place */
+        ::view-transition-old(site-header),
+        ::view-transition-new(site-header) { animation: none; }
+
+        /* Logo glow sweep */
+        @keyframes vt-logo-glow-native {
+            0%   { filter: drop-shadow(0 0 0px  rgba(197,195,228,0)); }
+            50%  { filter: drop-shadow(0 0 30px rgba(197,195,228,1)); }
+            100% { filter: drop-shadow(0 0 4px  rgba(197,195,228,0.15)); }
+        }
+        ::view-transition-old(site-logo) { animation: none; }
+        ::view-transition-new(site-logo) {
+            animation: vt-logo-glow-native 600ms cubic-bezier(0.22,1,0.36,1) both;
+        }
+
+        /* Nav pill stays locked */
+        ::view-transition-old(nav-pill),
+        ::view-transition-new(nav-pill) { animation: none; }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+        }
+
+    
+        /* Page transition loader */
+        @keyframes intense-glow {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(197, 195, 228, 0.4)); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 60px rgba(197, 195, 228, 1)); transform: scale(1.05); }
+        }
+        .animate-glow {
+            animation: intense-glow 2s ease-in-out infinite;
+            will-change: transform, filter;
+        }
+</style>
+</head>
+<body class="font-body-md text-seashell selection:bg-almond-silk selection:text-space-indigo">
+    <!-- Loading Overlay (Reused for Transitions) -->
+    <div id="page-loader" class="fixed inset-0 z-[100] bg-background flex flex-col items-center justify-center transition-opacity duration-700 ease-in-out">
+        <img src="RITMUNLogo.png" alt="Loading..." class="h-32 md:h-48 w-auto animate-glow">
+    </div>
+
+
+<!-- Global Premium UI Elements -->
+<div class="scroll-progress" id="scroll-progress"></div>
+<div class="cursor-orb" id="cursor-orb"></div>
+
+<canvas id="bg-canvas"></canvas>
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-container-padding py-4 bg-primary-container/40 dark:bg-primary-container/40 backdrop-blur-[20px] border-b border-outline-variant/20 shadow-lg" style="view-transition-name:site-header">
+<a href="index.html" class="flex items-center gap-3 group cursor-pointer">
+<img src="RITMUNLogo.png" alt="RITMUNSOC Logo" class="h-10 w-auto transition-transform group-hover:scale-105" style="view-transition-name:site-logo">
+<div class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface tracking-tighter transition-colors group-hover:text-primary">RITMUNSOC</div>
+</a>
+<nav class="hidden md:flex items-center gap-8 bg-surface-container-lowest/30 px-6 py-2 rounded-full border border-outline-variant/10 backdrop-blur-md" style="view-transition-name:nav-pill">
+<a class="nav-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:backdrop-blur-[40px] transition-all duration-300" href="index.html" data-page="index">Home</a>
+<a class="nav-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:backdrop-blur-[40px] transition-all duration-300" href="committee.html" data-page="committees">Committees</a>
+<a class="nav-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:backdrop-blur-[40px] transition-all duration-300" href="sec.html" data-page="secretariat">Secretariat</a>
+<a class="nav-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:backdrop-blur-[40px] transition-all duration-300" href="registration.html" data-page="register">Register</a>
+<a class="nav-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:backdrop-blur-[40px] transition-all duration-300" href="#" data-page="history">History</a>
+<a class="nav-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:backdrop-blur-[40px] transition-all duration-300" href="resources.html" data-page="resources">Resources</a>
+</nav>
+<div class="flex items-center gap-2">
+<a class="hidden md:inline-block bg-primary text-on-primary px-6 py-2 rounded-full font-label-md text-label-md uppercase tracking-widest active:scale-95 transition-transform hover:shadow-[0_0_20px_rgba(197,195,228,0.4)] text-center" href="login.html">Login</a>
+<button id="mobile-menu-toggle" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-full border border-outline-variant/30 bg-surface-container-lowest/40 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+</div>
+</header>
+<div id="mobile-menu-overlay" class="mobile-menu-overlay fixed inset-0 z-[60] bg-black/50 md:hidden"></div>
+<aside id="mobile-menu" class="mobile-menu-drawer fixed top-0 right-0 h-full w-[82%] max-w-[340px] z-[70] md:hidden border-l border-outline-variant/30 p-6 flex flex-col">
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">apps</span>
+<div class="font-display-lg text-[24px] leading-tight text-on-surface tracking-tight">Navigation</div>
+</div>
+<button id="mobile-menu-close" aria-label="Close menu" class="inline-flex items-center justify-center h-9 w-9 rounded-full border border-outline-variant/30 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="mobile-menu-divider mb-6"></div>
+<nav class="flex flex-col gap-3">
+<a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="index.html">Home</a>
+<a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="committee.html">Committees</a>
+<a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="sec.html">Secretariat</a>
+<a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="registration.html">Register</a>
+<a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="#">History</a>
+<a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="resources.html">Resources</a>
+</nav>
+<a class="mt-8 bg-primary/90 text-on-primary px-6 py-3 rounded-full font-label-md text-label-md uppercase tracking-widest active:scale-95 transition-all hover:brightness-110 hover:shadow-[0_0_22px_rgba(197,195,228,0.45)] inline-block text-center" href="login.html">
+    Login
+  </a>
+<p class="mt-5 font-label-md text-[12px] uppercase text-on-surface-variant/75 tracking-[0.22em]">Dialogue.Diplomacy.Leadership</p>
+</aside>
+<main class="relative px-container-padding pt-20 pb-32 max-w-7xl mx-auto" style="view-transition-name:page-content">
+<header class="mb-20 flex flex-col items-center text-center">
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-seashell mb-4">
+                The <span class="italic font-normal">Councils</span> &amp; <span class="font-bold">Committees</span>
+</h1>
+<p class="font-body-lg text-lilac-ash max-w-2xl text-center">
+                Engage in high-stakes diplomacy across our diverse array of simulations, from historic crisis rooms to futuristic policy-making forums.
+            </p>
+</header>
+<div class="grid grid-cols-1 gap-12">
+<div class="glass-panel glass-panel-active rounded-2xl overflow-hidden flex flex-col md:flex-row relative group">
+<div class="glare-effect"></div>
+<div class="w-full md:w-2/5 p-12 flex items-center justify-center relative overflow-hidden bg-space-indigo/20">
+<div class="watermark-text absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">UNSC</div>
+<div class="relative z-10 w-48 h-48 liquid-chrome">
+<img alt="UNSC Shield" class="w-full h-full object-contain rounded-full border-2 border-lilac-ash/30 p-4" data-alt="A highly detailed metallic shield emblem with concentric glowing rings and deep geometric engravings, rendered in a liquid chrome and molten glass texture. The shield floats in a dark atmospheric space illuminated by soft lilac light refraction, evoking a sense of prestige and international security. Modern and minimalist high-fidelity 3D digital art style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZsnpFKSJy-TPS95OB3W5mLH9Zjhz-8w4HKljqb8Q6sX-q3_zzsv3mykf_0jhnryCHMAG52GIPVD2tNN5D97LQ_bAiJcqWuToBGwsvjtX1lagx87ERD8AemP8BOq8Eonh-hEzqV3OBoeVH0tM2E7yRYZ50psgiCe36MDQEAig4_FWe2ezCJH-KSVz_1Q4zLwq6MV6kKTszmsh9DwKrO_ElWLbuhXlrNZ2Bo9UKGFGsdJCnPLlpvqrAehdCG39H9tLHBgV1fo-gdElh"/>
+</div>
+</div>
+<div class="w-full md:w-3/5 p-12 flex flex-col justify-between border-t md:border-t-0 md:border-l border-white/5">
+<div>
+<div class="flex flex-wrap items-center gap-3 mb-6">
+<span class="px-4 py-1.5 rounded-full bg-almond-silk text-space-indigo font-label-md text-label-md tracking-wider">CRISIS</span>
+<span class="px-4 py-1.5 rounded-full border border-lilac-ash text-lilac-ash font-label-md text-label-md tracking-wider uppercase">Active State</span>
+</div>
+<h2 class="font-headline-md text-headline-md mb-4 text-seashell">United Nations Security Council</h2>
+<div class="p-6 bg-space-indigo/40 rounded-xl border border-lilac-ash/20 mb-8">
+<p class="text-almond-silk font-medium mb-1 uppercase tracking-widest text-xs opacity-70">Agenda Focus</p>
+<p class="font-body-lg italic">"Addressing Global Crisis Containment in Hybrid Warfare Zones"</p>
+</div>
+<div class="flex flex-wrap gap-8">
+<div>
+<p class="text-lilac-ash text-xs uppercase tracking-widest mb-1">Director</p>
+<p class="text-seashell font-medium">Elena Vance</p>
+</div>
+<div>
+<p class="text-lilac-ash text-xs uppercase tracking-widest mb-1">Moderator</p>
+<p class="text-seashell font-medium">Julian Thorne</p>
+</div>
+</div>
+</div>
+<div class="mt-12 flex gap-4">
+<a href="unsc-bg.html" class="flex items-center gap-2 bg-gradient-to-r from-lilac-ash to-dusty-grape text-space-indigo px-8 py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity">
+                            Background Guide
+                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</a>
+<button class="p-3 rounded-xl border border-lilac-ash/30 backdrop-blur-md hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</div>
+</div>
+<div class="glass-panel glass-panel-active rounded-2xl overflow-hidden flex flex-col md:flex-row relative group">
+<div class="glare-effect"></div>
+<div class="w-full md:w-2/5 p-12 flex items-center justify-center relative overflow-hidden bg-space-indigo/20">
+<div class="watermark-text absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">DISEC</div>
+<div class="relative z-10 w-48 h-48 liquid-chrome">
+<img alt="DISEC Sphere" class="w-full h-full object-contain rounded-full border-2 border-lilac-ash/30 p-4" data-alt="A futuristic glass sphere with orbiting metallic rings, shimmering with soft prismatic light refractions and a liquid chrome surface. The object is suspended in a deep space-indigo environment with subtle lilac dust particles floating in the background. The mood is sophisticated and technological, representing disarmament and global security in a premium 3D design language." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAu-4L_APfDq1kABXxrgDLHBs-8KEY3Z8nRziLaelutXOKJXQH697DGGzrp-AAQ1RhSjs81VxVRm01JvTSxx4jDbzABYVx4L1rtoY0D_E-1kdbH9umqQK9acfU8WNUwM2yYgwHjONWK9YRpaU9GjkUxXODv2spOgVXG40JckKQa0sd308xU0n2NZlWA4Yc5KSxZw7KEMWh1Xxl6XOXEiJXLMSzeLEtSwP72P2vKPc0b6hGmOBNMHbAArYqeHYbuj4YkrUnWzG8UC205"/>
+</div>
+</div>
+<div class="w-full md:w-3/5 p-12 flex flex-col justify-between border-t md:border-t-0 md:border-l border-white/5">
+<div>
+<div class="flex flex-wrap items-center gap-3 mb-6">
+<span class="px-4 py-1.5 rounded-full bg-almond-silk text-space-indigo font-label-md text-label-md tracking-wider">GENERAL</span>
+<span class="px-4 py-1.5 rounded-full border border-lilac-ash text-lilac-ash font-label-md text-label-md tracking-wider uppercase">Active State</span>
+</div>
+<h2 class="font-headline-md text-headline-md mb-4 text-seashell">Disarmament and International Security Committee</h2>
+<div class="p-6 bg-space-indigo/40 rounded-xl border border-lilac-ash/20 mb-8">
+<p class="text-almond-silk font-medium mb-1 uppercase tracking-widest text-xs opacity-70">Agenda Focus</p>
+<p class="font-body-lg italic">"Regulatory Frameworks on Autonomous Weaponized Swarms"</p>
+</div>
+<div class="flex flex-wrap gap-8">
+<div>
+<p class="text-lilac-ash text-xs uppercase tracking-widest mb-1">Chair</p>
+<p class="text-seashell font-medium">Marcus Sterling</p>
+</div>
+<div>
+<p class="text-lilac-ash text-xs uppercase tracking-widest mb-1">Rapporteur</p>
+<p class="text-seashell font-medium">Sophia Chen</p>
+</div>
+</div>
+</div>
+<div class="mt-12 flex gap-4">
+<a href="disec-bg.html" class="flex items-center gap-2 bg-gradient-to-r from-lilac-ash to-dusty-grape text-space-indigo px-8 py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity">
+                            Background Guide
+                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</a>
+<button class="p-3 rounded-xl border border-lilac-ash/30 backdrop-blur-md hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</div>
+</div>
+<div class="glass-panel glass-panel-active rounded-2xl overflow-hidden flex flex-col md:flex-row relative group">
+<div class="glare-effect"></div>
+<div class="w-full md:w-2/5 p-12 flex items-center justify-center relative overflow-hidden bg-space-indigo/20">
+<div class="watermark-text absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 uppercase">EcoSoc</div>
+<div class="relative z-10 w-48 h-48 liquid-chrome">
+<img alt="ECOSOC Emblem" class="w-full h-full object-contain rounded-full border-2 border-lilac-ash/30 p-4" data-alt="An abstract 3D representation of global economic flow using translucent glass ribbons intertwined around a central glowing orb. The color palette features deep space indigo and soft almond silk highlights with metallic edge reflections. The aesthetic is extremely polished and futuristic, symbolizing economic and social cooperation in a high-end digital art style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBg3O7o8z8NJIissFnk5NvdM6sbZTNffHGwSlxx_Ew8W0tUvLiJVBNPsSAXjCbdQI4Hg34kKfHAq4Yne1ShpYrGWMjmgQhp5V2ttCrGjZTyXHwx9ToAjepP-oJeKR7hqF-QbKMEZRqMqsM3atkrcVuQoWrf2RdCrYVgz8V0xP0-q9sme4n90djP0jxT896djf4BAXKFa2ileXlX9wI9GNHrYHeTWco6iP65K494AP7EwVoC_iM42ILdpJVrBR1L_mIhquTMizsBtvYx"/>
+</div>
+</div>
+<div class="w-full md:w-3/5 p-12 flex flex-col justify-between border-t md:border-t-0 md:border-l border-white/5">
+<div>
+<div class="flex flex-wrap items-center gap-3 mb-6">
+<span class="px-4 py-1.5 rounded-full bg-almond-silk text-space-indigo font-label-md text-label-md tracking-wider uppercase">Regional</span>
+<span class="px-4 py-1.5 rounded-full border border-lilac-ash text-lilac-ash font-label-md text-label-md tracking-wider uppercase">Active State</span>
+</div>
+<h2 class="font-headline-md text-headline-md mb-4 text-seashell">Economic and Social Council</h2>
+<div class="p-6 bg-space-indigo/40 rounded-xl border border-lilac-ash/20 mb-8">
+<p class="text-almond-silk font-medium mb-1 uppercase tracking-widest text-xs opacity-70">Agenda Focus</p>
+<p class="font-body-lg italic">"Sustaining Sovereign Currencies in Decentralized Digital Economies"</p>
+</div>
+<div class="flex flex-wrap gap-8">
+<div>
+<p class="text-lilac-ash text-xs uppercase tracking-widest mb-1">President</p>
+<p class="text-seashell font-medium">Aarav Patel</p>
+</div>
+</div>
+</div>
+<div class="mt-12 flex gap-4">
+<a href="ecosoc-bg.html" class="flex items-center gap-2 bg-gradient-to-r from-lilac-ash to-dusty-grape text-space-indigo px-8 py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity">
+                            Background Guide
+                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</a>
+<button class="p-3 rounded-xl border border-lilac-ash/30 backdrop-blur-md hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="w-full px-container-padding py-8 flex flex-col md:flex-row justify-between items-center gap-4 bg-surface-container-lowest/60 dark:bg-surface-container-lowest/60 backdrop-blur-[20px] border-t border-outline-variant/10 text-on-surface dark:text-on-surface">
+<div class="flex flex-col items-center md:items-start">
+<div class="font-headline-sm text-headline-sm font-bold text-primary mb-2">RITMUNSOC</div>
+<div class="font-caption text-caption text-on-surface-variant/70">© 2024 RITMUNSOC. All rights reserved.</div>
+</div>
+<div class="flex gap-8 items-center">
+<a class="font-caption text-caption text-on-surface-variant/70 hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-caption text-caption text-on-surface-variant/70 hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-caption text-caption text-on-surface-variant/70 hover:text-primary transition-colors" href="#">Contact Us</a>
+<a class="font-caption text-caption text-on-surface-variant/70 hover:text-primary transition-colors" href="#">Press Kit</a>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-surface-variant/70 hover:text-primary cursor-pointer transition-colors">share</span>
+<span class="material-symbols-outlined text-on-surface-variant/70 hover:text-primary cursor-pointer transition-colors">forum</span>
+<span class="material-symbols-outlined text-on-surface-variant/70 hover:text-primary cursor-pointer transition-colors">smart_display</span>
+</div>
+</footer>
+<script>
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let mouse = { x: 0, y: 0 };
+        let points = [];
+
+        function init() {
+            width = window.innerWidth;
+            height = document.documentElement.scrollHeight;
+            canvas.width = window.innerWidth;
+            canvas.height = height;
+
+            points = [];
+            for (let i = 0; i < 5; i++) {
+                points.push({
+                    y: Math.random() * height,
+                    amplitude: 50 + Math.random() * 100,
+                    frequency: 0.001 + Math.random() * 0.002,
+                    speed: 0.005 + Math.random() * 0.008,
+                    offset: Math.random() * 100,
+                    color: i % 3 === 0 ? '#22223b' : (i % 3 === 1 ? '#4a4e69' : '#9a8c98')
+                });
+            }
+        }
+
+        window.addEventListener('resize', init);
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.pageY;
+        });
+
+        function animate(t) {
+            ctx.fillStyle = '#161310';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            points.forEach((p) => {
+                ctx.beginPath();
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = p.color;
+                ctx.globalAlpha = 0.4;
+
+                for (let x = 0; x < canvas.width; x += 10) {
+                    const wave = Math.sin(x * p.frequency + t * p.speed + p.offset) * p.amplitude;
+                    const mouseInfluence = Math.exp(-Math.pow(x - mouse.x, 2) / 50000) * (mouse.y - canvas.height / 2) * 0.2;
+                    const y = (canvas.height / 2) + wave + mouseInfluence;
+
+                    if (x === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+            });
+
+            ctx.globalAlpha = 0.1;
+            ctx.strokeStyle = '#c9ada7';
+            for (let i = 0; i < 3; i++) {
+                ctx.beginPath();
+                const x = (t * 0.05 + i * 500) % canvas.width;
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x + 200, canvas.height);
+                ctx.stroke();
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate(0);
+
+        document.querySelectorAll('.glass-panel').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 25;
+                const rotateY = (centerX - x) / 50;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+            });
+        });
+
+        window.addEventListener('load', () => {
+            init();
+            const loader = document.getElementById('page-loader');
+            if (loader) {
+                setTimeout(() => {
+                    loader.style.opacity = '0';
+                    loader.style.pointerEvents = 'none';
+                }, 500);
+            }
+        });
+
+        function highlightActiveNav() {
+            const navLinks = document.querySelectorAll('.nav-link[data-page]');
+            navLinks.forEach(link => {
+                link.classList.remove('text-primary', 'border-b-2', 'border-primary', 'pb-1');
+            });
+            const activeLink = document.querySelector('.nav-link[data-page="committees"]');
+            if (activeLink) {
+                activeLink.classList.add('text-primary', 'border-b-2', 'border-primary', 'pb-1');
+            }
+        }
+        highlightActiveNav();
+
+        function setupMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileOverlay = document.getElementById('mobile-menu-overlay');
+            const mobileToggle = document.getElementById('mobile-menu-toggle');
+            const mobileClose = document.getElementById('mobile-menu-close');
+            const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+            if (!mobileMenu || !mobileOverlay || !mobileToggle || !mobileClose) return;
+            const openMenu = () => {
+                mobileMenu.classList.add('open');
+                mobileOverlay.classList.add('open');
+                mobileToggle.setAttribute('aria-expanded', 'true');
+                document.body.style.overflow = 'hidden';
+            };
+            const closeMenu = () => {
+                mobileMenu.classList.remove('open');
+                mobileOverlay.classList.remove('open');
+                mobileToggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            };
+            mobileToggle.addEventListener('click', openMenu);
+            mobileClose.addEventListener('click', closeMenu);
+            mobileOverlay.addEventListener('click', closeMenu);
+            mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') closeMenu();
+            });
+        }
+        setupMobileMenu();
+
+        // Navigation transitions handled by transitions.js (logo loader)
+    
+        // 1. Scroll Progress Bar
+        const scrollProgress = document.getElementById('scroll-progress');
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercentage = (scrollTop / scrollHeight) * 100;
+            if(scrollProgress) scrollProgress.style.width = scrollPercentage + '%';
+        });
+
+        // 2. Cursor Orb
+        const cursorOrb = document.getElementById('cursor-orb');
+        if (cursorOrb && !window.matchMedia("(max-width: 768px)").matches) {
+            document.addEventListener('mousemove', (e) => {
+                cursorOrb.style.left = e.clientX + 'px';
+                cursorOrb.style.top = e.clientY + 'px';
+            });
+            document.addEventListener('mousedown', () => {
+                cursorOrb.style.transform = 'translate(-50%, -50%) scale(0.8)';
+                cursorOrb.style.background = 'radial-gradient(circle, rgba(197, 195, 228, 0.25) 0%, rgba(197, 195, 228, 0) 70%)';
+            });
+            document.addEventListener('mouseup', () => {
+                cursorOrb.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursorOrb.style.background = 'radial-gradient(circle, rgba(197, 195, 228, 0.15) 0%, rgba(197, 195, 228, 0) 70%)';
+            });
+        }
+
+        // 3. Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+</script>
+    <script src="transitions.js" defer></script>
+</body></html>

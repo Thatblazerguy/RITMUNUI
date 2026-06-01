@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="theme-light.css">
+<script src="theme-engine.js"></script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>RITMUNSOC | OC Command Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "primary-container": "#22223b",
+          "on-error": "#690005",
+          "tertiary": "#d2c2cf",
+          "surface-container-low": "#1f1b18",
+          "error-container": "#93000a",
+          "surface-container": "#231f1c",
+          "on-background": "#eae1dc",
+          "on-tertiary-fixed": "#221922",
+          "on-secondary": "#2b2f48",
+          "outline-variant": "#47464d",
+          "inverse-surface": "#eae1dc",
+          "secondary-fixed-dim": "#c1c4e5",
+          "secondary": "#c1c4e5",
+          "surface-dim": "#161310",
+          "on-secondary-fixed": "#161a32",
+          "tertiary-container": "#2b212b",
+          "background": "#161310",
+          "on-secondary-fixed-variant": "#414560",
+          "error": "#ffb4ab",
+          "on-surface": "#eae1dc",
+          "outline": "#928f98",
+          "on-primary-fixed-variant": "#44445f",
+          "surface-container-highest": "#383431",
+          "tertiary-fixed": "#eedeeb",
+          "on-error-container": "#ffdad6",
+          "primary-fixed-dim": "#c5c3e4",
+          "on-surface-variant": "#c8c5ce",
+          "on-primary-fixed": "#191932",
+          "inverse-on-surface": "#34302c",
+          "secondary-fixed": "#dee0ff",
+          "on-tertiary": "#372d37",
+          "surface-bright": "#3d3835",
+          "primary": "#c5c3e4",
+          "on-primary": "#2e2e48",
+          "surface": "#161310",
+          "surface-container-high": "#2d2926",
+          "inverse-primary": "#5c5c78",
+          "tertiary-fixed-dim": "#d2c2cf",
+          "surface-variant": "#383431",
+          "surface-container-lowest": "#110e0b",
+          "on-primary-container": "#8a89a7",
+          "secondary-container": "#414560",
+          "on-tertiary-container": "#958793",
+          "on-secondary-container": "#b0b3d3",
+          "on-tertiary-fixed-variant": "#4e434e",
+          "surface-tint": "#c5c3e4",
+          "primary-fixed": "#e2dfff",
+          "almond-silk": "#c9ada7",
+          "lilac-ash": "#9a8c98",
+          "dusty-grape": "#4a4e69",
+          "seashell": "#f2e9e4"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "section-gap": "4rem",
+          "unit": "8px",
+          "glass-padding": "1.25rem",
+          "gutter": "1.5rem",
+          "container-padding": "2rem"
+        },
+        "fontFamily": {
+          "label-md": ["Inter"],
+          "display-lg": ["Playfair Display"],
+          "display-lg-mobile": ["Playfair Display"],
+          "headline-md": ["Playfair Display"],
+          "body-md": ["Inter"],
+          "body-lg": ["Inter"],
+          "headline-sm": ["Inter"],
+          "caption": ["Inter"],
+          "mono": ["JetBrains Mono"]
+        },
+        "fontSize": {
+          "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "500"}],
+          "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+          "display-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+          "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+          "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+          "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+          "headline-sm": ["20px", {"lineHeight": "1.5", "letterSpacing": "0.05em", "fontWeight": "600"}],
+          "caption": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}]
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body { background-color: #0b090a; overflow-x: hidden; color: #f2e9e4; }
+  #wave-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+  .liquid-glass-panel { background: rgba(34, 34, 59, 0.25); backdrop-filter: blur(30px) saturate(180%); border: 1px solid rgba(154, 140, 152, 0.2); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8); }
+  .glass-pill { background: rgba(34, 34, 59, 0.4); backdrop-filter: blur(20px); border: 1px solid rgba(154, 140, 152, 0.3); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+  .glass-pill:focus-within { border-color: #c9ada7; box-shadow: 0 0 25px rgba(201, 173, 167, 0.25); background: rgba(34, 34, 59, 0.6); }
+  .liquid-badge { background: linear-gradient(135deg, rgba(201, 173, 167, 0.15) 0%, rgba(154, 140, 152, 0.05) 100%); border: 1px solid rgba(154, 140, 152, 0.25); backdrop-filter: blur(8px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+  .liquid-glow-text { text-shadow: 0 0 15px rgba(201, 173, 167, 0.4); }
+  .table-row-glare { position: relative; overflow: hidden; }
+  .table-row-glare::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(201, 173, 167, 0.05), transparent); transition: left 0.6s ease-in-out; pointer-events: none; }
+  .table-row-glare:hover::after { left: 100%; }
+  .torus-container { perspective: 1000px; }
+  .torus-ring { transform-style: preserve-3d; animation: rotateTorus 12s linear infinite; }
+  @keyframes rotateTorus { from { transform: rotateY(0deg) rotateX(15deg); } to { transform: rotateY(360deg) rotateX(15deg); } }
+  .liquid-cta { background: linear-gradient(135deg, rgba(201, 173, 167, 0.4) 0%, rgba(154, 140, 152, 0.4) 100%); backdrop-filter: blur(15px); border: 1px solid rgba(201, 173, 167, 0.3); transition: all 0.3s ease; }
+  .liquid-cta:hover { background: linear-gradient(135deg, rgba(201, 173, 167, 0.6) 0%, rgba(154, 140, 152, 0.6) 100%); box-shadow: 0 0 30px rgba(201, 173, 167, 0.3); transform: translateY(-2px); }
+  .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(154, 140, 152, 0.3); border-radius: 10px; }
+  .mobile-menu-overlay { opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
+  .mobile-menu-overlay.open { opacity: 1; pointer-events: auto; }
+  .mobile-menu-drawer { transform: translateX(100%); transition: transform 0.3s ease; background: radial-gradient(circle at 15% 10%, rgba(197, 195, 228, 0.2), transparent 45%), radial-gradient(circle at 85% 90%, rgba(193, 196, 229, 0.18), transparent 42%), rgba(45, 41, 38, 0.92); box-shadow: -24px 0 60px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08); }
+  .mobile-menu-drawer.open { transform: translateX(0); }
+  .mobile-menu-link { border: 1px solid rgba(71, 70, 77, 0.55); background: rgba(17, 14, 11, 0.42); backdrop-filter: blur(10px); border-radius: 9999px; padding: 0.72rem 1rem; transition: all 0.25s ease; }
+  .mobile-menu-link:hover { color: #c5c3e4; border-color: rgba(197, 195, 228, 0.55); background: rgba(34, 34, 59, 0.45); transform: translateX(-3px); }
+  .mobile-menu-divider { height: 1px; background: linear-gradient(to right, transparent, rgba(154, 140, 152, 0.6), transparent); }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+
+        .nav-link {
+            position: relative;
+            transition: color 180ms cubic-bezier(0.23, 1, 0.32, 1), transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -7px;
+            height: 2px;
+            border-radius: 9999px;
+            background: rgba(197, 195, 228, 0.9);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .nav-link:hover::after,
+        .nav-link[data-active="true"]::after { transform: scaleX(1); }
+        .nav-link:active { transform: scale(0.97); }
+        .mobile-nav-link {
+            transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), color 180ms cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .mobile-nav-link:active { transform: scale(0.98); }
+
+    
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(to right, #c5c3e4, #e2dfff);
+            z-index: 9999;
+            transition: width 0.1s ease;
+            box-shadow: 0 0 10px rgba(197, 195, 228, 0.5);
+        }
+        /* Cursor Orb */
+        .cursor-orb {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(197, 195, 228, 0.15) 0%, rgba(197, 195, 228, 0) 70%);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 1;
+            transition: width 0.3s, height 0.3s;
+        }
+        /* Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* ── Native cross-document View Transitions (Chrome 126+) ── */
+        @view-transition { navigation: auto; }
+
+        /* ── Page content ── */
+        main, .page-content-root {
+            contain: layout;
+        }
+
+        /* ── Outgoing page content ── */
+        @keyframes vt-page-out {
+            from { opacity: 1; transform: translateY(0) scale(1); }
+            to   { opacity: 0; transform: translateY(-16px) scale(0.985); }
+        }
+
+        /* ── Incoming page content ── */
+        @keyframes vt-page-in {
+            from { opacity: 0; transform: translateY(24px) scale(0.985); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        ::view-transition-old(page-content) {
+            animation: vt-page-out 240ms cubic-bezier(0.4, 0, 0.2, 1) both;
+        }
+        ::view-transition-new(page-content) {
+            animation: vt-page-in  460ms cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        /* Navbar locks in place */
+        ::view-transition-old(site-header),
+        ::view-transition-new(site-header) { animation: none; }
+
+        /* Logo glow sweep */
+        @keyframes vt-logo-glow-native {
+            0%   { filter: drop-shadow(0 0 0px  rgba(197,195,228,0)); }
+            50%  { filter: drop-shadow(0 0 30px rgba(197,195,228,1)); }
+            100% { filter: drop-shadow(0 0 4px  rgba(197,195,228,0.15)); }
+        }
+        ::view-transition-old(site-logo) { animation: none; }
+        ::view-transition-new(site-logo) {
+            animation: vt-logo-glow-native 600ms cubic-bezier(0.22,1,0.36,1) both;
+        }
+
+        /* Nav pill stays locked */
+        ::view-transition-old(nav-pill),
+        ::view-transition-new(nav-pill) { animation: none; }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+        }
+
+    
+        /* Page transition loader */
+        @keyframes intense-glow {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(197, 195, 228, 0.4)); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 60px rgba(197, 195, 228, 1)); transform: scale(1.05); }
+        }
+        .animate-glow {
+            animation: intense-glow 2s ease-in-out infinite;
+            will-change: transform, filter;
+        }
+</style>
+</head>
+<body class="font-body-md text-body-md antialiased">
+    <!-- Loading Overlay (Reused for Transitions) -->
+    <div id="page-loader" class="fixed inset-0 z-[100] bg-background flex flex-col items-center justify-center transition-opacity duration-700 ease-in-out">
+        <img src="RITMUNLogo.png" alt="Loading..." class="h-32 md:h-48 w-auto animate-glow">
+    </div>
+
+
+<!-- Global Premium UI Elements -->
+<div class="scroll-progress" id="scroll-progress"></div>
+<div class="cursor-orb" id="cursor-orb"></div>
+
+<canvas id="wave-canvas"></canvas>
+
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-container-padding py-4 bg-primary-container/40 dark:bg-primary-container/40 backdrop-blur-[20px] border-b border-outline-variant/20 shadow-lg" style="view-transition-name:site-header">
+  <a href="index.html" class="flex items-center gap-3 group cursor-pointer">
+<img src="RITMUNLogo.png" alt="RITMUNSOC Logo" class="h-10 w-auto transition-transform group-hover:scale-105" style="view-transition-name:site-logo">
+<div class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface tracking-tighter transition-colors group-hover:text-primary">RITMUNSOC</div>
+</a>
+  <nav class="hidden md:flex items-center gap-8 bg-surface-container-lowest/30 px-6 py-2 rounded-full border border-outline-variant/10 backdrop-blur-md" style="view-transition-name:nav-pill">
+    <a class="nav-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-all duration-300" href="index.html">Home</a>
+    <a class="nav-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-all duration-300" href="committee.html">Committees</a>
+    <a class="nav-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-all duration-300" href="sec.html">Secretariat</a>
+    <a class="nav-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-all duration-300" href="resources.html">Resources</a>
+  </nav>
+  <div class="flex items-center gap-2">
+  <div class="hidden md:flex items-center gap-3 bg-white/5 backdrop-blur-xl px-5 py-2.5 rounded-full border border-lilac-ash/30 cursor-pointer hover:bg-white/10 transition-all group">
+    <div class="w-7 h-7 rounded-full bg-gradient-to-br from-almond-silk to-lilac-ash flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+      <span class="material-symbols-outlined text-[18px] text-on-secondary">person</span>
+    </div>
+    <span class="font-label-md text-seashell">Rahul V.</span>
+    <span class="material-symbols-outlined text-lilac-ash text-[18px]">expand_more</span>
+  </div>
+  <button id="mobile-menu-toggle" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-full border border-outline-variant/30 bg-surface-container-lowest/40 text-on-surface-variant hover:text-primary transition-colors">
+    <span class="material-symbols-outlined text-[24px]">menu</span>
+  </button>
+</div>
+</header>
+<div id="mobile-menu-overlay" class="mobile-menu-overlay fixed inset-0 z-[60] bg-black/50 md:hidden"></div>
+<aside id="mobile-menu" class="mobile-menu-drawer fixed top-0 right-0 h-full w-[82%] max-w-[340px] z-[70] md:hidden border-l border-outline-variant/30 p-6 flex flex-col">
+  <div class="flex items-center justify-between mb-8">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary text-[20px]">apps</span>
+      <div class="font-display-lg text-[24px] leading-tight text-on-surface tracking-tight">Navigation</div>
+    </div>
+    <button id="mobile-menu-close" aria-label="Close menu" class="inline-flex items-center justify-center h-9 w-9 rounded-full border border-outline-variant/30 text-on-surface-variant hover:text-primary transition-colors">
+      <span class="material-symbols-outlined text-[20px]">close</span>
+    </button>
+  </div>
+  <div class="mobile-menu-divider mb-6"></div>
+  <nav class="flex flex-col gap-3">
+    <a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="index.html">Home</a>
+    <a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="committee.html">Committees</a>
+    <a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="sec.html">Secretariat</a>
+    <a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="resources.html">Resources</a>
+  </nav>
+  <div class="mt-8 flex items-center gap-3 bg-white/5 backdrop-blur-xl px-5 py-2.5 rounded-full border border-lilac-ash/30">
+    <div class="w-7 h-7 rounded-full bg-gradient-to-br from-almond-silk to-lilac-ash flex items-center justify-center shadow-lg">
+      <span class="material-symbols-outlined text-[18px] text-on-secondary">person</span>
+    </div>
+    <span class="font-label-md text-seashell">Rahul V.</span>
+  </div>
+  <p class="mt-5 font-label-md text-[12px] uppercase text-on-surface-variant/75 tracking-[0.22em]">Dialogue.Diplomacy.Leadership</p>
+</aside>
+
+<main class="pt-36 pb-24 px-container-padding max-w-7xl mx-auto space-y-section-gap" style="view-transition-name:page-content">
+  <section class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+    <div class="liquid-glass-panel p-8 rounded-[2rem] relative overflow-hidden">
+      <p class="font-label-md text-lilac-ash uppercase tracking-widest mb-2">Checked-In Delegates</p>
+      <h3 class="font-display-lg text-seashell text-[52px] leading-none">278</h3>
+      <p class="text-lilac-ash/80 font-caption mt-2 uppercase tracking-wider">Target: 320</p>
+    </div>
+    <div class="liquid-glass-panel p-8 rounded-[2rem] relative overflow-hidden">
+      <p class="font-label-md text-lilac-ash uppercase tracking-widest mb-2">Revenue Processed</p>
+      <h3 class="font-display-lg text-seashell text-[52px] leading-none">₹4.82L</h3>
+      <p class="text-lilac-ash/80 font-caption mt-2 uppercase tracking-wider">Pending: ₹0.94L</p>
+    </div>
+    <div class="liquid-glass-panel p-8 rounded-[2rem] relative overflow-hidden">
+      <p class="font-label-md text-lilac-ash uppercase tracking-widest mb-2">Room Readiness</p>
+      <h3 class="font-display-lg text-seashell text-[52px] leading-none">86%</h3>
+      <p class="text-lilac-ash/80 font-caption mt-2 uppercase tracking-wider">12 / 14 rooms ready</p>
+    </div>
+  </section>
+
+  <section class="grid grid-cols-1 xl:grid-cols-3 gap-gutter">
+    <div class="xl:col-span-2 liquid-glass-panel rounded-[24px] overflow-hidden">
+      <div class="p-7 border-b border-lilac-ash/10 flex items-center justify-between gap-4">
+        <div>
+          <h2 class="font-headline-md text-seashell">Financial Command & Fee Verification</h2>
+          <p class="font-caption text-lilac-ash uppercase tracking-[0.18em] mt-1">Pending vs Approved Payments</p>
+        </div>
+        <div class="inline-flex gap-3">
+          <span class="px-4 py-2 liquid-badge rounded-full text-[11px] font-label-md uppercase tracking-widest text-almond-silk">Pending: 37</span>
+          <span class="px-4 py-2 liquid-badge rounded-full text-[11px] font-label-md uppercase tracking-widest text-seashell">Approved: 241</span>
+        </div>
+      </div>
+      <div class="p-7 grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="liquid-badge rounded-2xl p-5">
+          <p class="font-label-md text-lilac-ash uppercase tracking-widest mb-3">Submitted Receipt</p>
+          <div class="h-56 rounded-xl border border-lilac-ash/20 bg-black/30 flex items-center justify-center">
+            <span class="material-symbols-outlined text-almond-silk text-[46px]">receipt_long</span>
+          </div>
+          <p class="font-mono text-[11px] text-lilac-ash mt-3 uppercase tracking-wider">Txn Ref: HDFC78291A</p>
+        </div>
+        <div class="space-y-4">
+          <div class="liquid-badge rounded-2xl p-5">
+            <p class="font-label-md text-lilac-ash uppercase tracking-widest mb-2">Validation Actions</p>
+            <button class="w-full py-3 mb-3 liquid-cta rounded-full font-label-md uppercase tracking-widest text-seashell">Approve & Generate ID</button>
+            <button class="w-full py-3 rounded-full border border-red-300/30 bg-red-400/10 text-red-200 font-label-md uppercase tracking-widest">Flag Transaction</button>
+          </div>
+          <div class="liquid-badge rounded-2xl p-5">
+            <p class="font-label-md text-lilac-ash uppercase tracking-widest mb-2">Revenue Formula</p>
+            <p class="font-mono text-sm text-seashell leading-relaxed">Total Capital = Σ(Individual Fees) + Σ(Delegation Fees) + Sponsorships</p>
+            <p class="font-mono text-[12px] text-almond-silk mt-2">= ₹2.17L + ₹1.89L + ₹0.76L</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="liquid-glass-panel rounded-[24px] p-7">
+      <h3 class="font-headline-sm text-seashell uppercase tracking-[0.18em] mb-4">Logistics & Crisis Broadcast</h3>
+      <textarea class="w-full h-28 rounded-xl bg-black/25 border border-lilac-ash/20 text-seashell p-4 font-body-md" placeholder="Broadcast global announcement..."></textarea>
+      <button class="w-full py-3 mt-3 rounded-full bg-red-500/20 border border-red-300/30 text-red-200 font-label-md uppercase tracking-widest">Emergency Flash</button>
+      <div class="mt-6">
+        <p class="font-label-md text-lilac-ash uppercase tracking-widest mb-3">Live Ticket Queue</p>
+        <div class="space-y-3 text-sm">
+          <div class="liquid-badge rounded-xl p-3"><span class="text-almond-silk font-semibold">Room 201:</span> Projector replacement required</div>
+          <div class="liquid-badge rounded-xl p-3"><span class="text-almond-silk font-semibold">UNSC Hall:</span> Additional placards requested</div>
+          <div class="liquid-badge rounded-xl p-3"><span class="text-almond-silk font-semibold">Dining:</span> Lunch catering arrived</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid grid-cols-1 xl:grid-cols-2 gap-gutter">
+    <div class="liquid-glass-panel rounded-[24px] overflow-hidden">
+      <div class="p-7 border-b border-lilac-ash/10">
+        <h3 class="font-headline-sm text-seashell uppercase tracking-[0.18em]">Portfolio & Committee Allocation Engine</h3>
+      </div>
+      <div class="p-7 overflow-x-auto custom-scrollbar">
+        <table class="w-full">
+          <thead>
+            <tr class="text-left">
+              <th class="pb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-almond-silk">Committee</th>
+              <th class="pb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-almond-silk">Capacity</th>
+              <th class="pb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-almond-silk">Assigned</th>
+              <th class="pb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-almond-silk">Conflict</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-lilac-ash/10">
+            <tr><td class="py-3 text-seashell">UNSC</td><td class="py-3 text-lilac-ash">15</td><td class="py-3 text-lilac-ash">14</td><td class="py-3 text-red-200">France taken</td></tr>
+            <tr><td class="py-3 text-seashell">UNHRC</td><td class="py-3 text-lilac-ash">30</td><td class="py-3 text-lilac-ash">23</td><td class="py-3 text-green-300">No conflict</td></tr>
+            <tr><td class="py-3 text-seashell">DISEC</td><td class="py-3 text-lilac-ash">25</td><td class="py-3 text-lilac-ash">25</td><td class="py-3 text-red-200">Full</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="px-7 pb-7">
+        <div class="liquid-badge rounded-xl p-4">
+          <p class="font-caption text-lilac-ash uppercase tracking-widest">Smart Match</p>
+          <p class="text-seashell mt-1">Delegate preferences detected: <span class="text-almond-silk">UNSC, UNHRC, DISEC</span>. Suggested assignment: <span class="text-almond-silk">UNHRC - Germany</span>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="liquid-glass-panel rounded-[24px] overflow-hidden">
+      <div class="p-7 border-b border-lilac-ash/10">
+        <h3 class="font-headline-sm text-seashell uppercase tracking-[0.18em]">Inventory & Assets Tracking</h3>
+      </div>
+      <div class="p-7 space-y-4">
+        <div class="flex items-center justify-between liquid-badge rounded-xl p-4"><span class="text-seashell">Delegate Kits</span><span class="text-lilac-ash">Distributed: 218</span></div>
+        <div class="flex items-center justify-between liquid-badge rounded-xl p-4"><span class="text-seashell">Lanyards</span><span class="text-red-200">Low Stock: 8 left</span></div>
+        <div class="flex items-center justify-between liquid-badge rounded-xl p-4"><span class="text-seashell">Placards</span><span class="text-lilac-ash">Printing</span></div>
+        <div class="flex items-center justify-between liquid-badge rounded-xl p-4"><span class="text-seashell">Certificates</span><span class="text-lilac-ash">In Stock</span></div>
+        <div class="mt-5">
+          <p class="font-label-md text-lilac-ash uppercase tracking-widest mb-2">Lanyard Stock Dial</p>
+          <div class="w-full h-4 rounded-full bg-black/40 border border-lilac-ash/20 overflow-hidden">
+            <div class="h-full bg-gradient-to-r from-red-400 to-almond-silk" style="width: 16%"></div>
+          </div>
+          <p class="font-mono text-[11px] text-red-200 mt-2 uppercase tracking-wider">Alert: reorder threshold crossed (&lt; 10)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="w-full px-container-padding py-8 flex flex-col md:flex-row justify-between items-center gap-4 bg-surface-container-lowest/60 dark:bg-surface-container-lowest/60 backdrop-blur-[20px] border-t border-outline-variant/10 text-on-surface dark:text-on-surface">
+<div class="flex flex-col items-center md:items-start">
+<div class="font-headline-sm text-headline-sm font-bold text-primary mb-2">RITMUNSOC</div>
+<div class="font-caption text-caption text-on-surface-variant/70">© 2024 RITMUNSOC. All rights reserved.</div>
+</div>
+<div class="flex gap-8 items-center">
+<a class="font-caption text-caption text-on-surface-variant/70 hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-caption text-caption text-on-surface-variant/70 hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-caption text-caption text-on-surface-variant/70 hover:text-primary transition-colors" href="#">Contact Us</a>
+<a class="font-caption text-caption text-on-surface-variant/70 hover:text-primary transition-colors" href="#">Press Kit</a>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-surface-variant/70 hover:text-primary cursor-pointer transition-colors">share</span>
+<span class="material-symbols-outlined text-on-surface-variant/70 hover:text-primary cursor-pointer transition-colors">forum</span>
+<span class="material-symbols-outlined text-on-surface-variant/70 hover:text-primary cursor-pointer transition-colors">smart_display</span>
+</div>
+</footer>
+
+<script>
+  const canvas = document.getElementById('wave-canvas');
+  const ctx = canvas.getContext('2d');
+  let width, height;
+  let waves = [];
+  let mouse = { x: -1000, y: -1000 };
+
+  function init() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+    waves = [];
+    for (let i = 0; i < 8; i++) {
+      waves.push({
+        y: height * 0.5 + (i - 4) * 60,
+        length: 0.002 + i * 0.0005,
+        amplitude: 80 + i * 20,
+        frequency: 0.015 + i * 0.005,
+        color: i % 2 === 0 ? '#c9ada7' : '#9a8c98',
+        opacity: 0.03 + (i * 0.01),
+        phase: Math.random() * Math.PI * 2,
+        lineWidth: 1 + i * 0.5
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+    const bgGrad = ctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, width);
+    bgGrad.addColorStop(0, '#1a181b');
+    bgGrad.addColorStop(1, '#0b090a');
+    ctx.fillStyle = bgGrad;
+    ctx.fillRect(0, 0, width, height);
+
+    waves.forEach((wave) => {
+      ctx.beginPath();
+      ctx.lineWidth = wave.lineWidth;
+      ctx.strokeStyle = wave.color;
+      ctx.globalAlpha = wave.opacity;
+      for (let x = 0; x < width; x += 2) {
+        const dx = x - mouse.x;
+        const dy = wave.y - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const mouseInfluence = Math.max(0, (250 - dist) / 250) * 80;
+        const y = wave.y + Math.sin(x * wave.length + wave.phase) * wave.amplitude + Math.cos(x * 0.001 + wave.phase) * 30 + mouseInfluence;
+        if (x === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      wave.phase += wave.frequency;
+    });
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', init);
+  window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+
+  function setupMobileMenu() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileOverlay = document.getElementById('mobile-menu-overlay');
+    const mobileToggle = document.getElementById('mobile-menu-toggle');
+    const mobileClose = document.getElementById('mobile-menu-close');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+    const openMenu = () => {
+      mobileMenu.classList.add('open');
+      mobileOverlay.classList.add('open');
+      mobileToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    };
+    const closeMenu = () => {
+      mobileMenu.classList.remove('open');
+      mobileOverlay.classList.remove('open');
+      mobileToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    };
+    mobileToggle.addEventListener('click', openMenu);
+    mobileClose.addEventListener('click', closeMenu);
+    mobileOverlay.addEventListener('click', closeMenu);
+    mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+  }
+
+  init();
+  draw();
+  setupMobileMenu();
+
+  // Navigation transitions handled by transitions.js (logo loader)
+
+
+        // 1. Scroll Progress Bar
+        const scrollProgress = document.getElementById('scroll-progress');
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercentage = (scrollTop / scrollHeight) * 100;
+            if(scrollProgress) scrollProgress.style.width = scrollPercentage + '%';
+        });
+
+        // 2. Cursor Orb
+        const cursorOrb = document.getElementById('cursor-orb');
+        if (cursorOrb && !window.matchMedia("(max-width: 768px)").matches) {
+            document.addEventListener('mousemove', (e) => {
+                cursorOrb.style.left = e.clientX + 'px';
+                cursorOrb.style.top = e.clientY + 'px';
+            });
+            document.addEventListener('mousedown', () => {
+                cursorOrb.style.transform = 'translate(-50%, -50%) scale(0.8)';
+                cursorOrb.style.background = 'radial-gradient(circle, rgba(197, 195, 228, 0.25) 0%, rgba(197, 195, 228, 0) 70%)';
+            });
+            document.addEventListener('mouseup', () => {
+                cursorOrb.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursorOrb.style.background = 'radial-gradient(circle, rgba(197, 195, 228, 0.15) 0%, rgba(197, 195, 228, 0) 70%)';
+            });
+        }
+
+        // 3. Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+</script>
+    <script src="transitions.js" defer></script>
+</body>
+</html>

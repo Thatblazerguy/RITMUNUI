@@ -1,0 +1,616 @@
+/* 
+ * Liquid Glass Diplomacy Light - Premium Design System Layer 
+ * Purely Additive Thematic Swap Override Matrix
+ */
+
+/* ==========================================
+   0. Switcher Button Base Styles (Dark & Light)
+   ========================================== */
+.theme-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 9999px;
+    background: rgba(74, 78, 105, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1.2px solid #b49fcc;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    margin-left: 8px;
+    flex-shrink: 0;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(180, 159, 204, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    border-color: #dee0ff;
+}
+
+.theme-toggle-btn:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle-svg {
+    width: 18px;
+    height: 18px;
+    color: #dee0ff;
+    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.3s ease;
+}
+
+.theme-toggle-btn .sun-icon {
+    opacity: 0;
+    transform: scale(0.5) rotate(-45deg);
+    transition: all 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform-origin: center;
+}
+
+.theme-toggle-btn .moon-icon {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+    transition: all 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform-origin: center;
+}
+
+/* ==========================================
+   1. Base Canvas Background Inversion
+   ========================================== */
+body.light-theme,
+html.light-theme body {
+    background-color: #ffffff !important;
+    background-image: radial-gradient(circle at 50% 50%, #ffffff 0%, #ead7d7 100%) !important;
+    color: #6d466b !important;
+    transition: background-color 450ms cubic-bezier(0.25, 0.8, 0.25, 1),
+                background-image 450ms cubic-bezier(0.25, 0.8, 0.25, 1),
+                color 450ms cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+/* ==========================================
+   2. Component Glass Material Inversion
+   ========================================== */
+body.light-theme .liquid-glass,
+body.light-theme .liquid-glass-floating,
+body.light-theme .gradient-border-card,
+body.light-theme .glass-panel-1,
+body.light-theme .glass-panel-active,
+body.light-theme .landscape-slab,
+body.light-theme .glass-cartridge,
+body.light-theme .glass-tier-1,
+body.light-theme .glass-tier-2,
+body.light-theme .liquid-glass-panel,
+body.light-theme .glass-pill,
+body.light-theme .command-block,
+body.light-theme .liquid-badge,
+body.light-theme #mobile-menu,
+body.light-theme .mobile-menu-drawer,
+body.light-theme .mobile-menu-link,
+body.light-theme .glass-panel,
+body.light-theme .glass-panel-deep {
+    background: rgba(255, 255, 255, 0.35) !important;
+    backdrop-filter: blur(40px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(40px) saturate(180%) !important;
+    box-shadow: 0 8px 32px 0 rgba(109, 70, 107, 0.08), inset 0 1px 2px rgba(255, 255, 255, 0.6) !important;
+    transition: background 450ms cubic-bezier(0.25, 0.8, 0.25, 1),
+                border-color 450ms cubic-bezier(0.25, 0.8, 0.25, 1),
+                box-shadow 450ms cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+/* ==========================================
+   3. Beveled Glass Edge Refractions
+   ========================================== */
+body.light-theme .reflective-edge,
+body.light-theme .liquid-glass,
+body.light-theme .glass-panel-1,
+body.light-theme .glass-panel-active,
+body.light-theme .landscape-slab,
+body.light-theme .glass-cartridge,
+body.light-theme .glass-tier-1,
+body.light-theme .glass-tier-2,
+body.light-theme .liquid-glass-panel,
+body.light-theme .glass-pill,
+body.light-theme .gradient-border-card,
+body.light-theme .glass-panel,
+body.light-theme .glass-panel-deep {
+    border: 1.2px solid rgba(180, 159, 204, 0.6) !important;
+    border-top-color: rgba(180, 159, 204, 0.95) !important;
+    border-left-color: rgba(180, 159, 204, 0.95) !important;
+    box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.8), 0 8px 32px 0 rgba(109, 70, 107, 0.06) !important;
+}
+
+body.light-theme .carousel-container .liquid-glass:hover,
+body.light-theme .glass-cartridge:hover {
+    border-color: #b49fcc !important;
+    background: rgba(255, 255, 255, 0.55) !important;
+    box-shadow: 0 12px 30px rgba(180, 159, 204, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
+}
+
+/* ==========================================
+   4. Typography & Readability
+   ========================================== */
+body.light-theme h1,
+body.light-theme h2,
+body.light-theme h3,
+body.light-theme h4,
+body.light-theme h5,
+body.light-theme h6,
+body.light-theme .font-display-lg,
+body.light-theme .font-headline-md,
+body.light-theme .text-seashell,
+body.light-theme .text-on-surface,
+body.light-theme .font-headline-sm,
+body.light-theme .text-headline-md,
+body.light-theme .text-headline-sm,
+body.light-theme [class*="text-[#eae1dc]"],
+body.light-theme [class*="text-[#f2e9e4]"] {
+    color: #412234 !important;
+    font-family: 'Playfair Display', serif !important;
+    text-shadow: none !important;
+}
+
+body.light-theme p,
+body.light-theme span:not(.material-symbols-outlined):not(.bg-primary):not(.bg-primary\/90):not(.text-on-primary):not(.ticker-track *),
+body.light-theme li,
+body.light-theme th,
+body.light-theme td,
+body.light-theme a:not(.bg-primary):not(.bg-primary\/90):not(.bg-primary\/40):not(.text-on-primary),
+body.light-theme .font-body-md,
+body.light-theme .font-body-lg,
+body.light-theme .font-label-md,
+body.light-theme .font-caption,
+body.light-theme .text-lilac-ash:not(.material-symbols-outlined),
+body.light-theme .text-on-surface-variant:not(.material-symbols-outlined),
+body.light-theme [class*="text-[#c8c5ce]"]:not(.material-symbols-outlined) {
+    color: #6d466b !important;
+    font-family: 'Inter', sans-serif !important;
+    text-shadow: none !important;
+}
+
+/* ==========================================
+   5. Navigation Bar & Capsule Adjustments
+   ========================================== */
+body.light-theme header[class*="fixed"],
+body.light-theme header[class*="sticky"],
+body.light-theme header[style*="view-transition-name:site-header"],
+body.light-theme header[class*="fixed"] nav {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(30px) !important;
+    border-bottom: 1.2px solid rgba(180, 159, 204, 0.3) !important;
+    box-shadow: 0 4px 20px rgba(109, 70, 107, 0.05) !important;
+}
+
+/* Page section headers — fully transparent, no background */
+body.light-theme header:not([class*="fixed"]):not([class*="sticky"]):not([style*="site-header"]) {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+body.light-theme .nav-link {
+    color: #6d466b !important;
+}
+
+body.light-theme .nav-link:hover,
+body.light-theme .nav-link[data-active="true"] {
+    color: #412234 !important;
+}
+
+body.light-theme .nav-link::after {
+    background: #412234 !important;
+}
+
+body.light-theme .ticker-wrap {
+    background: rgba(255, 255, 255, 0.6) !important;
+    border-color: rgba(180, 159, 204, 0.3) !important;
+}
+
+body.light-theme .ticker-track span {
+    color: #6d466b !important;
+}
+
+/* ==========================================
+   6. Form inputs, selections & textareas
+   ========================================== */
+body.light-theme input,
+body.light-theme textarea,
+body.light-theme select {
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    border-bottom: 1.5px solid #b49fcc !important;
+    color: #412234 !important;
+    box-shadow: inset 0 1px 3px rgba(109, 70, 107, 0.02) !important;
+}
+
+body.light-theme input::placeholder,
+body.light-theme textarea::placeholder {
+    color: rgba(109, 70, 107, 0.6) !important;
+}
+
+body.light-theme input:focus,
+body.light-theme textarea:focus {
+    border-color: #412234 !important;
+    outline: none !important;
+}
+
+/* ==========================================
+   7. Document Split Viewer (Archival Vault)
+   ========================================== */
+body.light-theme .viewer-shell {
+    background: rgba(255, 255, 255, 0.85) !important;
+    border-color: rgba(180, 159, 204, 0.5) !important;
+    box-shadow: 0 20px 60px rgba(109, 70, 107, 0.1) !important;
+}
+
+body.light-theme .viewer-frame {
+    background: #ffffff !important;
+}
+
+body.light-theme .paper-sheet {
+    background-color: #ffffff !important;
+    color: #412234 !important;
+    box-shadow: 0 20px 50px rgba(109, 70, 107, 0.15) !important;
+}
+
+body.light-theme .paper-sheet * {
+    color: #6d466b !important;
+}
+
+body.light-theme .paper-sheet h1,
+body.light-theme .paper-sheet h2,
+body.light-theme .paper-sheet h3 {
+    color: #412234 !important;
+}
+
+/* ==========================================
+   8. EB/OC Logistics Dashboards
+   ========================================== */
+body.light-theme th {
+    border-bottom: 1.2px solid rgba(180, 159, 204, 0.3) !important;
+    background-color: rgba(180, 159, 204, 0.15) !important;
+    color: #412234 !important;
+}
+
+body.light-theme td {
+    border-bottom: 1.2px solid rgba(180, 159, 204, 0.15) !important;
+}
+
+body.light-theme thead tr {
+    background-color: rgba(180, 159, 204, 0.1) !important;
+}
+
+body.light-theme .torus-ring {
+    border-color: rgba(180, 159, 204, 0.3) !important;
+}
+
+body.light-theme .liquid-cta {
+    background: linear-gradient(135deg, #412234 0%, #6d466b 100%) !important;
+    color: #ffffff !important;
+    border-color: #412234 !important;
+}
+
+body.light-theme .liquid-cta:hover {
+    background: linear-gradient(135deg, #6d466b 0%, #b49fcc 100%) !important;
+    box-shadow: 0 0 20px rgba(180, 159, 204, 0.6) !important;
+}
+
+/* ==========================================
+   9. Background CSS Waves (Resources)
+   ========================================== */
+body.light-theme .silk-wave {
+    background: 
+        radial-gradient(circle at 30% 30%, rgba(180, 159, 204, 0.2) 0%, transparent 40%),
+        radial-gradient(circle at 70% 60%, rgba(234, 215, 215, 0.25) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(180, 159, 204, 0.15) 0%, transparent 60%) !important;
+}
+
+body.light-theme .aurora-layer {
+    background:
+      radial-gradient(circle at 20% 35%, rgba(180, 159, 204, 0.2), transparent 38%),
+      radial-gradient(circle at 78% 18%, rgba(234, 215, 215, 0.3), transparent 42%),
+      radial-gradient(circle at 65% 78%, rgba(180, 159, 204, 0.2), transparent 40%) !important;
+}
+
+body.light-theme .vignette-overlay {
+    background: radial-gradient(circle, transparent 40%, rgba(234, 215, 215, 0.3) 100%) !important;
+}
+
+/* ==========================================
+   10. Global loader page overlay
+   ========================================== */
+body.light-theme #page-loader {
+    background: radial-gradient(circle at 50% 50%, #ffffff 0%, #ead7d7 100%) !important;
+}
+
+body.light-theme #page-loader img {
+    filter: drop-shadow(0 0 30px rgba(180, 159, 204, 0.6)) !important;
+}
+
+/* ==========================================
+   11. Cursor Orb and Custom Scroll in Light Mode
+   ========================================== */
+body.light-theme .cursor-orb {
+    background: radial-gradient(circle, rgba(180, 159, 204, 0.25) 0%, rgba(180, 159, 204, 0) 70%) !important;
+}
+
+body.light-theme .scroll-progress {
+    background: linear-gradient(to right, #b49fcc, #412234) !important;
+    box-shadow: 0 0 10px rgba(180, 159, 204, 0.5) !important;
+}
+
+body.light-theme .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(180, 159, 204, 0.5) !important;
+}
+
+/* ==========================================
+   12. Switcher Button Light Mode Overrides
+   ========================================== */
+body.light-theme .theme-toggle-btn {
+    background: rgba(255, 255, 255, 0.6) !important;
+    border-color: #b49fcc !important;
+    box-shadow: 0 4px 12px rgba(180, 159, 204, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.8) !important;
+}
+
+body.light-theme .theme-toggle-svg {
+    color: #412234 !important;
+    transform: rotate(360deg);
+}
+
+body.light-theme .theme-toggle-btn .sun-icon {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+}
+
+body.light-theme .theme-toggle-btn .moon-icon {
+    opacity: 0;
+    transform: scale(0.5) rotate(45deg);
+}
+
+
+/* ==========================================
+   13. TAILWIND COLOR UTILITY OVERRIDES
+   ========================================== */
+
+/* A. Container Background Utility Overrides */
+body.light-theme .bg-primary-container,
+body.light-theme [class*="bg-primary-container"] {
+    background-color: rgba(180, 159, 204, 0.15) !important;
+}
+body.light-theme .bg-surface-container,
+body.light-theme [class*="bg-surface-container"] {
+    background-color: rgba(255, 255, 255, 0.65) !important;
+}
+body.light-theme .bg-surface-container-lowest,
+body.light-theme [class*="bg-surface-container-lowest"] {
+    background-color: rgba(255, 255, 255, 0.45) !important;
+}
+body.light-theme .bg-surface-container-low,
+body.light-theme [class*="bg-surface-container-low"] {
+    background-color: rgba(255, 255, 255, 0.55) !important;
+}
+body.light-theme .bg-surface-container-high,
+body.light-theme [class*="bg-surface-container-high"] {
+    background-color: rgba(255, 255, 255, 0.75) !important;
+}
+body.light-theme .bg-surface-container-highest,
+body.light-theme [class*="bg-surface-container-highest"] {
+    background-color: rgba(255, 255, 255, 0.92) !important;
+}
+body.light-theme .bg-surface,
+body.light-theme [class*="bg-surface"] {
+    background-color: rgba(255, 255, 255, 0.3) !important;
+}
+body.light-theme .bg-surface-variant,
+body.light-theme [class*="bg-surface-variant"] {
+    background-color: rgba(255, 255, 255, 0.8) !important;
+}
+body.light-theme .bg-white\/5,
+body.light-theme .bg-white\/10 {
+    background-color: rgba(255, 255, 255, 0.25) !important;
+}
+body.light-theme .bg-black\/20,
+body.light-theme .bg-black\/30,
+body.light-theme .bg-black\/40 {
+    background-color: rgba(180, 159, 204, 0.1) !important;
+}
+body.light-theme .bg-dusty-grape\/25,
+body.light-theme .bg-dusty-grape\/40 {
+    background-color: rgba(255, 255, 255, 0.75) !important;
+}
+
+/* B. Typography Color Utility Overrides */
+body.light-theme .text-seashell,
+body.light-theme [class*="text-seashell"] {
+    color: #412234 !important;
+}
+body.light-theme .text-almond-silk,
+body.light-theme [class*="text-almond-silk"] {
+    color: #6d466b !important;
+}
+body.light-theme .text-lilac-ash,
+body.light-theme [class*="text-lilac-ash"] {
+    color: #6d466b !important;
+}
+body.light-theme .text-on-surface,
+body.light-theme [class*="text-on-surface"] {
+    color: #412234 !important;
+}
+body.light-theme .text-on-surface-variant,
+body.light-theme [class*="text-on-surface-variant"] {
+    color: #6d466b !important;
+}
+body.light-theme .text-primary-fixed,
+body.light-theme [class*="text-primary-fixed"] {
+    color: #412234 !important;
+}
+body.light-theme .text-primary,
+body.light-theme [class*="text-primary"] {
+    color: #412234 !important;
+}
+
+/* C. Border Color Utility Overrides */
+body.light-theme .border-outline-variant\/10,
+body.light-theme .border-outline-variant\/20,
+body.light-theme .border-outline-variant\/30,
+body.light-theme [class*="border-outline-variant"] {
+    border-color: rgba(180, 159, 204, 0.25) !important;
+}
+body.light-theme .border-primary\/10,
+body.light-theme .border-primary\/20,
+body.light-theme .border-primary\/40,
+body.light-theme [class*="border-primary"] {
+    border-color: rgba(180, 159, 204, 0.35) !important;
+}
+body.light-theme .border-lilac-ash\/10,
+body.light-theme .border-lilac-ash\/20,
+body.light-theme .border-lilac-ash\/30 {
+    border-color: rgba(180, 159, 204, 0.25) !important;
+}
+
+/* D. Cinematic MUN Archive Page Overrides */
+body.light-theme .liquid-bg {
+    background: radial-gradient(circle at 50% 50%, #ffffff 0%, #ead7d7 100%) !important;
+}
+body.light-theme .blob.bg-\[\#4a4e69\] {
+    background-color: rgba(180, 159, 204, 0.2) !important;
+}
+body.light-theme .blob.bg-\[\#9a8c98\] {
+    background-color: rgba(234, 215, 215, 0.3) !important;
+}
+body.light-theme .blob.bg-\[\#22223b\] {
+    background-color: rgba(180, 159, 204, 0.15) !important;
+}
+
+/* ==========================================
+   E. Liquid Glass Dock & Button Light Mode
+   ========================================== */
+body.light-theme .glass-effect-layer {
+    box-shadow: 0 6px 20px rgba(109, 70, 107, 0.12), 0 0 20px rgba(180, 159, 204, 0.1) !important;
+    color: #412234 !important;
+}
+body.light-theme .glass-effect-layer .glass-tint {
+    background: rgba(255, 255, 255, 0.45) !important;
+}
+body.light-theme .glass-effect-layer .glass-bevel {
+    box-shadow:
+        inset 2px 2px 1px 0 rgba(255, 255, 255, 0.75),
+        inset -1px -1px 1px 1px rgba(255, 255, 255, 0.6) !important;
+}
+body.light-theme .glass-btn .glass-content p {
+    color: #412234 !important;
+}
+body.light-theme .dock-icon {
+    filter: drop-shadow(0 2px 6px rgba(109, 70, 107, 0.15));
+}
+body.light-theme .liquid-glass-distortion:hover {
+    box-shadow: 0 0 24px rgba(180, 159, 204, 0.3) !important;
+}
+
+/* ==========================================
+   F. Resources Workspace Page Light Mode
+   ========================================== */
+
+/* Body background override (overrides inline body { background-color: #161310 }) */
+body.light-theme {
+    background-color: #ffffff !important;
+    background-image: radial-gradient(circle at 50% 50%, #ffffff 0%, #ead7d7 100%) !important;
+}
+
+/* 3D wave container — remap to soft parchment gradient */
+body.light-theme .bg-3d-waves {
+    background: radial-gradient(circle at 50% 50%, #ffffff 0%, #ead7d7 65%, #f0d9d9 100%) !important;
+}
+
+/* Wave layers — lighten SVG waves to pastel violet */
+body.light-theme .wave-layer {
+    opacity: 0.06 !important;
+    filter: hue-rotate(200deg) saturate(0.5) brightness(2) !important;
+}
+
+/* Glass tier panels (workspace main content panel) */
+body.light-theme .glass-tier-1 {
+    background: rgba(255, 255, 255, 0.5) !important;
+    border: 1.2px solid rgba(180, 159, 204, 0.45) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    box-shadow: 0 8px 32px rgba(109, 70, 107, 0.07) !important;
+}
+body.light-theme .glass-tier-2 {
+    background: rgba(255, 255, 255, 0.65) !important;
+    border: 1.2px solid rgba(180, 159, 204, 0.5) !important;
+    backdrop-filter: blur(40px) saturate(180%) !important;
+    box-shadow: 0 20px 60px rgba(109, 70, 107, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Specular highlight layer */
+body.light-theme .specular-highlight {
+    background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%) !important;
+}
+
+/* Left sidebar */
+body.light-theme aside[class*="fixed"][class*="left-0"] {
+    background: rgba(255, 255, 255, 0.75) !important;
+    backdrop-filter: blur(30px) saturate(180%) !important;
+    border-right: 1.2px solid rgba(180, 159, 204, 0.3) !important;
+    box-shadow: 4px 0 20px rgba(109, 70, 107, 0.06) !important;
+}
+
+/* Sidebar folder/file hover states */
+body.light-theme [class*="hover:bg-white\\/5"]:hover {
+    background-color: rgba(180, 159, 204, 0.12) !important;
+}
+
+/* Active file highlight in sidebar */
+body.light-theme .bg-primary-container\/30 {
+    background-color: rgba(180, 159, 204, 0.2) !important;
+}
+
+/* File tags (read time / file size badges) */
+body.light-theme .bg-\\[\\#f2e9e4\\] {
+    background-color: rgba(180, 159, 204, 0.2) !important;
+}
+body.light-theme .text-\\[\\#22223b\\] {
+    color: #412234 !important;
+}
+
+/* Viewer shell (document iframe container) */
+body.light-theme .viewer-shell {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1.2px solid rgba(180, 159, 204, 0.4) !important;
+    box-shadow: 0 20px 60px rgba(109, 70, 107, 0.1), inset 0 1px 0 rgba(255,255,255,0.9) !important;
+}
+
+/* Footer bar */
+body.light-theme footer[class*="fixed"] {
+    background: rgba(255, 255, 255, 0.75) !important;
+    backdrop-filter: blur(20px) !important;
+    border-top: 1.2px solid rgba(180, 159, 204, 0.25) !important;
+    box-shadow: 0 -4px 20px rgba(109, 70, 107, 0.04) !important;
+}
+
+/* Download link button in workspace */
+body.light-theme #download-link,
+body.light-theme [id="download-link"] {
+    background: rgba(255, 255, 255, 0.7) !important;
+    border-color: rgba(180, 159, 204, 0.4) !important;
+    color: #412234 !important;
+}
+body.light-theme #download-link:hover {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border-color: rgba(180, 159, 204, 0.7) !important;
+}
+
+/* "New Research" primary button in sidebar — keep it recognizable in light mode */
+body.light-theme aside button.bg-primary {
+    background: linear-gradient(135deg, #412234 0%, #6d466b 100%) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 15px rgba(65, 34, 52, 0.25) !important;
+}
+
+/* Left border accent on active file */
+body.light-theme .border-l-4.border-primary {
+    border-left-color: #6d466b !important;
+}
+

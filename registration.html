@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="theme-light.css">
+<script src="theme-engine.js"></script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Registration | RITMUNSOC</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "primary-container": "#22223b",
+          "on-error": "#690005",
+          "tertiary": "#d2c2cf",
+          "surface-container-low": "#1f1b18",
+          "error-container": "#93000a",
+          "surface-container": "#231f1c",
+          "on-background": "#eae1dc",
+          "on-tertiary-fixed": "#221922",
+          "on-secondary": "#2b2f48",
+          "outline-variant": "#47464d",
+          "inverse-surface": "#eae1dc",
+          "secondary-fixed-dim": "#c1c4e5",
+          "secondary": "#c1c4e5",
+          "surface-dim": "#161310",
+          "on-secondary-fixed": "#161a32",
+          "tertiary-container": "#2b212b",
+          "background": "#161310",
+          "on-secondary-fixed-variant": "#414560",
+          "error": "#ffb4ab",
+          "on-surface": "#eae1dc",
+          "outline": "#928f98",
+          "on-primary-fixed-variant": "#44445f",
+          "surface-container-highest": "#383431",
+          "tertiary-fixed": "#eedeeb",
+          "on-error-container": "#ffdad6",
+          "primary-fixed-dim": "#c5c3e4",
+          "on-surface-variant": "#c8c5ce",
+          "on-primary-fixed": "#191932",
+          "inverse-on-surface": "#34302c",
+          "secondary-fixed": "#dee0ff",
+          "on-tertiary": "#372d37",
+          "surface-bright": "#3d3835",
+          "primary": "#c5c3e4",
+          "on-primary": "#2e2e48",
+          "surface": "#161310",
+          "surface-container-high": "#2d2926",
+          "inverse-primary": "#5c5c78",
+          "tertiary-fixed-dim": "#d2c2cf",
+          "surface-variant": "#383431",
+          "surface-container-lowest": "#110e0b",
+          "on-primary-container": "#8a89a7",
+          "secondary-container": "#414560",
+          "on-tertiary-container": "#958793",
+          "on-secondary-container": "#b0b3d3",
+          "on-tertiary-fixed-variant": "#4e434e",
+          "surface-tint": "#c5c3e4",
+          "primary-fixed": "#e2dfff"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "section-gap": "4rem",
+          "unit": "8px",
+          "glass-padding": "1.25rem",
+          "gutter": "1.5rem",
+          "container-padding": "2rem"
+        },
+        "fontFamily": {
+          "label-md": ["Inter"],
+          "display-lg": ["Playfair Display"],
+          "display-lg-mobile": ["Playfair Display"],
+          "headline-md": ["Playfair Display"],
+          "body-md": ["Inter"],
+          "body-lg": ["Inter"],
+          "headline-sm": ["Inter"],
+          "caption": ["Inter"]
+        },
+        "fontSize": {
+          "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "500"}],
+          "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+          "display-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+          "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+          "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+          "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+          "headline-sm": ["20px", {"lineHeight": "1.5", "letterSpacing": "0.05em", "fontWeight": "600"}],
+          "caption": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}]
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body {
+    background-color: #161310;
+    overflow-x: hidden;
+    color: #eae1dc;
+  }
+
+  canvas#bg-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .glass-panel {
+    backdrop-filter: blur(40px);
+    background: rgba(74, 78, 105, 0.4);
+    border: 1px solid rgba(210, 194, 207, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  }
+
+  .form-input {
+    background: rgba(74, 78, 105, 0.2) !important;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(154, 140, 152, 0.3) !important;
+    color: #f2e9e4 !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .form-input::placeholder {
+    color: rgba(242, 233, 228, 0.5);
+  }
+
+  .form-input:focus {
+    outline: none !important;
+    border-color: #c9ada7 !important;
+    box-shadow: 0 0 15px rgba(201, 173, 167, 0.3) !important;
+    background: rgba(74, 78, 105, 0.3) !important;
+  }
+
+  .toggle-active {
+    background: #c9ada7;
+    color: #22223b;
+    box-shadow: 0 0 20px rgba(201, 173, 167, 0.5);
+  }
+
+  .toggle-shell {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .toggle-pill {
+    position: absolute;
+    top: 6px;
+    bottom: 6px;
+    left: 6px;
+    width: calc(50% - 6px);
+    border-radius: 9999px;
+    background: #c9ada7;
+    box-shadow: 0 0 24px rgba(201, 173, 167, 0.35);
+    transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 0;
+  }
+
+  .toggle-shell[data-mode='institution'] .toggle-pill {
+    transform: translateX(100%);
+  }
+
+  .toggle-btn {
+    position: relative;
+    z-index: 1;
+    transition: color 320ms ease;
+  }
+
+  .form-transition {
+    transition: opacity 260ms ease, transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .form-transition.is-hidden {
+    opacity: 0;
+    transform: translateY(8px);
+    pointer-events: none;
+  }
+
+  .form-transition.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .button-halo {
+    position: relative;
+  }
+
+  .button-halo::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    box-shadow: 0 0 25px rgba(201, 173, 167, 0.4);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .button-halo:hover::after {
+    opacity: 1;
+  }
+
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    vertical-align: middle;
+  }
+  .mobile-menu-overlay {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  .mobile-menu-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .mobile-menu-drawer {
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    background:
+      radial-gradient(circle at 15% 10%, rgba(197, 195, 228, 0.2), transparent 45%),
+      radial-gradient(circle at 85% 90%, rgba(193, 196, 229, 0.18), transparent 42%),
+      rgba(45, 41, 38, 0.92);
+    box-shadow: -24px 0 60px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+  .mobile-menu-drawer.open {
+    transform: translateX(0);
+  }
+  .mobile-menu-link {
+    border: 1px solid rgba(71, 70, 77, 0.55);
+    background: rgba(17, 14, 11, 0.42);
+    backdrop-filter: blur(10px);
+    border-radius: 9999px;
+    padding: 0.72rem 1rem;
+    transition: all 0.25s ease;
+  }
+  .mobile-menu-link:hover {
+    color: #c5c3e4;
+    border-color: rgba(197, 195, 228, 0.55);
+    background: rgba(34, 34, 59, 0.45);
+    transform: translateX(-3px);
+  }
+  .mobile-menu-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(154, 140, 152, 0.6), transparent);
+  }
+
+        .nav-link {
+            position: relative;
+            transition: color 180ms cubic-bezier(0.23, 1, 0.32, 1), transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -7px;
+            height: 2px;
+            border-radius: 9999px;
+            background: rgba(197, 195, 228, 0.9);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .nav-link:hover::after,
+        .nav-link[data-active="true"]::after { transform: scaleX(1); }
+        .nav-link:active { transform: scale(0.97); }
+        .mobile-nav-link {
+            transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), color 180ms cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .mobile-nav-link:active { transform: scale(0.98); }
+
+    
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(to right, #c5c3e4, #e2dfff);
+            z-index: 9999;
+            transition: width 0.1s ease;
+            box-shadow: 0 0 10px rgba(197, 195, 228, 0.5);
+        }
+        /* Cursor Orb */
+        .cursor-orb {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(197, 195, 228, 0.15) 0%, rgba(197, 195, 228, 0) 70%);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 1;
+            transition: width 0.3s, height 0.3s;
+        }
+        /* Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* ── Native cross-document View Transitions (Chrome 126+) ── */
+        @view-transition { navigation: auto; }
+
+        /* ── Page content ── */
+        main, .page-content-root {
+            contain: layout;
+        }
+
+        /* ── Outgoing page content ── */
+        @keyframes vt-page-out {
+            from { opacity: 1; transform: translateY(0) scale(1); }
+            to   { opacity: 0; transform: translateY(-16px) scale(0.985); }
+        }
+
+        /* ── Incoming page content ── */
+        @keyframes vt-page-in {
+            from { opacity: 0; transform: translateY(24px) scale(0.985); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        ::view-transition-old(page-content) {
+            animation: vt-page-out 240ms cubic-bezier(0.4, 0, 0.2, 1) both;
+        }
+        ::view-transition-new(page-content) {
+            animation: vt-page-in  460ms cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        /* Navbar locks in place */
+        ::view-transition-old(site-header),
+        ::view-transition-new(site-header) { animation: none; }
+
+        /* Logo glow sweep */
+        @keyframes vt-logo-glow-native {
+            0%   { filter: drop-shadow(0 0 0px  rgba(197,195,228,0)); }
+            50%  { filter: drop-shadow(0 0 30px rgba(197,195,228,1)); }
+            100% { filter: drop-shadow(0 0 4px  rgba(197,195,228,0.15)); }
+        }
+        ::view-transition-old(site-logo) { animation: none; }
+        ::view-transition-new(site-logo) {
+            animation: vt-logo-glow-native 600ms cubic-bezier(0.22,1,0.36,1) both;
+        }
+
+        /* Nav pill stays locked */
+        ::view-transition-old(nav-pill),
+        ::view-transition-new(nav-pill) { animation: none; }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+        }
+
+    
+        /* Page transition loader */
+        @keyframes intense-glow {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(197, 195, 228, 0.4)); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 60px rgba(197, 195, 228, 1)); transform: scale(1.05); }
+        }
+        .animate-glow {
+            animation: intense-glow 2s ease-in-out infinite;
+            will-change: transform, filter;
+        }
+</style>
+</head>
+<body class="font-body-md">
+    <!-- Loading Overlay (Reused for Transitions) -->
+    <div id="page-loader" class="fixed inset-0 z-[100] bg-background flex flex-col items-center justify-center transition-opacity duration-700 ease-in-out">
+        <img src="RITMUNLogo.png" alt="Loading..." class="h-32 md:h-48 w-auto animate-glow">
+    </div>
+
+
+<!-- Global Premium UI Elements -->
+<div class="scroll-progress" id="scroll-progress"></div>
+<div class="cursor-orb" id="cursor-orb"></div>
+
+<canvas id="bg-canvas"></canvas>
+
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-container-padding py-4 bg-primary-container/40 dark:bg-primary-container/40 backdrop-blur-[20px] border-b border-outline-variant/20 shadow-lg" style="view-transition-name:site-header">
+  <a href="index.html" class="flex items-center gap-3 group cursor-pointer">
+<img src="RITMUNLogo.png" alt="RITMUNSOC Logo" class="h-10 w-auto transition-transform group-hover:scale-105" style="view-transition-name:site-logo">
+<div class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface tracking-tighter transition-colors group-hover:text-primary">RITMUNSOC</div>
+</a>
+  <nav class="hidden md:flex items-center gap-8 bg-surface-container-lowest/30 px-6 py-2 rounded-full border border-outline-variant/10 backdrop-blur-md" style="view-transition-name:nav-pill">
+    <a class="nav-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:backdrop-blur-[40px] transition-all duration-300" href="index.html" data-page="index">Home</a>
+    <a class="nav-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:backdrop-blur-[40px] transition-all duration-300" href="committee.html" data-page="committees">Committees</a>
+    <a class="nav-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:backdrop-blur-[40px] transition-all duration-300" href="sec.html" data-page="secretariat">Secretariat</a>
+    <a class="nav-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:backdrop-blur-[40px] transition-all duration-300" href="registration.html" data-page="register">Register</a>
+    <a class="nav-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:backdrop-blur-[40px] transition-all duration-300" href="#" data-page="history">History</a>
+    <a class="nav-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:backdrop-blur-[40px] transition-all duration-300" href="resources.html" data-page="resources">Resources</a>
+  </nav>
+  <div class="flex items-center gap-2">
+<a class="hidden md:inline-block bg-primary text-on-primary px-6 py-2 rounded-full font-label-md text-label-md uppercase tracking-widest active:scale-95 transition-transform hover:shadow-[0_0_20px_rgba(197,195,228,0.4)] text-center" href="login.html">Login</a>
+<button id="mobile-menu-toggle" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-full border border-outline-variant/30 bg-surface-container-lowest/40 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+</div>
+</header>
+<div id="mobile-menu-overlay" class="mobile-menu-overlay fixed inset-0 z-[60] bg-black/50 md:hidden"></div>
+<aside id="mobile-menu" class="mobile-menu-drawer fixed top-0 right-0 h-full w-[82%] max-w-[340px] z-[70] md:hidden border-l border-outline-variant/30 p-6 flex flex-col">
+  <div class="flex items-center justify-between mb-8">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary text-[20px]">apps</span>
+      <div class="font-display-lg text-[24px] leading-tight text-on-surface tracking-tight">Navigation</div>
+    </div>
+    <button id="mobile-menu-close" aria-label="Close menu" class="inline-flex items-center justify-center h-9 w-9 rounded-full border border-outline-variant/30 text-on-surface-variant hover:text-primary transition-colors">
+      <span class="material-symbols-outlined text-[20px]">close</span>
+    </button>
+  </div>
+  <div class="mobile-menu-divider mb-6"></div>
+  <nav class="flex flex-col gap-3">
+    <a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="index.html">Home</a>
+    <a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="committee.html">Committees</a>
+    <a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="sec.html">Secretariat</a>
+    <a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="registration.html">Register</a>
+    <a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="#">History</a>
+    <a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="resources.html">Resources</a>
+  </nav>
+  <a class="mt-8 bg-primary/90 text-on-primary px-6 py-3 rounded-full font-label-md text-label-md uppercase tracking-widest active:scale-95 transition-all hover:brightness-110 hover:shadow-[0_0_22px_rgba(197,195,228,0.45)] inline-block text-center" href="login.html">
+    Login
+  </a>
+  <p class="mt-5 font-label-md text-[12px] uppercase text-on-surface-variant/75 tracking-[0.22em]">Dialogue.Diplomacy.Leadership</p>
+</aside>
+
+<main class="min-h-screen flex items-center justify-center pt-32 pb-20 px-6" style="view-transition-name:page-content">
+  <div class="glass-panel w-full max-w-6xl rounded-[24px] p-8 md:p-12 relative overflow-hidden">
+    <header class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-8">
+      <div>
+        <h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-[#f2e9e4] mb-2">Delegate Registration</h1>
+        <p class="font-headline-sm text-headline-sm text-[#c9ada7] opacity-80">Join the elite circle of international diplomacy.</p>
+      </div>
+      <div class="toggle-shell bg-primary-container/60 p-1.5 rounded-full flex items-center border border-outline-variant/20" id="toggle-shell" data-mode="institution">
+        <span class="toggle-pill" aria-hidden="true"></span>
+        <button class="toggle-btn px-6 py-2 rounded-full font-label-md text-label-md uppercase transition-all duration-500" id="toggle-individual" type="button">
+          Individual Delegate
+        </button>
+        <button class="toggle-btn px-6 py-2 rounded-full font-label-md text-label-md uppercase hover:text-on-surface transition-all duration-500" id="toggle-institution" type="button">
+          Institution Delegation
+        </button>
+      </div>
+    </header>
+
+    <form class="grid grid-cols-1 md:grid-cols-2 gap-12" id="registration-form">
+      <div class="space-y-6 form-transition" id="individual-left-fields">
+        <div class="group">
+          <label class="block font-label-md text-label-md uppercase mb-2 ml-1 text-on-surface-variant">Full Name</label>
+          <input class="form-input w-full px-4 py-3 rounded-lg text-[#f2e9e4] font-body-md backdrop-blur-[20px]" placeholder="Enter your full name" type="text" value="Nysa Lakhotia">
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div class="group">
+            <label class="block font-label-md text-label-md uppercase mb-2 ml-1 text-on-surface-variant">Email Address</label>
+            <input class="form-input w-full px-4 py-3 rounded-lg text-[#f2e9e4] font-body-md backdrop-blur-[20px]" placeholder="nysa@example.com" type="email">
+          </div>
+          <div class="group">
+            <label class="block font-label-md text-label-md uppercase mb-2 ml-1 text-on-surface-variant">Phone Number</label>
+            <input class="form-input w-full px-4 py-3 rounded-lg text-[#f2e9e4] font-body-md backdrop-blur-[20px]" placeholder="+91 98765 43210" type="tel">
+          </div>
+        </div>
+        <div class="group">
+          <label class="block font-label-md text-label-md uppercase mb-2 ml-1 text-on-surface-variant">Institution Name</label>
+          <input class="form-input w-full px-4 py-3 rounded-lg text-[#f2e9e4] font-body-md backdrop-blur-[20px]" type="text" value="Ramaiah Institute of Technology">
+        </div>
+        <div class="group">
+          <label class="block font-label-md text-label-md uppercase mb-2 ml-1 text-on-surface-variant">Institution ID Number</label>
+          <input class="form-input w-full px-4 py-3 rounded-lg text-[#f2e9e4] font-body-md backdrop-blur-[20px]" placeholder="e.g. 1MS20CS001" type="text">
+        </div>
+      </div>
+
+      <div class="space-y-6 form-transition hidden" id="institution-left-fields">
+        <div class="group">
+          <label class="block font-label-md text-label-md uppercase mb-2 ml-1 text-on-surface-variant">Institution Name</label>
+          <input class="form-input w-full px-4 py-3 rounded-lg text-[#f2e9e4] font-body-md backdrop-blur-[20px]" type="text" placeholder="Enter institution name">
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div class="group">
+            <label class="block font-label-md text-label-md uppercase mb-2 ml-1 text-on-surface-variant">Team Lead Name</label>
+            <input class="form-input w-full px-4 py-3 rounded-lg text-[#f2e9e4] font-body-md backdrop-blur-[20px]" type="text" placeholder="Primary lead full name">
+          </div>
+          <div class="group">
+            <label class="block font-label-md text-label-md uppercase mb-2 ml-1 text-on-surface-variant">Team Lead Phone</label>
+            <input class="form-input w-full px-4 py-3 rounded-lg text-[#f2e9e4] font-body-md backdrop-blur-[20px]" type="tel" placeholder="+91 98765 43210">
+          </div>
+        </div>
+        <div class="group">
+          <label class="block font-label-md text-label-md uppercase mb-2 ml-1 text-on-surface-variant">Team Lead Email</label>
+          <input class="form-input w-full px-4 py-3 rounded-lg text-[#f2e9e4] font-body-md backdrop-blur-[20px]" type="email" placeholder="lead@example.com">
+        </div>
+        <div class="group">
+          <label class="block font-label-md text-label-md uppercase mb-2 ml-1 text-on-surface-variant">No. of Delegates</label>
+          <input class="form-input w-full px-4 py-3 rounded-lg text-[#f2e9e4] font-body-md backdrop-blur-[20px]" type="number" min="1" placeholder="Enter total number of delegates">
+        </div>
+      </div>
+
+      <div class="space-y-6" id="right-fields">
+        <div>
+          <label class="block font-label-md text-label-md uppercase mb-4 text-on-surface-variant flex items-center">
+            <span class="material-symbols-outlined mr-2" style="font-size: 18px;">account_balance</span>
+            Committee Preferences
+          </label>
+          <div class="space-y-3">
+            <select class="form-input w-full px-4 py-3 rounded-lg text-[#f2e9e4] font-body-md backdrop-blur-[20px]">
+              <option disabled selected>Select Committee 1</option>
+              <option>UNHRC</option>
+              <option>DISEC</option>
+              <option>UNSC</option>
+            </select>
+            <select class="form-input w-full px-4 py-3 rounded-lg text-[#f2e9e4] font-body-md backdrop-blur-[20px]">
+              <option disabled selected>Select Committee 2</option>
+              <option>UNHRC</option>
+              <option>DISEC</option>
+              <option>UNSC</option>
+            </select>
+            <select class="form-input w-full px-4 py-3 rounded-lg text-[#f2e9e4] font-body-md backdrop-blur-[20px]">
+              <option disabled selected>Select Committee 3</option>
+              <option>UNHRC</option>
+              <option>DISEC</option>
+              <option>UNSC</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-label-md text-label-md uppercase mb-4 text-on-surface-variant flex items-center">
+            <span class="material-symbols-outlined mr-2" style="font-size: 18px;">public</span>
+            Portfolio Preferences
+          </label>
+          <div class="space-y-3">
+            <input class="form-input w-full px-4 py-3 rounded-lg text-[#f2e9e4] font-body-md backdrop-blur-[20px]" placeholder="Portfolio Choice 1" type="text">
+            <input class="form-input w-full px-4 py-3 rounded-lg text-[#f2e9e4] font-body-md backdrop-blur-[20px]" placeholder="Portfolio Choice 2" type="text">
+            <input class="form-input w-full px-4 py-3 rounded-lg text-[#f2e9e4] font-body-md backdrop-blur-[20px]" placeholder="Portfolio Choice 3" type="text">
+          </div>
+        </div>
+
+        <div class="form-transition hidden" id="institution-upload-block">
+          <label class="block font-label-md text-label-md uppercase mb-4 text-on-surface-variant flex items-center">
+            <span class="material-symbols-outlined mr-2" style="font-size: 18px;">upload_file</span>
+            Delegate Sheet Upload
+          </label>
+          <label class="form-input w-full min-h-[160px] rounded-lg p-6 flex flex-col items-center justify-center text-center cursor-pointer border-dashed border-2 border-[#c9ada7]/40 hover:border-[#c9ada7] transition-colors">
+            <span class="material-symbols-outlined text-3xl mb-2 text-[#c9ada7]">description</span>
+            <span class="font-body-md text-[#f2e9e4]">Upload Excel (.xlsx or .xls) with all delegates</span>
+            <span class="font-caption text-on-surface-variant mt-2">Max file size: 10MB</span>
+            <input type="file" accept=".xlsx,.xls" class="hidden">
+          </label>
+        </div>
+      </div>
+
+      <div class="md:col-span-2 flex flex-col md:flex-row justify-between items-center mt-8 pt-8 border-t border-outline-variant/10 gap-8">
+        <div class="flex items-center gap-4 text-on-surface-variant">
+          <div class="w-10 h-10 rounded-full bg-secondary-container/30 flex items-center justify-center border border-outline-variant/20">
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+          </div>
+          <div>
+            <p class="font-label-md text-label-md text-on-surface">Data Verification Active</p>
+            <p class="font-caption text-caption">Applications are manually vetted by the secretariat.</p>
+          </div>
+        </div>
+        <button class="button-halo bg-[#c9ada7] text-[#22223b] font-label-md text-label-md uppercase tracking-widest px-10 py-4 rounded-full flex items-center gap-3 hover:scale-105 active:scale-95 transition-all group" type="submit" id="submit-button">
+          Register as Institution
+          <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+        </button>
+      </div>
+    </form>
+
+    <div class="absolute -top-20 -right-20 w-40 h-40 bg-[#c9ada7]/10 blur-[100px] rounded-full"></div>
+    <div class="absolute -bottom-20 -left-20 w-40 h-40 bg-primary/10 blur-[100px] rounded-full"></div>
+  </div>
+</main>
+
+<footer class="w-full px-container-padding py-8 flex flex-col md:flex-row justify-between items-center gap-4 bg-surface-container-lowest/60 dark:bg-surface-container-lowest/60 backdrop-blur-[20px] border-t border-outline-variant/10 text-on-surface dark:text-on-surface">
+<div class="flex flex-col items-center md:items-start">
+<div class="font-headline-sm text-headline-sm font-bold text-primary mb-2">RITMUNSOC</div>
+<div class="font-caption text-caption text-on-surface-variant/70">© 2024 RITMUNSOC. All rights reserved.</div>
+</div>
+<div class="flex gap-8 items-center">
+<a class="font-caption text-caption text-on-surface-variant/70 hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-caption text-caption text-on-surface-variant/70 hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-caption text-caption text-on-surface-variant/70 hover:text-primary transition-colors" href="#">Contact Us</a>
+<a class="font-caption text-caption text-on-surface-variant/70 hover:text-primary transition-colors" href="#">Press Kit</a>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-surface-variant/70 hover:text-primary cursor-pointer transition-colors">share</span>
+<span class="material-symbols-outlined text-on-surface-variant/70 hover:text-primary cursor-pointer transition-colors">forum</span>
+<span class="material-symbols-outlined text-on-surface-variant/70 hover:text-primary cursor-pointer transition-colors">smart_display</span>
+</div>
+</footer>
+
+<script>
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  let width, height;
+  let points = [];
+  let mouse = { x: 0, y: 0 };
+
+  function init() {
+    width = window.innerWidth;
+    height = document.documentElement.scrollHeight;
+    canvas.width = window.innerWidth;
+    canvas.height = height;
+
+    points = [];
+    for (let i = 0; i < 5; i++) {
+      points.push({
+        y: Math.random() * height,
+        amplitude: 50 + Math.random() * 100,
+        frequency: 0.001 + Math.random() * 0.002,
+        speed: 0.005 + Math.random() * 0.008,
+        offset: Math.random() * 100,
+        color: i % 3 === 0 ? '#22223b' : (i % 3 === 1 ? '#4a4e69' : '#9a8c98')
+      });
+    }
+  }
+
+  window.addEventListener('resize', init);
+  window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.pageY;
+  });
+
+  function animate(t) {
+    ctx.fillStyle = '#161310';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    points.forEach((p) => {
+      ctx.beginPath();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = p.color;
+      ctx.globalAlpha = 0.4;
+
+      for (let x = 0; x < canvas.width; x += 10) {
+        const wave = Math.sin(x * p.frequency + t * p.speed + p.offset) * p.amplitude;
+        const mouseInfluence = Math.exp(-Math.pow(x - mouse.x, 2) / 50000) * (mouse.y - canvas.height / 2) * 0.2;
+        const y = (canvas.height / 2) + wave + mouseInfluence;
+
+        if (x === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    });
+
+    ctx.globalAlpha = 0.1;
+    ctx.strokeStyle = '#c9ada7';
+    for (let i = 0; i < 3; i++) {
+      ctx.beginPath();
+      const x = (t * 0.05 + i * 500) % canvas.width;
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x + 200, canvas.height);
+      ctx.stroke();
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  init();
+  animate(0);
+
+  window.addEventListener('load', () => {
+    init();
+  });
+
+  function highlightActiveNav() {
+    const navLinks = document.querySelectorAll('.nav-link[data-page]');
+    navLinks.forEach(link => {
+      link.classList.remove('text-primary', 'border-b-2', 'border-primary', 'pb-1');
+    });
+    const registerLink = document.querySelector('.nav-link[data-page="register"]');
+    if (registerLink) {
+      registerLink.classList.add('text-primary', 'border-b-2', 'border-primary', 'pb-1');
+    }
+  }
+  highlightActiveNav();
+
+  function setupMobileMenu() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileOverlay = document.getElementById('mobile-menu-overlay');
+    const mobileToggle = document.getElementById('mobile-menu-toggle');
+    const mobileClose = document.getElementById('mobile-menu-close');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+    if (!mobileMenu || !mobileOverlay || !mobileToggle || !mobileClose) return;
+    const openMenu = () => {
+      mobileMenu.classList.add('open');
+      mobileOverlay.classList.add('open');
+      mobileToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    };
+    const closeMenu = () => {
+      mobileMenu.classList.remove('open');
+      mobileOverlay.classList.remove('open');
+      mobileToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    };
+    mobileToggle.addEventListener('click', openMenu);
+    mobileClose.addEventListener('click', closeMenu);
+    mobileOverlay.addEventListener('click', closeMenu);
+    mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeMenu();
+    });
+  }
+  setupMobileMenu();
+
+  // Navigation transitions handled by transitions.js (logo loader)
+
+  const btnIndiv = document.getElementById('toggle-individual');
+  const btnInsti = document.getElementById('toggle-institution');
+  const toggleShell = document.getElementById('toggle-shell');
+  const individualLeftFields = document.getElementById('individual-left-fields');
+  const institutionLeftFields = document.getElementById('institution-left-fields');
+  const institutionUploadBlock = document.getElementById('institution-upload-block');
+  const submitButton = document.getElementById('submit-button');
+
+  function setMode(mode) {
+    const isInstitution = mode === 'institution';
+    toggleShell.dataset.mode = mode;
+
+    const show = (el) => {
+      el.classList.remove('hidden', 'is-hidden');
+      requestAnimationFrame(() => el.classList.add('is-visible'));
+    };
+
+    const hide = (el) => {
+      el.classList.remove('is-visible');
+      el.classList.add('is-hidden');
+      setTimeout(() => el.classList.add('hidden'), 220);
+    };
+
+    if (isInstitution) {
+      hide(individualLeftFields);
+      show(institutionLeftFields);
+      show(institutionUploadBlock);
+    } else {
+      hide(institutionLeftFields);
+      hide(institutionUploadBlock);
+      show(individualLeftFields);
+    }
+
+    btnIndiv.classList.toggle('text-[#22223b]', !isInstitution);
+    btnIndiv.classList.toggle('text-on-surface-variant', isInstitution);
+    btnInsti.classList.toggle('text-[#22223b]', isInstitution);
+    btnInsti.classList.toggle('text-on-surface-variant', !isInstitution);
+
+    submitButton.firstChild.textContent = isInstitution ? 'Register as Institution' : 'Register as Delegate';
+  }
+
+  btnIndiv.onclick = () => {
+    setMode('individual');
+  };
+
+  btnInsti.onclick = () => {
+    setMode('institution');
+  };
+
+  setMode('institution');
+
+        // 1. Scroll Progress Bar
+        const scrollProgress = document.getElementById('scroll-progress');
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercentage = (scrollTop / scrollHeight) * 100;
+            if(scrollProgress) scrollProgress.style.width = scrollPercentage + '%';
+        });
+
+        // 2. Cursor Orb
+        const cursorOrb = document.getElementById('cursor-orb');
+        if (cursorOrb && !window.matchMedia("(max-width: 768px)").matches) {
+            document.addEventListener('mousemove', (e) => {
+                cursorOrb.style.left = e.clientX + 'px';
+                cursorOrb.style.top = e.clientY + 'px';
+            });
+            document.addEventListener('mousedown', () => {
+                cursorOrb.style.transform = 'translate(-50%, -50%) scale(0.8)';
+                cursorOrb.style.background = 'radial-gradient(circle, rgba(197, 195, 228, 0.25) 0%, rgba(197, 195, 228, 0) 70%)';
+            });
+            document.addEventListener('mouseup', () => {
+                cursorOrb.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursorOrb.style.background = 'radial-gradient(circle, rgba(197, 195, 228, 0.15) 0%, rgba(197, 195, 228, 0) 70%)';
+            });
+        }
+
+        // 3. Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+</script>
+    <script src="transitions.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="theme-light.css">
+<script src="theme-engine.js"></script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>MUN ARCHIVE | Unified Document Workspace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<style>
+  body { background-color: #161310; margin: 0; overflow: hidden; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .glass-tier-1 { backdrop-filter: blur(20px); background: rgba(74, 78, 105, 0.4); border: 1px solid rgba(154, 140, 152, 0.2); }
+  .glass-tier-2 { backdrop-filter: blur(40px); background: rgba(74, 78, 105, 0.6); border: 1px solid rgba(154, 140, 152, 0.4); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); }
+  .specular-highlight { background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 50%); }
+  .bg-3d-waves { background: radial-gradient(circle at 50% 50%, #2a2752 0%, #161310 65%, #110e0b 100%); position: fixed; inset: 0; z-index: -1; overflow: hidden; }
+  .wave-layer { position: absolute; width: 200%; height: 200%; top: -50%; left: -50%; background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,500 C200,400 300,600 500,500 C700,400 800,600 1000,500 L1000,1000 L0,1000 Z' fill='%234a4e69' fill-opacity='0.05'/%3E%3C/svg%3E"); animation: wave-animation 20s infinite linear; transform-origin: center; }
+  @keyframes wave-animation { 0% { transform: rotate(0deg) scale(1); } 50% { transform: rotate(180deg) scale(1.1); } 100% { transform: rotate(360deg) scale(1); } }
+  .aurora-layer {
+    position: absolute;
+    inset: -20%;
+    background:
+      radial-gradient(circle at 20% 35%, rgba(197,195,228,0.12), transparent 38%),
+      radial-gradient(circle at 78% 18%, rgba(154,140,152,0.16), transparent 42%),
+      radial-gradient(circle at 65% 78%, rgba(65,69,96,0.18), transparent 40%);
+    filter: blur(70px);
+    animation: aurora-shift 16s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+  @keyframes aurora-shift {
+    0% { transform: translate3d(-2%, 0, 0) scale(1); opacity: 0.7; }
+    100% { transform: translate3d(2%, -2%, 0) scale(1.08); opacity: 1; }
+  }
+  .paper-sheet { box-shadow: 0 20px 50px rgba(0,0,0,0.5); background-color: #f2e9e4; color: #22223b; min-height: 1100px; width: 100%; max-width: 800px; }
+  .viewer-shell {
+    width: 100%;
+    max-width: 980px;
+    height: clamp(560px, calc(100vh - 290px), 720px);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(154, 140, 152, 0.35);
+    background: rgba(17, 14, 11, 0.45);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.08);
+  }
+  .viewer-frame {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #111;
+  }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .mobile-menu-overlay { opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
+  .mobile-menu-overlay.open { opacity: 1; pointer-events: auto; }
+  .mobile-menu-drawer { transform: translateX(100%); transition: transform 0.3s ease; background: radial-gradient(circle at 15% 10%, rgba(197, 195, 228, 0.2), transparent 45%), radial-gradient(circle at 85% 90%, rgba(193, 196, 229, 0.18), transparent 42%), rgba(45, 41, 38, 0.92); box-shadow: -24px 0 60px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08); }
+  .mobile-menu-drawer.open { transform: translateX(0); }
+  .mobile-menu-link { border: 1px solid rgba(71, 70, 77, 0.55); background: rgba(17, 14, 11, 0.42); backdrop-filter: blur(10px); border-radius: 9999px; padding: 0.72rem 1rem; transition: all 0.25s ease; }
+  .mobile-menu-link:hover { color: #c5c3e4; border-color: rgba(197, 195, 228, 0.55); background: rgba(34, 34, 59, 0.45); transform: translateX(-3px); }
+  .mobile-menu-divider { height: 1px; background: linear-gradient(to right, transparent, rgba(154, 140, 152, 0.6), transparent); }
+
+        .nav-link {
+            position: relative;
+            transition: color 180ms cubic-bezier(0.23, 1, 0.32, 1), transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -7px;
+            height: 2px;
+            border-radius: 9999px;
+            background: rgba(197, 195, 228, 0.9);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .nav-link:hover::after,
+        .nav-link[data-active="true"]::after { transform: scaleX(1); }
+        .nav-link:active { transform: scale(0.97); }
+        .mobile-nav-link {
+            transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), color 180ms cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .mobile-nav-link:active { transform: scale(0.98); }
+
+    
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(to right, #c5c3e4, #e2dfff);
+            z-index: 9999;
+            transition: width 0.1s ease;
+            box-shadow: 0 0 10px rgba(197, 195, 228, 0.5);
+        }
+        /* Cursor Orb */
+        .cursor-orb {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(197, 195, 228, 0.15) 0%, rgba(197, 195, 228, 0) 70%);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 1;
+            transition: width 0.3s, height 0.3s;
+        }
+        /* Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+</style>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "surface-container-highest": "#383431","outline-variant": "#47464d","secondary-container": "#414560","on-tertiary-container": "#958793","on-primary": "#2e2e48","surface-tint": "#c5c3e4","tertiary-fixed-dim": "#d2c2cf","primary-fixed": "#e2dfff","on-secondary-fixed": "#161a32","surface": "#161310","on-error-container": "#ffdad6","inverse-primary": "#5c5c78","primary-container": "#22223b","surface-container-high": "#2d2926","primary-fixed-dim": "#c5c3e4","on-primary-fixed-variant": "#44445f","surface-bright": "#3d3835","secondary-fixed": "#dee0ff","secondary": "#c1c4e5","on-surface-variant": "#c8c5ce","on-secondary-fixed-variant": "#414560","tertiary": "#d2c2cf","on-primary-container": "#8a89a7","surface-variant": "#383431","primary": "#c5c3e4","on-background": "#eae1dc","surface-container-lowest": "#110e0b","on-tertiary-fixed-variant": "#4e434e","outline": "#928f98","on-surface": "#eae1dc","tertiary-container": "#2b212b","on-tertiary": "#372d37","surface-dim": "#161310","inverse-on-surface": "#34302c","secondary-fixed-dim": "#c1c4e5","error-container": "#93000a","surface-container-low": "#1f1b18","on-error": "#690005","tertiary-fixed": "#eedeeb","background": "#161310","error": "#ffb4ab","on-tertiary-fixed": "#221922","inverse-surface": "#eae1dc","surface-container": "#231f1c","on-primary-fixed": "#191932","on-secondary-container": "#b0b3d3","on-secondary": "#2b2f48"
+        },
+        "spacing": {"unit": "8px","container-padding": "2rem","section-gap": "4rem","gutter": "1.5rem","glass-padding": "1.25rem"},
+        "fontFamily": {"headline-md": ["Playfair Display"],"headline-sm": ["Inter"],"body-lg": ["Inter"],"label-md": ["Inter"],"body-md": ["Inter"],"caption": ["Inter"],"display-lg": ["Playfair Display"]},
+        "fontSize": {"headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],"headline-sm": ["20px", {"lineHeight": "1.5", "letterSpacing": "0.05em", "fontWeight": "600"}],"body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],"label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "500"}],"body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],"caption": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}],"display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}]}
+      }
+    }
+  }
+</script>
+</head>
+<body class="font-body-md text-on-surface">
+
+<!-- Global Premium UI Elements -->
+<div class="scroll-progress" id="scroll-progress"></div>
+<div class="cursor-orb" id="cursor-orb"></div>
+
+<div class="bg-3d-waves">
+  <div class="wave-layer" style="animation-duration: 30s; opacity: 0.3;"></div>
+  <div class="wave-layer" style="animation-duration: 25s; opacity: 0.1; top: -40%; left: -40%; transform: rotate(15deg);"></div>
+  <div class="aurora-layer"></div>
+</div>
+
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-container-padding py-4 bg-primary-container/40 dark:bg-primary-container/40 backdrop-blur-[20px] border-b border-outline-variant/20 shadow-lg">
+  <a href="index.html" class="flex items-center gap-3 group cursor-pointer">
+    <img src="RITMUNLogo.png" alt="RITMUNSOC Logo" class="h-10 w-auto transition-transform group-hover:scale-105">
+    <div class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface tracking-tighter transition-colors group-hover:text-primary">RITMUNSOC</div>
+  </a>
+  <nav class="hidden md:flex items-center gap-8 bg-surface-container-lowest/30 px-6 py-2 rounded-full border border-outline-variant/10 backdrop-blur-md">
+    <a class="nav-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-all duration-300" href="index.html">Home</a>
+    <a class="nav-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-all duration-300" href="committee.html">Committees</a>
+    <a class="nav-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-all duration-300" href="sec.html">Secretariat</a>
+    <a class="nav-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-all duration-300" href="registration.html">Register</a>
+    <a class="nav-link font-label-md text-label-md uppercase tracking-wider text-primary text-primary" href="resources.html">Resources</a>
+  </nav>
+  <div class="flex items-center gap-2">
+<a class="hidden md:inline-block bg-primary text-on-primary px-6 py-2 rounded-full font-label-md text-label-md uppercase tracking-widest active:scale-95 transition-transform hover:shadow-[0_0_20px_rgba(197,195,228,0.4)] text-center" href="login.html">Login</a>
+<button id="mobile-menu-toggle" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-full border border-outline-variant/30 bg-surface-container-lowest/40 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+</div>
+</header>
+<div id="mobile-menu-overlay" class="mobile-menu-overlay fixed inset-0 z-[60] bg-black/50 md:hidden"></div>
+<aside id="mobile-menu" class="mobile-menu-drawer fixed top-0 right-0 h-full w-[82%] max-w-[340px] z-[70] md:hidden border-l border-outline-variant/30 p-6 flex flex-col">
+  <div class="flex items-center justify-between mb-8">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary text-[20px]">apps</span>
+      <div class="font-display-lg text-[24px] leading-tight text-on-surface tracking-tight">Navigation</div>
+    </div>
+    <button id="mobile-menu-close" aria-label="Close menu" class="inline-flex items-center justify-center h-9 w-9 rounded-full border border-outline-variant/30 text-on-surface-variant hover:text-primary transition-colors">
+      <span class="material-symbols-outlined text-[20px]">close</span>
+    </button>
+  </div>
+  <div class="mobile-menu-divider mb-6"></div>
+  <nav class="flex flex-col gap-3">
+    <a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="index.html">Home</a>
+    <a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="committee.html">Committees</a>
+    <a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="sec.html">Secretariat</a>
+    <a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="registration.html">Register</a>
+    <a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="resources.html">Resources</a>
+  </nav>
+  <a class="mt-8 bg-primary/90 text-on-primary px-6 py-3 rounded-full font-label-md text-label-md uppercase tracking-widest inline-block text-center" href="login.html">Login</a>
+</aside>
+
+<aside class="fixed left-0 top-0 bottom-0 z-40 hidden md:flex flex-col pt-24 pb-8 bg-surface-container-low/60 backdrop-blur-2xl h-[calc(100vh-theme(spacing.section-gap))] w-72 rounded-xl ml-spacing-unit mt-20 border-r border-outline-variant/10 shadow-inner-glow">
+  <div class="px-6 mb-6">
+    <h2 class="font-headline-sm text-headline-sm text-on-surface">Workspace</h2>
+    <p class="font-label-md text-label-md text-on-surface-variant opacity-70">Academic Archive v2.4</p>
+  </div>
+  <div class="flex-1 overflow-y-auto scrollbar-hide px-2">
+    <div class="space-y-1">
+      <div class="group">
+        <button type="button" data-file-link="https://drive.google.com/file/d/10RgT2TiJJfSnDTRuM80Zt6jwYtbbIFJo/view?usp=sharing" data-file-title="UNSC Background Guide 2026" class="w-full text-left flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-white/5 rounded-lg transition-all cursor-pointer">
+          <span class="material-symbols-outlined transition-transform duration-300 group-hover:rotate-90" data-icon="chevron_right">chevron_right</span>
+          <span class="material-symbols-outlined text-primary" data-icon="folder_open">folder_open</span>
+          <span class="font-label-md text-label-md">United Nations Security Council</span>
+        </button>
+        <div class="ml-10 mt-2 space-y-2">
+          <button type="button" data-file-link="https://drive.google.com/file/d/10RgT2TiJJfSnDTRuM80Zt6jwYtbbIFJo/view?usp=sharing" data-file-title="UNSC Background Guide 2026" class="w-full text-left bg-primary-container/30 text-primary border-l-4 border-primary px-3 py-3 rounded-r-lg flex flex-col gap-1 transition-all shadow-lg border-y border-r border-outline-variant/20 hover:bg-primary-container/45">
+            <span class="font-label-md text-label-md font-bold truncate">UNSC Background Guide 2026</span>
+            <div class="flex gap-2 mt-1"><span class="bg-[#f2e9e4] text-[#22223b] text-[10px] px-2 py-0.5 rounded-full font-bold">22m READ</span><span class="bg-[#f2e9e4] text-[#22223b] text-[10px] px-2 py-0.5 rounded-full font-bold">4.8MB</span></div>
+          </button>
+          <button type="button" data-file-link="https://drive.google.com/file/d/10RgT2TiJJfSnDTRuM80Zt6jwYtbbIFJo/view?usp=sharing" data-file-title="Resolution Draft 12-A" class="w-full text-left text-on-surface-variant hover:bg-white/5 px-3 py-3 rounded-lg flex flex-col gap-1 cursor-pointer transition-all border border-transparent hover:border-outline-variant/10">
+            <span class="font-label-md text-label-md truncate">Resolution Draft 12-A</span>
+            <div class="flex gap-2 mt-1 opacity-60"><span class="bg-[#f2e9e4] text-[#22223b] text-[10px] px-2 py-0.5 rounded-full font-bold">5m READ</span></div>
+          </button>
+        </div>
+      </div>
+      <button type="button" data-file-link="https://drive.google.com/file/d/10RgT2TiJJfSnDTRuM80Zt6jwYtbbIFJo/view?usp=sharing" data-file-title="DISEC Resources" class="w-full text-left flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-white/5 rounded-lg transition-all cursor-pointer"><span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span><span class="material-symbols-outlined text-on-tertiary-container" data-icon="folder_open">folder_open</span><span class="font-label-md text-label-md">DISEC Resources</span></button>
+      <button type="button" data-file-link="https://drive.google.com/file/d/10RgT2TiJJfSnDTRuM80Zt6jwYtbbIFJo/view?usp=sharing" data-file-title="Crisis Directives" class="w-full text-left flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-white/5 rounded-lg transition-all cursor-pointer"><span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span><span class="material-symbols-outlined text-on-tertiary-container" data-icon="folder_open">folder_open</span><span class="font-label-md text-label-md">Crisis Directives</span></button>
+    </div>
+  </div>
+  <div class="px-4 mt-4">
+    <button class="w-full py-3 bg-primary text-on-primary rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all"><span class="material-symbols-outlined" data-icon="add">add</span>New Research</button>
+  </div>
+</aside>
+
+<main class="md:ml-[300px] ml-0 mt-24 mr-spacing-unit pb-20 flex justify-center h-[calc(100vh-120px)] overflow-y-auto scrollbar-hide">
+  <div class="glass-tier-2 rounded-2xl p-8 md:p-10 w-full max-w-5xl relative min-h-full flex flex-col items-center">
+    <div class="specular-highlight absolute inset-0 rounded-2xl pointer-events-none"></div>
+    <div class="w-full max-w-5xl mt-6">
+      <div class="mb-4 px-2 flex items-center justify-between gap-4">
+        <div>
+        <p class="font-label-md text-[11px] uppercase tracking-[0.24em] text-lilac-ash">Live File Preview</p>
+        <h2 id="viewer-title" class="font-headline-sm text-seashell mt-1">UNSC Background Guide 2026</h2>
+        </div>
+        <a id="download-link" href="https://drive.google.com/file/d/10RgT2TiJJfSnDTRuM80Zt6jwYtbbIFJo/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="shrink-0 inline-flex items-center gap-2 px-3 py-2 rounded-full border border-outline-variant/40 bg-surface-container-low/60 text-on-surface-variant hover:text-on-surface hover:border-primary/50 transition-all">
+          <span class="material-symbols-outlined text-[18px]">download</span>
+          <span class="font-label-md text-[11px] uppercase tracking-widest">Download</span>
+        </a>
+      </div>
+      <div class="viewer-shell">
+        <iframe
+          class="viewer-frame"
+          id="file-viewer"
+          src="https://drive.google.com/file/d/10RgT2TiJJfSnDTRuM80Zt6jwYtbbIFJo/preview"
+          allow="autoplay"
+          title="UNSC Background Guide 2026 Viewer">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="w-full px-container-padding py-8 flex flex-col md:flex-row justify-between items-center gap-4 bg-surface-container-lowest/60 dark:bg-surface-container-lowest/60 backdrop-blur-[20px] border-t border-outline-variant/10 text-on-surface dark:text-on-surface">
+<div class="flex flex-col items-center md:items-start">
+<div class="font-headline-sm text-headline-sm font-bold text-primary mb-2">RITMUNSOC</div>
+<div class="font-caption text-caption text-on-surface-variant/70">© 2024 RITMUNSOC. All rights reserved.</div>
+</div>
+<div class="flex gap-8 items-center">
+<a class="font-caption text-caption text-on-surface-variant/70 hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-caption text-caption text-on-surface-variant/70 hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-caption text-caption text-on-surface-variant/70 hover:text-primary transition-colors" href="#">Contact Us</a>
+<a class="font-caption text-caption text-on-surface-variant/70 hover:text-primary transition-colors" href="#">Press Kit</a>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-surface-variant/70 hover:text-primary cursor-pointer transition-colors">share</span>
+<span class="material-symbols-outlined text-on-surface-variant/70 hover:text-primary cursor-pointer transition-colors">forum</span>
+<span class="material-symbols-outlined text-on-surface-variant/70 hover:text-primary cursor-pointer transition-colors">smart_display</span>
+</div>
+</footer>
+
+<script>
+  function setupMobileMenu() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileOverlay = document.getElementById('mobile-menu-overlay');
+    const mobileToggle = document.getElementById('mobile-menu-toggle');
+    const mobileClose = document.getElementById('mobile-menu-close');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+    if (!mobileMenu || !mobileOverlay || !mobileToggle || !mobileClose) return;
+    const openMenu = () => {
+      mobileMenu.classList.add('open');
+      mobileOverlay.classList.add('open');
+      mobileToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    };
+    const closeMenu = () => {
+      mobileMenu.classList.remove('open');
+      mobileOverlay.classList.remove('open');
+      mobileToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    };
+    mobileToggle.addEventListener('click', openMenu);
+    mobileClose.addEventListener('click', closeMenu);
+    mobileOverlay.addEventListener('click', closeMenu);
+    mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+  }
+  setupMobileMenu();
+
+  document.querySelectorAll('.material-symbols-outlined').forEach(icon => {
+    icon.addEventListener('mousedown', function() { this.classList.add('scale-90'); });
+    icon.addEventListener('mouseup', function() { this.classList.remove('scale-90'); });
+  });
+
+  const fileViewer = document.getElementById('file-viewer');
+  const viewerTitle = document.getElementById('viewer-title');
+  const downloadLink = document.getElementById('download-link');
+  const fileTriggers = document.querySelectorAll('[data-file-link]');
+
+  function toPreviewLink(link) {
+    const match = link.match(/\/file\/d\/([^/]+)\//);
+    if (!match) return link;
+    return `https://drive.google.com/file/d/${match[1]}/preview`;
+  }
+
+  fileTriggers.forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const link = trigger.getAttribute('data-file-link');
+      const title = trigger.getAttribute('data-file-title') || 'Document';
+      if (!link || !fileViewer || !downloadLink || !viewerTitle) return;
+      fileViewer.src = toPreviewLink(link);
+      downloadLink.href = link;
+      viewerTitle.textContent = title;
+    });
+  });
+
+  function setupNavTransitions() {
+    const links = document.querySelectorAll('.nav-link[href], .mobile-nav-link[href]');
+    links.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('#')) return;
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (document.startViewTransition) {
+          document.startViewTransition(() => {
+            window.location.href = href;
+          });
+          return;
+        }
+        document.body.style.transition = 'opacity 180ms cubic-bezier(0.23, 1, 0.32, 1)';
+        document.body.style.opacity = '0';
+        setTimeout(() => { window.location.href = href; }, 180);
+      });
+    });
+  }
+  setupNavTransitions();
+
+
+        // 1. Scroll Progress Bar
+        const scrollProgress = document.getElementById('scroll-progress');
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercentage = (scrollTop / scrollHeight) * 100;
+            if(scrollProgress) scrollProgress.style.width = scrollPercentage + '%';
+        });
+
+        // 2. Cursor Orb
+        const cursorOrb = document.getElementById('cursor-orb');
+        if (cursorOrb && !window.matchMedia("(max-width: 768px)").matches) {
+            document.addEventListener('mousemove', (e) => {
+                cursorOrb.style.left = e.clientX + 'px';
+                cursorOrb.style.top = e.clientY + 'px';
+            });
+            document.addEventListener('mousedown', () => {
+                cursorOrb.style.transform = 'translate(-50%, -50%) scale(0.8)';
+                cursorOrb.style.background = 'radial-gradient(circle, rgba(197, 195, 228, 0.25) 0%, rgba(197, 195, 228, 0) 70%)';
+            });
+            document.addEventListener('mouseup', () => {
+                cursorOrb.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursorOrb.style.background = 'radial-gradient(circle, rgba(197, 195, 228, 0.15) 0%, rgba(197, 195, 228, 0) 70%)';
+            });
+        }
+
+        // 3. Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+</script>
+</body>
+</html>
