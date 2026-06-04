@@ -620,55 +620,241 @@ Explore Committees
 <input type="range" class="carousel-scrubber" id="events-scrubber" min="0" max="100" value="0" aria-label="Scroll through events">
 </section>
 
-<!-- Testimonials Section -->
-<section class="mb-section-gap reveal relative overflow-hidden">
-<div class="max-w-4xl mx-auto liquid-glass rounded-[2rem] p-10 md:p-16 text-center relative border border-primary/20 shadow-[0_0_30px_rgba(197,195,228,0.05)]">
-    <span class="material-symbols-outlined text-primary/20 text-[80px] absolute top-4 left-8 pointer-events-none">format_quote</span>
-    
-    <div class="testimonial-slider relative min-h-[160px] flex items-center justify-center">
-        <!-- Testimonial 1 -->
-        <div class="testimonial-slide absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-1000 opacity-100 z-10">
-            <p class="font-display-lg text-xl md:text-3xl text-on-surface mb-6 leading-relaxed italic">"RITMUNSOC provided me with the platform to understand global diplomacy intimately. The debates are rigorous and the community is incredibly supportive."</p>
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-12 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center font-bold text-primary">A</div>
-                <div class="text-left">
-                    <h4 class="font-label-md text-on-surface font-bold">Aarav Sharma</h4>
-                    <p class="font-caption text-primary/80">Secretary General, RITMUN'23</p>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Testimonial 2 -->
-        <div class="testimonial-slide absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-1000 opacity-0 z-0">
-            <p class="font-display-lg text-xl md:text-3xl text-on-surface mb-6 leading-relaxed italic">"The simulation of crisis committees here is unparalleled. It pushes your strategic thinking to the limit while demanding cooperative leadership."</p>
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-12 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center font-bold text-primary">N</div>
-                <div class="text-left">
-                    <h4 class="font-label-md text-on-surface font-bold">Neha Gupta</h4>
-                    <p class="font-caption text-primary/80">Best Delegate, UNSC '24</p>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Testimonial 3 -->
-        <div class="testimonial-slide absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-1000 opacity-0 z-0">
-            <p class="font-display-lg text-xl md:text-3xl text-on-surface mb-6 leading-relaxed italic">"From learning how to draft resolutions to making lifelong friends, my journey with RITMUNSOC has been the highlight of my college experience."</p>
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-12 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center font-bold text-primary">R</div>
-                <div class="text-left">
-                    <h4 class="font-label-md text-on-surface font-bold">Rohan Mehta</h4>
-                    <p class="font-caption text-primary/80">Under-Secretary General, RITMUN'25</p>
-                </div>
-            </div>
-        </div>
+<!-- Animated Testimonials Section -->
+<section class="mb-section-gap reveal" id="testimonials-section">
+<style>
+    .at-wrap {
+        max-width: 56rem;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2.5rem;
+        padding: 0 0.5rem;
+    }
+    @media (min-width: 768px) {
+        .at-wrap { flex-direction: row; align-items: center; gap: 3.5rem; }
+    }
+    /* Image stack */
+    .at-images {
+        position: relative;
+        flex-shrink: 0;
+        width: 200px;
+        height: 260px;
+    }
+    @media (min-width: 768px) { .at-images { width: 240px; height: 320px; } }
+    .at-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 1.5rem;
+        object-fit: cover;
+        box-shadow: 0 24px 64px rgba(0,0,0,0.45);
+        transition: opacity 400ms cubic-bezier(0.22,1,0.36,1),
+                    transform 500ms cubic-bezier(0.22,1,0.36,1);
+        opacity: 0;
+        transform: scale(0.92) rotateZ(-3deg);
+        will-change: transform, opacity;
+    }
+    .at-img.at-active {
+        opacity: 1;
+        transform: scale(1) rotateZ(0deg);
+        z-index: 10;
+    }
+    .at-img.at-prev {
+        opacity: 0.45;
+        transform: scale(0.95) rotateZ(-4deg) translateX(-14px) translateY(10px);
+        z-index: 5;
+    }
+    .at-img.at-prev2 {
+        opacity: 0.2;
+        transform: scale(0.88) rotateZ(-7deg) translateX(-24px) translateY(18px);
+        z-index: 2;
+    }
+    /* Content */
+    .at-content { flex: 1; min-width: 0; }
+    .at-quote-text {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(1.1rem, 3vw, 1.5rem);
+        line-height: 1.55;
+        color: #eae1dc;
+        font-style: italic;
+        margin-bottom: 1.75rem;
+        position: relative;
+    }
+    .at-quote-icon {
+        font-size: 5rem;
+        line-height: 0;
+        color: rgba(197,195,228,0.14);
+        font-family: Georgia, serif;
+        position: absolute;
+        top: -1.2rem;
+        left: -0.5rem;
+        pointer-events: none;
+        user-select: none;
+    }
+    .at-person { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+    .at-avatar {
+        width: 3rem; height: 3rem;
+        border-radius: 9999px;
+        object-fit: cover;
+        border: 2px solid rgba(197,195,228,0.35);
+        flex-shrink: 0;
+    }
+    .at-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.95rem; color: #eae1dc; }
+    .at-role { font-family: 'Inter', sans-serif; font-size: 0.78rem; color: rgba(197,195,228,0.65); margin-top: 2px; letter-spacing: 0.03em; }
+    /* Arrows */
+    .at-arrows { display: flex; gap: 0.6rem; }
+    .at-arrow {
+        width: 2.6rem; height: 2.6rem;
+        border-radius: 9999px;
+        border: 1px solid rgba(154,140,152,0.35);
+        background: rgba(17,14,11,0.45);
+        backdrop-filter: blur(10px);
+        display: flex; align-items: center; justify-content: center;
+        color: #c8c5ce;
+        cursor: pointer;
+        transition: border-color 200ms, background 200ms, color 200ms, transform 150ms;
+    }
+    .at-arrow:hover {
+        border-color: rgba(197,195,228,0.7);
+        background: rgba(34,34,59,0.55);
+        color: #e2dfff;
+        transform: scale(1.08);
+    }
+    .at-arrow:active { transform: scale(0.95); }
+</style>
+
+<div class="at-wrap" id="at-root">
+    <!-- Image Stack -->
+    <div class="at-images" id="at-images" aria-hidden="true">
+        <img class="at-img" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=400&auto=format&fit=crop" alt="Aarav Sharma">
+        <img class="at-img" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=400&auto=format&fit=crop" alt="Neha Gupta">
+        <img class="at-img" src="https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=400&auto=format&fit=crop" alt="Rohan Mehta">
+        <img class="at-img" src="https://images.unsplash.com/photo-1636041293178-808a6762ab39?q=80&w=400&auto=format&fit=crop" alt="Priya Nair">
+        <img class="at-img" src="https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=400&auto=format&fit=crop" alt="Arjun Sinha">
     </div>
-    
-    <div class="flex justify-center gap-2 mt-8 z-20 relative">
-        <button class="testimonial-dot w-2 h-2 rounded-full bg-primary transition-all duration-300"></button>
-        <button class="testimonial-dot w-2 h-2 rounded-full bg-primary/30 transition-all duration-300 hover:bg-primary/60"></button>
-        <button class="testimonial-dot w-2 h-2 rounded-full bg-primary/30 transition-all duration-300 hover:bg-primary/60"></button>
+
+    <!-- Quote + Navigation -->
+    <div class="at-content">
+        <div class="at-quote-text" id="at-quote">
+            <span class="at-quote-icon">"</span>
+            <span id="at-quote-text">RITMUNSOC provided me with the platform to understand global diplomacy intimately. The debates are rigorous and the community is incredibly supportive.</span>"
+        </div>
+        <div class="at-person">
+            <img class="at-avatar" id="at-avatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop" alt="Aarav Sharma">
+            <div>
+                <div class="at-name" id="at-name">Aarav Sharma</div>
+                <div class="at-role" id="at-role">Secretary General, RITMUN'23</div>
+            </div>
+        </div>
+        <div class="at-arrows">
+            <button class="at-arrow" id="at-prev" aria-label="Previous testimonial">
+                <span class="material-symbols-outlined" style="font-size:18px">arrow_back</span>
+            </button>
+            <button class="at-arrow" id="at-next" aria-label="Next testimonial">
+                <span class="material-symbols-outlined" style="font-size:18px">arrow_forward</span>
+            </button>
+        </div>
     </div>
 </div>
+
+<script>
+(function() {
+    const testimonials = [
+        {
+            quote: "RITMUNSOC provided me with the platform to understand global diplomacy intimately. The debates are rigorous and the community is incredibly supportive.",
+            name: "Aarav Sharma",
+            role: "Secretary General, RITMUN'23",
+            src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=400&auto=format&fit=crop",
+        },
+        {
+            quote: "The simulation of crisis committees here is unparalleled. It pushes your strategic thinking to the limit while demanding cooperative leadership.",
+            name: "Neha Gupta",
+            role: "Best Delegate, UNSC '24",
+            src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=400&auto=format&fit=crop",
+        },
+        {
+            quote: "From learning how to draft resolutions to making lifelong friends, my journey with RITMUNSOC has been the highlight of my college experience.",
+            name: "Rohan Mehta",
+            role: "Under-Secretary General, RITMUN'25",
+            src: "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=400&auto=format&fit=crop",
+        },
+        {
+            quote: "RITMUNSOC sharpened my public speaking and negotiation skills beyond what any classroom ever could. A transformative experience every delegate must have.",
+            name: "Priya Nair",
+            role: "Verbal Mention, UNHRC '24",
+            src: "https://images.unsplash.com/photo-1636041293178-808a6762ab39?q=80&w=400&auto=format&fit=crop",
+        },
+        {
+            quote: "The level of preparation and mentorship from the secretariat is phenomenal. It inspired me to lead my own delegation the following year.",
+            name: "Arjun Sinha",
+            role: "Best Delegate, AIPPM '25",
+            src: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=400&auto=format&fit=crop",
+        },
+    ];
+
+    let current = 0;
+    let isAnimating = false;
+    const imgs = document.querySelectorAll('#at-images .at-img');
+    const quoteEl = document.getElementById('at-quote-text');
+    const nameEl = document.getElementById('at-name');
+    const roleEl = document.getElementById('at-role');
+    const avatarEl = document.getElementById('at-avatar');
+
+    function updateStack(idx) {
+        const total = testimonials.length;
+        imgs.forEach((img, i) => {
+            img.classList.remove('at-active','at-prev','at-prev2');
+            const rel = (i - idx + total) % total;
+            if (rel === 0) img.classList.add('at-active');
+            else if (rel === total - 1) img.classList.add('at-prev');
+            else if (rel === total - 2) img.classList.add('at-prev2');
+        });
+    }
+
+    function goTo(idx) {
+        if (isAnimating) return;
+        isAnimating = true;
+        current = (idx + testimonials.length) % testimonials.length;
+        const t = testimonials[current];
+
+        // Fade out
+        quoteEl.style.transition = 'opacity 200ms';
+        quoteEl.style.opacity = '0';
+        nameEl.style.opacity = '0';
+        roleEl.style.opacity = '0';
+        avatarEl.style.opacity = '0';
+
+        updateStack(current);
+
+        setTimeout(() => {
+            quoteEl.textContent = t.quote;
+            nameEl.textContent = t.name;
+            roleEl.textContent = t.role;
+            avatarEl.src = t.src.replace('w=400', 'w=100');
+            avatarEl.alt = t.name;
+
+            quoteEl.style.opacity = '1';
+            nameEl.style.opacity = '1';
+            roleEl.style.opacity = '1';
+            avatarEl.style.opacity = '1';
+            isAnimating = false;
+        }, 220);
+    }
+
+    // Initial render
+    updateStack(0);
+    [quoteEl, nameEl, roleEl, avatarEl].forEach(el => { el.style.transition = 'opacity 300ms'; });
+
+    document.getElementById('at-next').addEventListener('click', () => goTo(current + 1));
+    document.getElementById('at-prev').addEventListener('click', () => goTo(current - 1));
+
+    // Auto-advance
+    setInterval(() => goTo(current + 1), 5500);
+})();
+</script>
 </section>
 
 <!-- Newsletter / CTA -->
