@@ -669,3 +669,49 @@ body.light-theme aside button.bg-primary {
 body.light-theme .border-l-4.border-primary {
     border-left-color: #6d466b !important;
 }
+
+/* ==========================================
+   Animated Testimonials Component
+   ========================================== */
+body.light-theme .at-quote-text {
+    color: #412234 !important;
+    font-family: 'Playfair Display', serif !important;
+}
+
+body.light-theme .at-quote-icon {
+    color: rgba(109, 70, 107, 0.2) !important;
+}
+
+body.light-theme .at-name {
+    color: #412234 !important;
+    font-family: 'Playfair Display', serif !important;
+}
+
+body.light-theme .at-role {
+    color: rgba(109, 70, 107, 0.72) !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+body.light-theme .at-avatar {
+    border-color: rgba(180, 159, 204, 0.6) !important;
+}
+
+body.light-theme .at-arrow {
+    background: rgba(255, 255, 255, 0.55) !important;
+    border-color: rgba(180, 159, 204, 0.5) !important;
+    color: #412234 !important;
+}
+
+body.light-theme .at-arrow:hover {
+    background: rgba(255, 255, 255, 0.85) !important;
+    border-color: rgba(109, 70, 107, 0.55) !important;
+    color: #412234 !important;
+}
+
+body.light-theme .at-img.at-prev {
+    opacity: 0.38 !important;
+}
+
+body.light-theme .at-img.at-prev2 {
+    opacity: 0.16 !important;
+}
