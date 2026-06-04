@@ -100,6 +100,62 @@ body.light-theme .glass-panel-deep {
                 box-shadow 450ms cubic-bezier(0.25, 0.8, 0.25, 1) !important;
 }
 
+body.light-theme .committee-spotlight {
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(234, 215, 215, 0.42)),
+        radial-gradient(circle at 16% 12%, rgba(180, 159, 204, 0.22), transparent 36%) !important;
+    border-color: rgba(180, 159, 204, 0.42) !important;
+    box-shadow: 0 22px 70px rgba(109, 70, 107, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.78) !important;
+}
+
+body.light-theme .committee-hover-card {
+    background: rgba(255, 255, 255, 0.42) !important;
+    border-color: rgba(180, 159, 204, 0.32) !important;
+}
+
+body.light-theme .committee-hover-card.is-active {
+    border-color: rgba(109, 70, 107, 0.42) !important;
+    box-shadow: 0 18px 46px rgba(109, 70, 107, 0.16), 0 0 30px rgba(180, 159, 204, 0.18) !important;
+}
+
+body.light-theme .committee-hover-card::after {
+    background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.5) 54%, rgba(255, 255, 255, 0.1)),
+        linear-gradient(0deg, rgba(255, 255, 255, 0.8), transparent 62%) !important;
+}
+
+body.light-theme .committee-hover-title,
+body.light-theme .committee-hover-details,
+body.light-theme .committee-hover-details p {
+    color: #412234 !important;
+}
+
+body.light-theme span.committee-hover-code {
+    color: #6d466b !important;
+}
+
+body.light-theme .committee-spotlight-copy {
+    background: rgba(255, 255, 255, 0.46) !important;
+    border-color: rgba(180, 159, 204, 0.3) !important;
+}
+
+body.light-theme .committee-action {
+    background: rgba(255, 255, 255, 0.56) !important;
+    border-color: rgba(180, 159, 204, 0.42) !important;
+    color: #412234 !important;
+}
+
+body.light-theme .committee-action:hover {
+    background: rgba(255, 255, 255, 0.82) !important;
+    border-color: rgba(109, 70, 107, 0.44) !important;
+}
+
+body.light-theme .committee-action-primary {
+    background: linear-gradient(135deg, #412234, #6d466b) !important;
+    border-color: rgba(65, 34, 52, 0.62) !important;
+    color: #fff7f2 !important;
+}
+
 /* ==========================================
    3. Beveled Glass Edge Refractions
    ========================================== */
@@ -157,7 +213,7 @@ body.light-theme span:not(.material-symbols-outlined):not(.bg-primary):not(.bg-p
 body.light-theme li,
 body.light-theme th,
 body.light-theme td,
-body.light-theme a:not(.bg-primary):not(.bg-primary\/90):not(.bg-primary\/40):not(.text-on-primary),
+body.light-theme a:not(.bg-primary):not(.bg-primary\/90):not(.bg-primary\/40):not(.text-on-primary):not(.committee-action):not(.committee-action-primary),
 body.light-theme .font-body-md,
 body.light-theme .font-body-lg,
 body.light-theme .font-label-md,
@@ -613,4 +669,3 @@ body.light-theme aside button.bg-primary {
 body.light-theme .border-l-4.border-primary {
     border-left-color: #6d466b !important;
 }
-

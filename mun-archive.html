@@ -5,6 +5,8 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>BITSMUN Hyderabad 2025 | MUN ARCHIVE</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 <script id="tailwind-config">
@@ -417,35 +419,20 @@
 <main class="pt-32 px-container-padding max-w-[1600px] mx-auto min-h-screen">
 <div class="flex flex-col lg:flex-row gap-gutter lg:items-stretch">
 <!-- Left (60%): Cinematic Media Gallery -->
-<section class="w-full lg:w-[60%] flex flex-col gap-6">
-<!-- Main Glass Viewport -->
-<div class="glass-panel specular-border rounded-3xl overflow-hidden relative group flex-1">
-<img alt="BITSMUN 2025 Delegation" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1XhmQNDf-O5jQ0KPPoaYhwktvTu1KQqJiA2vyQnMwMPclhCyWXldtMOpFDweXMBWU5kFynDVyDIptGFEl5uGHuTKWiHP3vq3QQqwdNKOCvrLGsL0JyWjdA4HKKAHGMeWtAosKz2Ucdo_1rvH5tiioQa8rKDyo3rc8q_Ee-6y8wUhNniz6jtvSS-5n9IwFF31gkDToDSFvV_fBMraw9yoru6hDUjvsyHSysPxTRje2muinPqaR4BKbvDa9_8ZWoU2BZaFnB3cXkWDz" style="filter: contrast(1.1) brightness(0.9) saturate(0.8) sepia(0.1); transform: scale(1.05) translate(-8.3px, 2.88px);">
-<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-<!-- Interaction Light Glare Overlay -->
-<div class="absolute inset-0 pointer-events-none bg-gradient-to-tr from-white/0 via-white/5 to-white/0 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></div>
-</div>
-<!-- Thumbnail Carousel -->
-<div class="flex gap-4 overflow-x-auto pb-4 custom-scrollbar">
-<div class="flex-shrink-0 w-32 h-20 rounded-xl glass-panel p-1 border-2 border-primary ring-2 ring-primary/20">
-<img class="w-full h-full object-cover rounded-lg" data-alt="Close up cinematic shot of diplomatic delegates in a boardroom, soft glassmorphism aesthetic with indigo and lavender lighting, professional academic setting with blurred background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6qmRRcPC3oOBpGuJ0DZbsBF0kLDgSG6xN2j6gIGZttncR2VMjcV9ynda62NnhY6cfG49joTn7HkukBlQwdQB9YGxdDPe35m3QZvQ1KMARYvkAe1cHH2w6vAXM-cO9duhfhNlOMhIf8H2dACPC7IRguCicY5qZAhX11vdPN6lIixFk89W_lpYXtHIl0XDx_gJpRFqoCIMak1o6gDptsiZxQsNTIiPCc0IQgUjmuAzpr2JaJmdMJUJ9tCbg3Z15AAN11qCOkwnQ34ew">
-</div>
-<div class="flex-shrink-0 w-32 h-20 rounded-xl glass-panel p-1 opacity-60 hover:opacity-100 transition-all cursor-pointer">
-<img class="w-full h-full object-cover rounded-lg" data-alt="A large group of international students celebrating an achievement in a modern auditorium with sleek furniture. The scene is illuminated with cool blue and warm gold light, creating a cinematic, premium atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6dKfe-rJLYz3-lS8dzeA-GSPpQu0lNQXi8n1QVjis4FYXQJ0Ml7ZimkP9Zux5wMeKdJtwBOIx-wOWTquTn0wqLGM9MkcXEMAFh3gJpucBVvAWk3pDKUffrE5LEoOKC6NGa_5RqP_xbhPzA7e-1MlwkAjcKaq3SkjQySSZ9UjCgYKigj7TdAVV6_HlK4saMTqEeVC-1BcUO3VrCthYvi0N2JFQjr3IUjsYQJLCVrxfZCy-H9GV8RHO3GdYcx8EeUcFgdU1x_XI-f6h">
-</div>
-<div class="flex-shrink-0 w-32 h-20 rounded-xl glass-panel p-1 opacity-60 hover:opacity-100 transition-all cursor-pointer">
-<img class="w-full h-full object-cover rounded-lg" data-alt="Detailed close up of a diplomatic trophy and certificate on a polished glass table. Reflections of indigo and violet light dancing on the metallic surface, high-key lighting, luxurious and celebratory mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVbTFqbWQ84yiMWXQEynxBOazqLBoqEsjX63EYlrwYESpMJBxzRf8pdxpGBeUQyAnoXWpxgsUmVHtg6isJoUV3-I2tqZ3O4dLBZ9NoPurNBxOcrn7STw04LwafcH4tLyBtJP-CWVMo2VZgoFhnJZphOpjfXBYEnkaMeNEyetIRmW3njSaMguMybR2GHWDMarjqObTyXm4SqpCMDGbIPRQo0FtsL1XpAtf7Sw5AYtz356eOi_lHYo8sHBbDmjvTxgarp8ZQ3ZcBcvXT">
-</div>
-<div class="flex-shrink-0 w-32 h-20 rounded-xl glass-panel p-1 opacity-60 hover:opacity-100 transition-all cursor-pointer">
-<img class="w-full h-full object-cover rounded-lg" data-alt="Architectural wide shot of a prestigious university hall during a Model United Nations event. The ceiling features geometric light installations, and the room is filled with a soft lilac haze. Cinematic depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaF5IUMDl0gO4n8labbNbuxFT4tK2_avN--KcddL2W5kgj1HxbQGFzLxfjgUY2SNb5LjpSioyzi-qKQ200ZwHrsdCl1VZzvGXKoOzyL7v07cBeUErJK5TY9ApF2NValnOeRNIH9Md3TNJZH0Bp9HRZg1XgJPWY-oc8g6gqulqAIlB-gMHXgd2aQz-ZKzPO-5Xk5xqka_W-ckPIc2_Bq5U-98L85irda9pnOn9mVSj_jHRJhClnHV4Jz0UAYaZC9JjuopqoxhZMQhqQ">
-</div>
-</div>
-
-
-
+<!-- Left (60%): Cinematic Media Gallery (Sticky Scroll) -->
+<!-- Left (60%): Cinematic Media Gallery (Sticky Scroll) -->
+<section class="w-full lg:w-[60%] relative h-full">
+    <div id="sticky-card-container" class="sticky-cards relative flex h-[80vh] w-full items-center justify-center overflow-hidden p-3 lg:p-8">
+        <div class="relative h-[90%] w-full max-w-sm overflow-hidden rounded-lg sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl">
+            <img class="sticky-card-img rounded-3xl absolute h-full w-full object-cover" src="Rahul.jpg" alt="Gallery Image 1">
+            <img class="sticky-card-img rounded-3xl absolute h-full w-full object-cover" src="Nysa.jpg" alt="Gallery Image 2">
+            <img class="sticky-card-img rounded-3xl absolute h-full w-full object-cover" src="Ryan.jpg" alt="Gallery Image 3">
+            <img class="sticky-card-img rounded-3xl absolute h-full w-full object-cover" src="sreehari.jpg" alt="Gallery Image 4">
+        </div>
+    </div>
 </section>
 <!-- Right (40%): The Laurels & Logistics Deck -->
-<aside class="w-full lg:w-[40%] flex flex-col gap-gutter">
+<aside class="w-full lg:w-[40%] flex flex-col gap-gutter lg:sticky lg:top-32 lg:h-[calc(100vh-160px)]">
 <div class="glass-panel-deep specular-border rounded-3xl p-10 flex flex-col gap-8 h-full">
 <!-- Header Section -->
 <div class="relative">
@@ -501,6 +488,38 @@
 <div class="flex flex-col">
 <span class="text-on-surface font-semibold font-body-md">Nirav Reddy</span>
 <span class="text-[10px] uppercase tracking-widest text-on-surface-variant/60 font-label-md mt-1">AIPPM</span>
+</div>
+<span class="bg-white/5 text-on-surface-variant px-3 py-1 rounded-full text-[10px] font-bold tracking-tighter uppercase border border-white/10">Verbal Mention</span>
+</div>
+<!-- Best Delegate -->
+<div class="glass-panel liquid-glass-distortion p-4 rounded-2xl flex items-center justify-between hover-glow group transition-all cursor-default">
+<div class="flex flex-col">
+<span class="text-on-surface font-semibold font-body-md">Sarah Jenkins</span>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant/60 font-label-md mt-1">UNHCR</span>
+</div>
+<span class="bg-primary-container text-almond-silk px-3 py-1 rounded-full text-[10px] font-bold tracking-tighter uppercase border border-primary/30">Best Delegate</span>
+</div>
+<!-- Honorable Mention -->
+<div class="glass-panel liquid-glass-distortion p-4 rounded-2xl flex items-center justify-between hover-glow group transition-all cursor-default">
+<div class="flex flex-col">
+<span class="text-on-surface font-semibold font-body-md">Liam O'Connor</span>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant/60 font-label-md mt-1">DISEC</span>
+</div>
+<span class="bg-white/5 text-on-surface-variant px-3 py-1 rounded-full text-[10px] font-bold tracking-tighter uppercase border border-white/10">Honorable Mention</span>
+</div>
+<!-- Outstanding Delegate -->
+<div class="glass-panel liquid-glass-distortion p-4 rounded-2xl flex items-center justify-between hover-glow group transition-all cursor-default">
+<div class="flex flex-col">
+<span class="text-on-surface font-semibold font-body-md">Priya Patel</span>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant/60 font-label-md mt-1">WHO</span>
+</div>
+<span class="bg-white/5 text-on-surface-variant px-3 py-1 rounded-full text-[10px] font-bold tracking-tighter uppercase border border-white/10">Outstanding Delegate</span>
+</div>
+<!-- Verbal Mention -->
+<div class="glass-panel liquid-glass-distortion p-4 rounded-2xl flex items-center justify-between hover-glow group transition-all cursor-default">
+<div class="flex flex-col">
+<span class="text-on-surface font-semibold font-body-md">Ethan Wright</span>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant/60 font-label-md mt-1">UNSC</span>
 </div>
 <span class="bg-white/5 text-on-surface-variant px-3 py-1 rounded-full text-[10px] font-bold tracking-tighter uppercase border border-white/10">Verbal Mention</span>
 </div>
@@ -697,6 +716,64 @@
             });
         }
         setupMobileMenu();
+
+        function initStickyCards() {
+            if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+            
+            gsap.registerPlugin(ScrollTrigger);
+
+            const imageElements = document.querySelectorAll('.sticky-card-img');
+            const totalCards = imageElements.length;
+
+            if (!imageElements[0]) return;
+
+            gsap.set(imageElements[0], { y: "0%", scale: 1, rotation: 0 });
+
+            for (let i = 1; i < totalCards; i++) {
+                if (!imageElements[i]) continue;
+                gsap.set(imageElements[i], { y: "100%", scale: 1, rotation: 0 });
+            }
+
+            const scrollTimeline = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".sticky-cards",
+                    start: "top top+=120",
+                    end: `+=${window.innerHeight * (totalCards - 1)}`,
+                    pin: true,
+                    scrub: 0.5,
+                    pinSpacing: true,
+                },
+            });
+
+            for (let i = 0; i < totalCards - 1; i++) {
+                const currentImage = imageElements[i];
+                const nextImage = imageElements[i + 1];
+                const position = i;
+                if (!currentImage || !nextImage) continue;
+
+                scrollTimeline.to(
+                    currentImage,
+                    {
+                        scale: 0.7,
+                        rotation: 5,
+                        duration: 1,
+                        ease: "none",
+                    },
+                    position,
+                );
+
+                scrollTimeline.to(
+                    nextImage,
+                    {
+                        y: "0%",
+                        duration: 1,
+                        ease: "none",
+                    },
+                    position,
+                );
+            }
+        }
+        window.addEventListener('load', initStickyCards);
 
 
     </script>

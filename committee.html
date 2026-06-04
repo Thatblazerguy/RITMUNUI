@@ -287,6 +287,204 @@
             transform: translateY(0);
         }
 
+        .committee-spotlight {
+            min-height: calc(100vh - 7rem);
+            display: flex;
+            flex-direction: column;
+            gap: clamp(1rem, 2vw, 1.5rem);
+            border: 1px solid rgba(154, 140, 152, 0.22);
+            background:
+                linear-gradient(135deg, rgba(34, 34, 59, 0.48), rgba(22, 19, 16, 0.72)),
+                radial-gradient(circle at 16% 12%, rgba(197, 195, 228, 0.16), transparent 34%);
+            box-shadow: 0 28px 80px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(242, 233, 228, 0.08);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+
+        .committee-spotlight-copy {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 1rem;
+            flex-wrap: wrap;
+            border: 1px solid rgba(154, 140, 152, 0.16);
+            border-radius: 1.5rem;
+            background: rgba(17, 14, 11, 0.28);
+            padding: 1rem;
+        }
+
+        .committee-spotlight-actions,
+        .committee-hover-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .committee-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            min-height: 2.75rem;
+            border-radius: 9999px;
+            padding: 0.75rem 1rem;
+            border: 1px solid rgba(154, 140, 152, 0.3);
+            background: rgba(17, 14, 11, 0.4);
+            color: #f2e9e4;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.76rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1), border-color 180ms ease, background 180ms ease;
+        }
+
+        .committee-action:hover {
+            transform: translateY(-1px);
+            border-color: rgba(197, 195, 228, 0.55);
+            background: rgba(34, 34, 59, 0.58);
+        }
+
+        .committee-action-primary {
+            border-color: rgba(201, 173, 167, 0.56);
+            background: linear-gradient(135deg, rgba(201, 173, 167, 0.95), rgba(154, 140, 152, 0.9));
+            color: #22223b;
+        }
+
+        .committee-hover-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0.72rem;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .committee-hover-card {
+            position: relative;
+            min-height: 3.55rem;
+            height: 3.55rem;
+            overflow: hidden;
+            border: 1px solid rgba(154, 140, 152, 0.24);
+            border-radius: 1.25rem;
+            background: rgba(17, 14, 11, 0.5);
+            cursor: pointer;
+            transition:
+                height 360ms cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 260ms ease,
+                box-shadow 260ms ease;
+        }
+
+        .committee-hover-card.is-active {
+            height: clamp(25rem, 62vh, 42rem);
+            border-color: rgba(197, 195, 228, 0.5);
+            box-shadow: 0 20px 54px rgba(0, 0, 0, 0.34), 0 0 32px rgba(197, 195, 228, 0.12);
+        }
+
+        .committee-hover-card img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.58;
+            transform: scale(1.04);
+            transition: opacity 360ms ease, transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .committee-hover-card.is-active img {
+            opacity: 0.92;
+            transform: scale(1);
+        }
+
+        .committee-hover-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(90deg, rgba(17, 14, 11, 0.88), rgba(17, 14, 11, 0.28) 54%, rgba(17, 14, 11, 0.1)),
+                linear-gradient(0deg, rgba(17, 14, 11, 0.72), transparent 62%);
+            pointer-events: none;
+        }
+
+        .committee-hover-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            height: 100%;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: clamp(1rem, 2.6vw, 2rem);
+        }
+
+        .committee-hover-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .committee-hover-code {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(201, 173, 167, 0.9);
+        }
+
+        .committee-hover-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.35rem, 4vw, 3.2rem);
+            line-height: 1.05;
+            color: #f2e9e4;
+            transform: translateY(0.2rem);
+            transition: transform 340ms cubic-bezier(0.22, 1, 0.36, 1), opacity 260ms ease;
+        }
+
+        .committee-hover-card:not(.is-active) .committee-hover-title {
+            max-width: 80%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            font-size: 1rem;
+            opacity: 0.84;
+        }
+
+        .committee-hover-details {
+            max-width: 40rem;
+            opacity: 0;
+            transform: translateY(0.85rem);
+            transition: opacity 260ms ease, transform 340ms cubic-bezier(0.22, 1, 0.36, 1);
+            pointer-events: none;
+        }
+
+        .committee-hover-card.is-active .committee-hover-details {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        @media (max-width: 767px) {
+            .committee-spotlight {
+                border-radius: 1.5rem;
+                min-height: auto;
+            }
+
+            .committee-spotlight-copy {
+                align-items: stretch;
+            }
+
+            .committee-hover-card.is-active {
+                height: 26rem;
+            }
+
+            .committee-action {
+                width: 100%;
+            }
+        }
+
 
         /* ── Native cross-document View Transitions (Chrome 126+) ── */
         @view-transition { navigation: auto; }
@@ -408,8 +606,8 @@
   </a>
 <p class="mt-5 font-label-md text-[12px] uppercase text-on-surface-variant/75 tracking-[0.22em]">Dialogue.Diplomacy.Leadership</p>
 </aside>
-<main class="relative px-container-padding pt-20 pb-32 max-w-7xl mx-auto" style="view-transition-name:page-content">
-<header class="mb-20 flex flex-col items-center text-center">
+<main class="relative px-container-padding pt-20 pb-32 max-w-none mx-auto" style="view-transition-name:page-content">
+<header class="mb-20 flex flex-col items-center text-center max-w-7xl mx-auto">
 <h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-seashell mb-4">
                 The <span class="italic font-normal">Councils</span> &amp; <span class="font-bold">Committees</span>
 </h1>
@@ -417,7 +615,153 @@
                 Engage in high-stakes diplomacy across our diverse array of simulations, from historic crisis rooms to futuristic policy-making forums.
             </p>
 </header>
-<div class="grid grid-cols-1 gap-12">
+<section class="committee-spotlight rounded-[2rem] p-5 md:p-8 mb-16 reveal" aria-label="Committee preview">
+<div class="committee-spotlight-copy">
+<div class="committee-spotlight-actions">
+<button class="committee-action" type="button" data-stack-prev>
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+Previous
+</button>
+<button class="committee-action committee-action-primary" type="button" data-stack-next>
+Next Committee
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<a class="committee-action" href="registration.html">
+<span class="material-symbols-outlined text-[18px]">how_to_reg</span>
+Register
+</a>
+</div>
+</div>
+<div class="committee-hover-stack" data-committee-stack>
+<article class="committee-hover-card is-active" data-hover-card data-agenda="Addressing Global Crisis Containment in Hybrid Warfare Zones" tabindex="0" aria-label="United Nations Security Council preview">
+<img alt="UNSC shield preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZsnpFKSJy-TPS95OB3W5mLH9Zjhz-8w4HKljqb8Q6sX-q3_zzsv3mykf_0jhnryCHMAG52GIPVD2tNN5D97LQ_bAiJcqWuToBGwsvjtX1lagx87ERD8AemP8BOq8Eonh-hEzqV3OBoeVH0tM2E7yRYZ50psgiCe36MDQEAig4_FWe2ezCJH-KSVz_1Q4zLwq6MV6kKTszmsh9DwKrO_ElWLbuhXlrNZ2Bo9UKGFGsdJCnPLlpvqrAehdCG39H9tLHBgV1fo-gdElh"/>
+<div class="committee-hover-content">
+<div class="committee-hover-row">
+<span class="committee-hover-code">UNSC / Crisis</span>
+<span class="material-symbols-outlined text-primary text-[22px]">security</span>
+</div>
+<div>
+<h3 class="committee-hover-title">United Nations Security Council</h3>
+<div class="committee-hover-details mt-4">
+<p class="font-body-lg text-seashell/90 italic">"Addressing Global Crisis Containment in Hybrid Warfare Zones"</p>
+<p class="font-label-md text-label-md uppercase tracking-[0.22em] text-lilac-ash mt-4">Director: Elena Vance</p>
+<div class="committee-hover-actions mt-6">
+<a class="committee-action committee-action-primary" href="#committee-details">View Details</a>
+<a class="committee-action" href="registration.html">Register</a>
+<button class="committee-action" type="button" data-copy-agenda>Copy Agenda</button>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="committee-hover-card" data-hover-card data-agenda="Regulatory Frameworks on Autonomous Weaponized Swarms" tabindex="0" aria-label="DISEC preview">
+<img alt="DISEC sphere preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAu-4L_APfDq1kABXxrgDLHBs-8KEY3Z8nRziLaelutXOKJXQH697DGGzrp-AAQ1RhSjs81VxVRm01JvTSxx4jDbzABYVx4L1rtoY0D_E-1kdbH9umqQK9acfU8WNUwM2yYgwHjONWK9YRpaU9GjkUxXODv2spOgVXG40JckKQa0sd308xU0n2NZlWA4Yc5KSxZw7KEMWh1Xxl6XOXEiJXLMSzeLEtSwP72P2vKPc0b6hGmOBNMHbAArYqeHYbuj4YkrUnWzG8UC205"/>
+<div class="committee-hover-content">
+<div class="committee-hover-row">
+<span class="committee-hover-code">DISEC / General</span>
+<span class="material-symbols-outlined text-primary text-[22px]">orbit</span>
+</div>
+<div>
+<h3 class="committee-hover-title">Disarmament and International Security Committee</h3>
+<div class="committee-hover-details mt-4">
+<p class="font-body-lg text-seashell/90 italic">"Regulatory Frameworks on Autonomous Weaponized Swarms"</p>
+<p class="font-label-md text-label-md uppercase tracking-[0.22em] text-lilac-ash mt-4">Chair: Marcus Sterling</p>
+<div class="committee-hover-actions mt-6">
+<a class="committee-action committee-action-primary" href="#committee-details">View Details</a>
+<a class="committee-action" href="registration.html">Register</a>
+<button class="committee-action" type="button" data-copy-agenda>Copy Agenda</button>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="committee-hover-card" data-hover-card data-agenda="Sustaining Sovereign Currencies in Decentralized Digital Economies" tabindex="0" aria-label="Economic and Social Council preview">
+<img alt="ECOSOC emblem preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBg3O7o8z8NJIissFnk5NvdM6sbZTNffHGwSlxx_Ew8W0tUvLiJVBNPsSAXjCbdQI4Hg34kKfHAq4Yne1ShpYrGWMjmgQhp5V2ttCrGjZTyXHwx9ToAjepP-oJeKR7hqF-QbKMEZRqMqsM3atkrcVuQoWrf2RdCrYVgz8V0xP0-q9sme4n90djP0jxT896djf4BAXKFa2ileXlX9wI9GNHrYHeTWco6iP65K494AP7EwVoC_iM42ILdpJVrBR1L_mIhquTMizsBtvYx"/>
+<div class="committee-hover-content">
+<div class="committee-hover-row">
+<span class="committee-hover-code">ECOSOC / Regional</span>
+<span class="material-symbols-outlined text-primary text-[22px]">public</span>
+</div>
+<div>
+<h3 class="committee-hover-title">Economic and Social Council</h3>
+<div class="committee-hover-details mt-4">
+<p class="font-body-lg text-seashell/90 italic">"Sustaining Sovereign Currencies in Decentralized Digital Economies"</p>
+<p class="font-label-md text-label-md uppercase tracking-[0.22em] text-lilac-ash mt-4">President: Aarav Patel</p>
+<div class="committee-hover-actions mt-6">
+<a class="committee-action committee-action-primary" href="#committee-details">View Details</a>
+<a class="committee-action" href="registration.html">Register</a>
+<button class="committee-action" type="button" data-copy-agenda>Copy Agenda</button>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="committee-hover-card" data-hover-card data-agenda="Protecting Civil Liberties During Algorithmic Governance" tabindex="0" aria-label="United Nations Human Rights Council preview">
+<img alt="UNHRC glass emblem preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZsnpFKSJy-TPS95OB3W5mLH9Zjhz-8w4HKljqb8Q6sX-q3_zzsv3mykf_0jhnryCHMAG52GIPVD2tNN5D97LQ_bAiJcqWuToBGwsvjtX1lagx87ERD8AemP8BOq8Eonh-hEzqV3OBoeVH0tM2E7yRYZ50psgiCe36MDQEAig4_FWe2ezCJH-KSVz_1Q4zLwq6MV6kKTszmsh9DwKrO_ElWLbuhXlrNZ2Bo9UKGFGsdJCnPLlpvqrAehdCG39H9tLHBgV1fo-gdElh"/>
+<div class="committee-hover-content">
+<div class="committee-hover-row">
+<span class="committee-hover-code">UNHRC / Rights</span>
+<span class="material-symbols-outlined text-primary text-[22px]">gavel</span>
+</div>
+<div>
+<h3 class="committee-hover-title">United Nations Human Rights Council</h3>
+<div class="committee-hover-details mt-4">
+<p class="font-body-lg text-seashell/90 italic">"Protecting Civil Liberties During Algorithmic Governance"</p>
+<p class="font-label-md text-label-md uppercase tracking-[0.22em] text-lilac-ash mt-4">Chair: Nandini Rao</p>
+<div class="committee-hover-actions mt-6">
+<a class="committee-action committee-action-primary" href="#committee-details">View Details</a>
+<a class="committee-action" href="registration.html">Register</a>
+<button class="committee-action" type="button" data-copy-agenda>Copy Agenda</button>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="committee-hover-card" data-hover-card data-agenda="Coalition Politics and Electoral Ethics in Contemporary India" tabindex="0" aria-label="AIPPM preview">
+<img alt="AIPPM political forum preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAu-4L_APfDq1kABXxrgDLHBs-8KEY3Z8nRziLaelutXOKJXQH697DGGzrp-AAQ1RhSjs81VxVRm01JvTSxx4jDbzABYVx4L1rtoY0D_E-1kdbH9umqQK9acfU8WNUwM2yYgwHjONWK9YRpaU9GjkUxXODv2spOgVXG40JckKQa0sd308xU0n2NZlWA4Yc5KSxZw7KEMWh1Xxl6XOXEiJXLMSzeLEtSwP72P2vKPc0b6hGmOBNMHbAArYqeHYbuj4YkrUnWzG8UC205"/>
+<div class="committee-hover-content">
+<div class="committee-hover-row">
+<span class="committee-hover-code">AIPPM / National</span>
+<span class="material-symbols-outlined text-primary text-[22px]">account_balance</span>
+</div>
+<div>
+<h3 class="committee-hover-title">All India Political Parties Meet</h3>
+<div class="committee-hover-details mt-4">
+<p class="font-body-lg text-seashell/90 italic">"Coalition Politics and Electoral Ethics in Contemporary India"</p>
+<p class="font-label-md text-label-md uppercase tracking-[0.22em] text-lilac-ash mt-4">Moderator: Kabir Mehta</p>
+<div class="committee-hover-actions mt-6">
+<a class="committee-action committee-action-primary" href="#committee-details">View Details</a>
+<a class="committee-action" href="registration.html">Register</a>
+<button class="committee-action" type="button" data-copy-agenda>Copy Agenda</button>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="committee-hover-card" data-hover-card data-agenda="Crisis Reporting, Editorial Responsibility, and Media Verification" tabindex="0" aria-label="International Press preview">
+<img alt="International Press preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBg3O7o8z8NJIissFnk5NvdM6sbZTNffHGwSlxx_Ew8W0tUvLiJVBNPsSAXjCbdQI4Hg34kKfHAq4Yne1ShpYrGWMjmgQhp5V2ttCrGjZTyXHwx9ToAjepP-oJeKR7hqF-QbKMEZRqMqsM3atkrcVuQoWrf2RdCrYVgz8V0xP0-q9sme4n90djP0jxT896djf4BAXKFa2ileXlX9wI9GNHrYHeTWco6iP65K494AP7EwVoC_iM42ILdpJVrBR1L_mIhquTMizsBtvYx"/>
+<div class="committee-hover-content">
+<div class="committee-hover-row">
+<span class="committee-hover-code">Press / Media</span>
+<span class="material-symbols-outlined text-primary text-[22px]">newspaper</span>
+</div>
+<div>
+<h3 class="committee-hover-title">International Press Corps</h3>
+<div class="committee-hover-details mt-4">
+<p class="font-body-lg text-seashell/90 italic">"Crisis Reporting, Editorial Responsibility, and Media Verification"</p>
+<p class="font-label-md text-label-md uppercase tracking-[0.22em] text-lilac-ash mt-4">Editor-in-Chief: Mira Kapoor</p>
+<div class="committee-hover-actions mt-6">
+<a class="committee-action committee-action-primary" href="#committee-details">View Details</a>
+<a class="committee-action" href="registration.html">Register</a>
+<button class="committee-action" type="button" data-copy-agenda>Copy Agenda</button>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div>
+</section>
+<div id="committee-details" class="grid grid-cols-1 gap-12 scroll-mt-28 max-w-7xl mx-auto">
 <div class="glass-panel glass-panel-active rounded-2xl overflow-hidden flex flex-col md:flex-row relative group">
 <div class="glare-effect"></div>
 <div class="w-full md:w-2/5 p-12 flex items-center justify-center relative overflow-hidden bg-space-indigo/20">
@@ -697,6 +1041,73 @@
             });
         }
         setupMobileMenu();
+
+        function setupCommitteeHoverStack() {
+            const cards = Array.from(document.querySelectorAll('[data-hover-card]'));
+            if (!cards.length) return;
+            const previousButton = document.querySelector('[data-stack-prev]');
+            const nextButton = document.querySelector('[data-stack-next]');
+            let activeIndex = cards.findIndex(card => card.classList.contains('is-active'));
+            if (activeIndex < 0) activeIndex = 0;
+
+            const activateCard = (targetCard, shouldFocus = false) => {
+                activeIndex = cards.indexOf(targetCard);
+                cards.forEach(card => {
+                    const isActive = card === targetCard;
+                    card.classList.toggle('is-active', isActive);
+                    card.setAttribute('aria-expanded', String(isActive));
+                });
+                if (shouldFocus) targetCard.focus({ preventScroll: true });
+            };
+
+            const activateByOffset = (offset) => {
+                const nextIndex = (activeIndex + offset + cards.length) % cards.length;
+                activateCard(cards[nextIndex], true);
+            };
+
+            const copyAgenda = async (button) => {
+                const card = button.closest('[data-hover-card]');
+                const agenda = card?.dataset.agenda;
+                if (!agenda) return;
+                try {
+                    await navigator.clipboard.writeText(agenda);
+                    const originalText = button.textContent;
+                    button.textContent = 'Copied';
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                    }, 1400);
+                } catch (error) {
+                    button.textContent = 'Copy Failed';
+                    setTimeout(() => {
+                        button.textContent = 'Copy Agenda';
+                    }, 1400);
+                }
+            };
+
+            cards.forEach(card => {
+                card.setAttribute('aria-expanded', card.classList.contains('is-active') ? 'true' : 'false');
+                card.addEventListener('mouseenter', () => activateCard(card));
+                card.addEventListener('focus', () => activateCard(card));
+                card.addEventListener('click', () => activateCard(card));
+                card.addEventListener('keydown', event => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        activateCard(card);
+                    }
+                });
+            });
+
+            document.querySelectorAll('[data-copy-agenda]').forEach(button => {
+                button.addEventListener('click', event => {
+                    event.stopPropagation();
+                    copyAgenda(button);
+                });
+            });
+
+            if (previousButton) previousButton.addEventListener('click', () => activateByOffset(-1));
+            if (nextButton) nextButton.addEventListener('click', () => activateByOffset(1));
+        }
+        setupCommitteeHoverStack();
 
         // Navigation transitions handled by transitions.js (logo loader)
     
