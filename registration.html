@@ -451,29 +451,10 @@
   <div id="bg-animated-text" class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden select-none z-0"></div>
 
   <!-- 2D Interactive Badge -->
-  <div id="badge-2d-container" class="relative w-full max-w-sm mx-auto h-[70vh] min-h-[500px] flex flex-col items-center justify-start cursor-pointer transition-opacity duration-500 z-10 group" aria-label="Double click to reveal registration" style="perspective: 1000px;">
-    
-    <!-- Lanyard String (SVG) -->
-    <svg class="absolute top-[-100px] w-64 h-64 pointer-events-none drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] z-0" viewBox="0 0 100 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Left side of string -->
-      <path d="M-20,-50 Q45,30 50,120" stroke="#c5c3e4" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.6"/>
-      <!-- Right side of string -->
-      <path d="M120,-50 Q55,30 50,120" stroke="#c5c3e4" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.6"/>
-      <!-- Clip holder -->
-      <rect x="44" y="120" width="12" height="15" rx="3" fill="url(#metal-gradient)"/>
-      <circle cx="50" cy="138" r="5" fill="none" stroke="#928f98" stroke-width="2"/>
-      
-      <defs>
-        <linearGradient id="metal-gradient" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#eae1dc"/>
-          <stop offset="50%" stop-color="#928f98"/>
-          <stop offset="100%" stop-color="#47464d"/>
-        </linearGradient>
-      </defs>
-    </svg>
+  <div id="badge-2d-container" class="relative w-full max-w-sm mx-auto h-[70vh] min-h-[500px] flex flex-col items-center justify-center cursor-pointer transition-opacity duration-500 z-10 group" aria-label="Double click to reveal registration" style="perspective: 1000px;">
 
     <!-- The Card itself -->
-    <div id="badge-card" class="mt-[135px] bg-[#fcf8f2]/95 dark:bg-[#0A1128]/95 backdrop-blur-[30px] w-[320px] h-[480px] rounded-[16px] p-6 relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.2)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(212,175,55,0.4)] flex flex-col justify-between border border-[#d4af37]/60 dark:border-[#d4af37]/40 origin-[center_-120px] transition-colors duration-[400ms] transition-transform ease-out z-10">
+    <div id="badge-card" class="bg-[#fcf8f2]/60 dark:bg-[#0A1128]/60 backdrop-blur-[30px] w-[320px] h-[480px] rounded-[16px] p-6 relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.2)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(212,175,55,0.4)] flex flex-col justify-between border border-[#d4af37]/60 dark:border-[#d4af37]/40 transition-colors duration-[400ms] transition-transform ease-out z-10 origin-center">
       
       <!-- Faint Background Seal Watermark -->
       <svg viewBox="0 0 100 100" class="absolute inset-0 w-full h-full opacity-[0.08] dark:opacity-[0.05] text-[#d4af37] pointer-events-none z-0 scale-[1.6] translate-y-8" fill="none" stroke="currentColor" stroke-width="1.5">
