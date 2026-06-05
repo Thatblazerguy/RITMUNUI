@@ -30,6 +30,7 @@ export interface LanyardCardProps {
   className?: string
   width?: string | number
   height?: string | number
+  onDoubleClick?: () => void
 }
 
 // Preload assets
@@ -53,6 +54,7 @@ export function LanyardCard({
             bandTexture={DEFAULT_BAND_TEXTURE}
             maxSpeed={maxSpeed}
             minSpeed={minSpeed}
+            onDoubleClick={onDoubleClick}
           />
         </Physics>
         <Environment background blur={0.75}>
@@ -96,9 +98,10 @@ interface BandProps {
   bandTexture: string
   maxSpeed: number
   minSpeed: number
+  onDoubleClick?: () => void
 }
 
-function Band({ cardModel, bandTexture, maxSpeed, minSpeed }: BandProps) {
+function Band({ cardModel, bandTexture, maxSpeed, minSpeed, onDoubleClick }: BandProps) {
   const band = useRef<any>()
   const fixed = useRef<any>()
   const j1 = useRef<any>()
@@ -286,6 +289,10 @@ function Band({ cardModel, bandTexture, maxSpeed, minSpeed }: BandProps) {
                 )
               }
             }}
+            onDoubleClick={(e) => {
+              e.stopPropagation();
+              onDoubleClick?.();
+            }}
           >
             <mesh geometry={nodes.card.geometry}>
               <meshPhysicalMaterial
@@ -322,10 +329,15 @@ function Band({ cardModel, bandTexture, maxSpeed, minSpeed }: BandProps) {
   )
 }
 
-export function Demo() {
+export function Demo({ onDoubleClick }: { onDoubleClick?: () => void }) {
   return (
-    <div className="w-full relative rounded-lg">
-      <LanyardCard className="rounded-lg shadow-xl" height="80vh" />
+    <div className="w-full relative rounded-lg flex items-center justify-center">
+      <LanyardCard className="rounded-lg shadow-xl" height="80vh" onDoubleClick={onDoubleClick} />
+      <div className="absolute bottom-12 left-0 w-full text-center pointer-events-none">
+        <p className="text-white/70 font-label-md tracking-[0.2em] text-sm uppercase animate-pulse drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+          Double click badge to register
+        </p>
+      </div>
     </div>
   )
 }
