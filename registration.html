@@ -974,7 +974,7 @@
                 const el = document.createElement('div');
                 el.textContent = text;
                 // Base styles for the fade-through effect
-                el.className = "absolute font-display-lg font-bold tracking-[0.1em] text-[15vw] md:text-[10vw] text-primary whitespace-nowrap text-center transition-all duration-[800ms] ease-[cubic-bezier(0.2,0.8,0.2,1)] opacity-0 transform translate-y-8 scale-95 blur-sm";
+                el.className = "absolute font-display-lg font-black tracking-[0.1em] text-[15vw] md:text-[10vw] text-primary whitespace-nowrap text-center transition-all duration-[800ms] ease-[cubic-bezier(0.2,0.8,0.2,1)] opacity-0 transform translate-y-8 scale-95 blur-sm drop-shadow-[0_4px_4px_rgba(0,0,0,0.3)]";
                 return el;
             };
 
@@ -985,7 +985,7 @@
                 if (currentEl) {
                     const exitEl = currentEl;
                     // Exit state
-                    exitEl.classList.remove('opacity-5', 'translate-y-0', 'scale-100', 'blur-none');
+                    exitEl.classList.remove('opacity-10', 'translate-y-0', 'scale-100', 'blur-none');
                     exitEl.classList.add('opacity-0', '-translate-y-4', 'scale-105', 'blur-sm');
                     
                     // Remove from DOM after transition
@@ -1003,7 +1003,7 @@
 
                 // Enter state
                 nextEl.classList.remove('opacity-0', 'translate-y-8', 'scale-95', 'blur-sm');
-                nextEl.classList.add('opacity-5', 'translate-y-0', 'scale-100', 'blur-none');
+                nextEl.classList.add('opacity-10', 'translate-y-0', 'scale-100', 'blur-none');
 
                 currentEl = nextEl;
                 currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
