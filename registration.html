@@ -445,7 +445,11 @@
   <p class="mt-5 font-label-md text-[12px] uppercase text-on-surface-variant/75 tracking-[0.22em]">Dialogue.Diplomacy.Leadership</p>
 </aside>
 
-<main class="min-h-screen flex flex-col items-center justify-center pt-32 pb-20 px-6 gap-12" style="view-transition-name:page-content">
+<main class="min-h-screen flex flex-col items-center justify-center pt-32 pb-20 px-6 gap-12 relative" style="view-transition-name:page-content">
+  
+  <!-- Animated Background Text -->
+  <div id="bg-animated-text" class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden select-none z-0"></div>
+
   <!-- 2D Interactive Badge -->
   <div id="badge-2d-container" class="relative w-full max-w-sm mx-auto h-[70vh] min-h-[500px] flex flex-col items-center justify-start cursor-pointer transition-opacity duration-500 z-10 group" aria-label="Double click to reveal registration" style="perspective: 1000px;">
     
@@ -954,6 +958,62 @@
                     cancelAnimationFrame(rafId);
                 }, 500);
             });
+        }
+
+        // 5. Animated Background Text
+        const bgTextContainer = document.getElementById('bg-animated-text');
+        if (bgTextContainer) {
+            const phrases = [
+                "UNLOCK",
+                "YOUR ALL ACCESS",
+                "DELEGATE PASS"
+            ];
+            let currentPhraseIndex = 0;
+
+            const createTextElement = (text) => {
+                const el = document.createElement('div');
+                el.textContent = text;
+                // Base styles for the fade-through effect
+                el.className = "absolute font-display-lg font-bold tracking-[0.1em] text-[15vw] md:text-[10vw] text-primary whitespace-nowrap text-center transition-all duration-[800ms] ease-[cubic-bezier(0.2,0.8,0.2,1)] opacity-0 transform translate-y-8 scale-95 blur-sm";
+                return el;
+            };
+
+            let currentEl = null;
+
+            const cycleText = () => {
+                // Fade out current element
+                if (currentEl) {
+                    const exitEl = currentEl;
+                    // Exit state
+                    exitEl.classList.remove('opacity-5', 'translate-y-0', 'scale-100', 'blur-none');
+                    exitEl.classList.add('opacity-0', '-translate-y-4', 'scale-105', 'blur-sm');
+                    
+                    // Remove from DOM after transition
+                    setTimeout(() => {
+                        if(exitEl.parentNode) exitEl.parentNode.removeChild(exitEl);
+                    }, 800);
+                }
+
+                // Create and fade in new element
+                const nextEl = createTextElement(phrases[currentPhraseIndex]);
+                bgTextContainer.appendChild(nextEl);
+
+                // Trigger reflow to ensure start state is applied before animating
+                void nextEl.offsetWidth;
+
+                // Enter state
+                nextEl.classList.remove('opacity-0', 'translate-y-8', 'scale-95', 'blur-sm');
+                nextEl.classList.add('opacity-5', 'translate-y-0', 'scale-100', 'blur-none');
+
+                currentEl = nextEl;
+                currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+            };
+
+            // Initial trigger
+            cycleText();
+
+            // Cycle every 3 seconds
+            setInterval(cycleText, 3000);
         }
 
 </script>
