@@ -122,6 +122,19 @@
             transform: translateY(0);
         }
 
+
+        /* Staggered Mobile Menu */
+        .staggered-menu-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            will-change: transform, opacity;
+        }
+        .mobile-menu-drawer.open .staggered-menu-item {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
 </style>
 <script id="tailwind-config">
   tailwind.config = {
@@ -173,24 +186,28 @@
 </header>
 <div id="mobile-menu-overlay" class="mobile-menu-overlay fixed inset-0 z-[60] bg-black/50 md:hidden"></div>
 <aside id="mobile-menu" class="mobile-menu-drawer fixed top-0 right-0 h-full w-[82%] max-w-[340px] z-[70] md:hidden border-l border-outline-variant/30 p-6 flex flex-col">
-  <div class="flex items-center justify-between mb-8">
-    <div class="flex items-center gap-2">
-      <span class="material-symbols-outlined text-primary text-[20px]">apps</span>
-      <div class="font-display-lg text-[24px] leading-tight text-on-surface tracking-tight">Navigation</div>
-    </div>
-    <button id="mobile-menu-close" aria-label="Close menu" class="inline-flex items-center justify-center h-9 w-9 rounded-full border border-outline-variant/30 text-on-surface-variant hover:text-primary transition-colors">
-      <span class="material-symbols-outlined text-[20px]">close</span>
-    </button>
-  </div>
-  <div class="mobile-menu-divider mb-6"></div>
-  <nav class="flex flex-col gap-3">
-    <a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="index.html">Home</a>
-    <a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="committee.html">Committees</a>
-    <a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="sec.html">Secretariat</a>
-    <a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="registration.html">Register</a>
-    <a class="mobile-nav-link nav-link mobile-nav-link mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" href="resources.html">Resources</a>
-  </nav>
-  <a class="mt-8 bg-primary/90 text-on-primary px-6 py-3 rounded-full font-label-md text-label-md uppercase tracking-widest inline-block text-center" href="login.html">Login</a>
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-3">
+<img src="RITMUNLogo.png" alt="RITMUNSOC Logo" class="h-8 w-auto">
+<div class="font-display-lg text-[20px] leading-tight text-on-surface tracking-tight">RITMUNSOC</div>
+</div>
+<button id="mobile-menu-close" aria-label="Close menu" class="inline-flex items-center justify-center h-9 w-9 rounded-full border border-outline-variant/30 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="mobile-menu-divider mb-6"></div>
+<nav class="flex flex-col gap-3">
+<a class="mobile-nav-link nav-link staggered-menu-item mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" style="transition-delay: 0.1s" href="index.html">Home</a>
+<a class="mobile-nav-link nav-link staggered-menu-item mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" style="transition-delay: 0.15s" href="committee.html">Committees</a>
+<a class="mobile-nav-link nav-link staggered-menu-item mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" style="transition-delay: 0.2s" href="sec.html">Secretariat</a>
+<a class="mobile-nav-link nav-link staggered-menu-item mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" style="transition-delay: 0.25s" href="registration.html">Register</a>
+<a class="mobile-nav-link nav-link staggered-menu-item mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" style="transition-delay: 0.3s" href="#">History</a>
+<a class="mobile-nav-link nav-link staggered-menu-item mobile-menu-link font-label-md text-label-md uppercase tracking-wider text-on-surface-variant" style="transition-delay: 0.35s" href="resources.html">Resources</a>
+</nav>
+<a class="ripple-login-btn mt-8 staggered-menu-item bg-primary/90 text-on-primary px-6 py-3 rounded-full font-label-md text-label-md uppercase tracking-widest active:scale-95 transition-all inline-block text-center" style="transition-delay: 0.45s" href="login.html">
+    Login
+  </a>
+<p class="mt-5 staggered-menu-item font-label-md text-[12px] uppercase text-on-surface-variant/75 tracking-[0.22em]" style="transition-delay: 0.5s">Dialogue.Diplomacy.Leadership</p>
 </aside>
 
 <aside class="fixed left-0 top-0 bottom-0 z-40 hidden md:flex flex-col pt-24 pb-8 bg-surface-container-low/60 backdrop-blur-2xl h-[calc(100vh-theme(spacing.section-gap))] w-72 rounded-xl ml-spacing-unit mt-20 border-r border-outline-variant/10 shadow-inner-glow">
