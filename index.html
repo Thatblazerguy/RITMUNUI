@@ -429,13 +429,15 @@
         /* Staggered Mobile Menu */
         .staggered-menu-item {
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            will-change: transform, opacity;
+            transform: translateX(30px);
+            filter: blur(5px);
+            transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+            will-change: transform, opacity, filter;
         }
         .mobile-menu-drawer.open .staggered-menu-item {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateX(0);
+            filter: blur(0);
         }
 
 </style>
@@ -482,45 +484,39 @@
 </div>
 </header>
 <div id="mobile-menu-overlay" class="mobile-menu-overlay fixed inset-0 z-[60] bg-black/50 md:hidden"></div>
-<aside id="mobile-menu" class="mobile-menu-drawer fixed top-0 right-0 h-full w-[90%] max-w-[480px] z-[70] md:hidden !bg-none !bg-[#fcf8f2] dark:!bg-[#0A1128] border-l border-[#d4af37]/20 flex flex-col pt-8 pl-10 pr-8 pb-12 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+<aside id="mobile-menu" class="mobile-menu-drawer fixed top-0 right-0 h-full w-[85%] max-w-[400px] z-[70] md:hidden !bg-[#0A1128] dark:!bg-[#0A1128] border-l border-white/5 flex flex-col pt-12 pl-12 pr-8 pb-12 shadow-[0_0_60px_rgba(0,0,0,0.8)]">
 <div class="absolute top-8 right-8">
-<button id="mobile-menu-close" aria-label="Close menu" class="flex items-center gap-1 text-[#0A1128] dark:text-[#fcf8f2] hover:text-[#b5952f] dark:hover:text-[#d4af37] transition-colors">
-<span class="font-label-md text-sm font-medium tracking-wide">Close</span>
+<button id="mobile-menu-close" aria-label="Close menu" class="flex items-center gap-1 text-white hover:text-white/70 transition-colors">
+<span class="font-body-md text-sm font-semibold tracking-wide">Close</span>
 <span class="material-symbols-outlined text-[20px]">close</span>
 </button>
 </div>
-<nav class="flex flex-col gap-6 mt-24">
-<a class="mobile-nav-link nav-link staggered-menu-item relative w-max group" style="transition-delay: 0.1s" href="index.html">
-<span class="font-display-lg text-[46px] sm:text-[56px] leading-[1.1] font-black uppercase tracking-tighter text-[#0A1128] dark:text-[#fcf8f2] group-hover:text-[#b5952f] dark:group-hover:text-[#d4af37] transition-colors">Home</span>
-<span class="absolute top-0 -right-6 font-body-md text-xs sm:text-sm font-bold text-[#b5952f] dark:text-[#d4af37]">01</span>
+<nav class="flex flex-col gap-6 mt-20">
+<a class="mobile-nav-link nav-link staggered-menu-item w-max group" style="transition-delay: 0.1s" href="index.html">
+<span class="font-body-md text-[17px] text-white/90 group-hover:text-white transition-colors">Home</span><span class="font-body-md text-[17px] text-white/40 group-hover:text-white transition-colors">01</span>
 </a>
-<a class="mobile-nav-link nav-link staggered-menu-item relative w-max group" style="transition-delay: 0.15s" href="committee.html">
-<span class="font-display-lg text-[46px] sm:text-[56px] leading-[1.1] font-black uppercase tracking-tighter text-[#0A1128] dark:text-[#fcf8f2] group-hover:text-[#b5952f] dark:group-hover:text-[#d4af37] transition-colors">Committees</span>
-<span class="absolute top-0 -right-7 font-body-md text-xs sm:text-sm font-bold text-[#b5952f] dark:text-[#d4af37]">02</span>
+<a class="mobile-nav-link nav-link staggered-menu-item w-max group" style="transition-delay: 0.15s" href="committee.html">
+<span class="font-body-md text-[17px] text-white/90 group-hover:text-white transition-colors">Committees</span><span class="font-body-md text-[17px] text-white/40 group-hover:text-white transition-colors">02</span>
 </a>
-<a class="mobile-nav-link nav-link staggered-menu-item relative w-max group" style="transition-delay: 0.2s" href="sec.html">
-<span class="font-display-lg text-[46px] sm:text-[56px] leading-[1.1] font-black uppercase tracking-tighter text-[#0A1128] dark:text-[#fcf8f2] group-hover:text-[#b5952f] dark:group-hover:text-[#d4af37] transition-colors">Secretariat</span>
-<span class="absolute top-0 -right-7 font-body-md text-xs sm:text-sm font-bold text-[#b5952f] dark:text-[#d4af37]">03</span>
+<a class="mobile-nav-link nav-link staggered-menu-item w-max group" style="transition-delay: 0.2s" href="sec.html">
+<span class="font-body-md text-[17px] text-white/90 group-hover:text-white transition-colors">Secretariat</span><span class="font-body-md text-[17px] text-white/40 group-hover:text-white transition-colors">03</span>
 </a>
-<a class="mobile-nav-link nav-link staggered-menu-item relative w-max group" style="transition-delay: 0.25s" href="registration.html">
-<span class="font-display-lg text-[46px] sm:text-[56px] leading-[1.1] font-black uppercase tracking-tighter text-[#0A1128] dark:text-[#fcf8f2] group-hover:text-[#b5952f] dark:group-hover:text-[#d4af37] transition-colors">Register</span>
-<span class="absolute top-0 -right-7 font-body-md text-xs sm:text-sm font-bold text-[#b5952f] dark:text-[#d4af37]">04</span>
+<a class="mobile-nav-link nav-link staggered-menu-item w-max group" style="transition-delay: 0.25s" href="registration.html">
+<span class="font-body-md text-[17px] text-white/90 group-hover:text-white transition-colors">Register</span><span class="font-body-md text-[17px] text-white/40 group-hover:text-white transition-colors">04</span>
 </a>
-<a class="mobile-nav-link nav-link staggered-menu-item relative w-max group" style="transition-delay: 0.3s" href="resources.html">
-<span class="font-display-lg text-[46px] sm:text-[56px] leading-[1.1] font-black uppercase tracking-tighter text-[#0A1128] dark:text-[#fcf8f2] group-hover:text-[#b5952f] dark:group-hover:text-[#d4af37] transition-colors">Resources</span>
-<span class="absolute top-0 -right-7 font-body-md text-xs sm:text-sm font-bold text-[#b5952f] dark:text-[#d4af37]">05</span>
+<a class="mobile-nav-link nav-link staggered-menu-item w-max group" style="transition-delay: 0.3s" href="resources.html">
+<span class="font-body-md text-[17px] text-white/90 group-hover:text-white transition-colors">Resources</span><span class="font-body-md text-[17px] text-white/40 group-hover:text-white transition-colors">05</span>
 </a>
-<a class="mobile-nav-link nav-link staggered-menu-item relative w-max group" style="transition-delay: 0.35s" href="login.html">
-<span class="font-display-lg text-[46px] sm:text-[56px] leading-[1.1] font-black uppercase tracking-tighter text-[#0A1128] dark:text-[#fcf8f2] group-hover:text-[#b5952f] dark:group-hover:text-[#d4af37] transition-colors">Login</span>
-<span class="absolute top-0 -right-7 font-body-md text-xs sm:text-sm font-bold text-[#b5952f] dark:text-[#d4af37]">06</span>
+<a class="mobile-nav-link nav-link staggered-menu-item w-max group" style="transition-delay: 0.35s" href="login.html">
+<span class="font-body-md text-[17px] text-white/90 group-hover:text-white transition-colors">Login</span><span class="font-body-md text-[17px] text-white/40 group-hover:text-white transition-colors">06</span>
 </a>
 </nav>
 <div class="mt-auto pt-12 staggered-menu-item" style="transition-delay: 0.45s">
 <div class="flex items-center gap-3">
-<img src="RITMUNLogo.png" alt="RITMUNSOC Logo" class="h-8 w-auto opacity-90">
-<div class="font-display-lg text-[20px] leading-tight text-[#0A1128]/90 dark:text-[#fcf8f2]/90 tracking-tight">RITMUNSOC</div>
+<img src="RITMUNLogo.png" alt="RITMUNSOC Logo" class="h-6 w-auto opacity-70 grayscale">
+<div class="font-display-lg text-[18px] text-white/80 tracking-tight">RITMUNSOC</div>
 </div>
-<p class="mt-2 font-label-md text-[10px] uppercase text-[#0A1128]/60 dark:text-[#fcf8f2]/50 tracking-[0.2em]">Dialogue.Diplomacy.Leadership</p>
+<p class="mt-2 font-body-md text-[10px] uppercase text-white/40 tracking-[0.1em]">Dialogue.Diplomacy.Leadership</p>
 </div>
 </aside>
 <main class="relative pt-44 md:pt-40 px-6 md:px-container-padding" style="view-transition-name:page-content">
