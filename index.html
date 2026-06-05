@@ -5,7 +5,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>RITMUNSOC | Diplomacy Refracted</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:ital,wght@0,600;0,700;1,600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 <script id="tailwind-config">
       tailwind.config = {
@@ -504,12 +504,11 @@
 <span class="font-label-md text-label-md uppercase tracking-widest text-primary">Global Summit 2024</span>
 </div>
 <div class="mb-4">
-<h2 class="font-display-lg text-[54px] sm:text-[80px] md:text-[120px] lg:text-[160px] text-[#eae1dc] font-black leading-none tracking-tighter transition-all duration-500 ease-out hover:scale-[1.05] hover:drop-shadow-[0_0_30px_rgba(197,195,228,0.6)] cursor-default" style="text-shadow: rgba(197, 195, 228, 0.3) 0px 0px 20px;">
-        RITMUNSOC
-    </h2>
-<div class="font-label-md text-[14px] md:text-[16px] tracking-[0.4em] text-[#c8c5ce] uppercase mt-2 mb-8">
-        DIALOGUE. DIPLOMACY. LEADERSHIP.
-    </div>
+  <!-- TextPressure hero title -->
+  <div id="text-pressure-hero" style="position:relative; width:100%; height:clamp(60px,20vw,200px); cursor:default;"></div>
+  <div class="font-label-md text-[14px] md:text-[16px] tracking-[0.4em] text-[#c8c5ce] dark:text-[#c8c5ce] text-[#22223b] uppercase mt-2 mb-8">
+      DIALOGUE. DIPLOMACY. LEADERSHIP.
+  </div>
 </div>
 </section>
 <!-- Bento Grid Features -->
@@ -1319,4 +1318,46 @@ Explore Committees
 
     <script src="transitions.js" defer></script>
 <script src="ripple-button.js" defer></script>
+<script src="text-pressure.js"></script>
+<script>
+  (function() {
+    function getTextColor() {
+      return document.documentElement.classList.contains('dark') ? '#eae1dc' : '#22223b';
+    }
+
+    function initTextPressure() {
+      var container = document.getElementById('text-pressure-hero');
+      if (!container) return;
+      // Clean up previous instance if re-initialising
+      container.innerHTML = '';
+      window._textPressureInstance = new TextPressure(container, {
+        text: 'RITMUNSOC',
+        fontFamily: 'Playfair Display',
+        fontUrl: null,
+        weight: true,
+        italic: false,   // Playfair italic is a separate style — skip the ital axis
+        width: false,
+        alpha: false,
+        flex: true,
+        stroke: false,
+        scale: false,
+        textColor: getTextColor(),
+        minFontSize: 36
+      });
+    }
+
+    // Init after DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initTextPressure);
+    } else {
+      initTextPressure();
+    }
+
+    // Re-init on theme toggle so colours update
+    document.addEventListener('themeChanged', function() {
+      if (window._textPressureInstance) window._textPressureInstance.destroy();
+      initTextPressure();
+    });
+  })();
+</script>
 </body></html>

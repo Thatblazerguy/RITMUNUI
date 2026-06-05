@@ -105,6 +105,8 @@
         } else {
             document.addEventListener('DOMContentLoaded', () => swapLogos(isLight), { once: true });
         }
+        // Notify other scripts (e.g. TextPressure) that the theme changed
+        document.dispatchEvent(new CustomEvent('themeChanged', { detail: { isLight } }));
     }
 
     function loadAndApply() {
