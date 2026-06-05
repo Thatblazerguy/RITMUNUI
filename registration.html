@@ -446,8 +446,73 @@
 </aside>
 
 <main class="min-h-screen flex flex-col items-center justify-center pt-32 pb-20 px-6 gap-12" style="view-transition-name:page-content">
-  <!-- 3D Lanyard Badge Mount Point -->
-  <div id="lanyard-badge-root" class="w-full max-w-6xl transition-opacity duration-500 z-10"></div>
+  <!-- 2D Interactive Badge -->
+  <div id="badge-2d-container" class="relative w-full max-w-sm mx-auto h-[60vh] min-h-[400px] flex flex-col items-center justify-start cursor-pointer transition-opacity duration-500 z-10 group" aria-label="Double click to reveal registration" style="perspective: 1000px;">
+    
+    <!-- Lanyard String (SVG) -->
+    <svg class="absolute top-[-80px] w-48 h-48 pointer-events-none drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] z-0" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Left side of string -->
+      <path d="M-20,-50 Q45,20 50,60" stroke="#c5c3e4" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.6"/>
+      <!-- Right side of string -->
+      <path d="M120,-50 Q55,20 50,60" stroke="#c5c3e4" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.6"/>
+      <!-- Clip holder -->
+      <rect x="44" y="60" width="12" height="15" rx="3" fill="url(#metal-gradient)"/>
+      <circle cx="50" cy="73" r="5" fill="none" stroke="#928f98" stroke-width="2"/>
+      
+      <defs>
+        <linearGradient id="metal-gradient" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#eae1dc"/>
+          <stop offset="50%" stop-color="#928f98"/>
+          <stop offset="100%" stop-color="#47464d"/>
+        </linearGradient>
+      </defs>
+    </svg>
+
+    <!-- The Card itself -->
+    <div id="badge-card" class="mt-[100px] bg-primary-container/40 dark:bg-primary-container/40 backdrop-blur-[30px] w-[260px] h-[380px] rounded-[16px] p-6 relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.2)] flex flex-col items-center justify-between border border-outline-variant/30 origin-[center_-80px] transition-transform duration-[400ms] ease-out z-10">
+      
+      <!-- Card header -->
+      <div class="w-full text-center pb-4 border-b border-outline-variant/20">
+        <h2 class="font-display-lg text-[22px] text-primary font-bold tracking-wider leading-none">RITMUNSOC</h2>
+        <p class="font-label-md text-[10px] uppercase tracking-widest text-on-surface-variant mt-2">2024 Delegate</p>
+      </div>
+
+      <!-- Card photo placeholder -->
+      <div class="w-28 h-28 rounded-full border-4 border-primary/20 overflow-hidden relative my-4 bg-surface-container/50 shadow-inner flex items-center justify-center">
+        <span class="material-symbols-outlined text-[64px] text-on-surface-variant/50">person</span>
+      </div>
+
+      <!-- Card info placeholder -->
+      <div class="w-full space-y-3">
+        <div class="h-2.5 w-[85%] bg-on-surface-variant/20 rounded-full mx-auto"></div>
+        <div class="h-2 w-[60%] bg-on-surface-variant/20 rounded-full mx-auto"></div>
+        <div class="h-2 w-[75%] bg-on-surface-variant/20 rounded-full mx-auto"></div>
+      </div>
+
+      <!-- Barcode decoration -->
+      <div class="w-full mt-4 h-6 flex justify-center items-end opacity-40 gap-[3px]">
+        <div class="w-1 h-full bg-primary/70"></div>
+        <div class="w-1.5 h-full bg-primary/70"></div>
+        <div class="w-[2px] h-4 bg-primary/70"></div>
+        <div class="w-2 h-full bg-primary/70"></div>
+        <div class="w-1 h-5 bg-primary/70"></div>
+        <div class="w-[3px] h-full bg-primary/70"></div>
+        <div class="w-1 h-full bg-primary/70"></div>
+        <div class="w-[2px] h-5 bg-primary/70"></div>
+        <div class="w-2 h-full bg-primary/70"></div>
+        <div class="w-1 h-full bg-primary/70"></div>
+      </div>
+      
+      <!-- Holographic glint overlay -->
+      <div id="badge-glint" class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/20 to-white/0 -translate-x-[150%] transition-transform duration-200 pointer-events-none mix-blend-overlay"></div>
+    </div>
+    
+    <div class="absolute bottom-0 w-full text-center pointer-events-none mt-8 z-0">
+      <p class="text-on-surface-variant font-label-md tracking-[0.2em] text-sm uppercase animate-pulse drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+        Double click badge to register
+      </p>
+    </div>
+  </div>
 
   <div id="registration-form-panel" class="hidden opacity-0 translate-y-8 transition-all duration-700 ease-out glass-panel w-full max-w-6xl rounded-[24px] p-8 md:p-12 relative overflow-hidden z-0">
     <header class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-8">
@@ -817,6 +882,79 @@
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
         revealElements.forEach(el => revealObserver.observe(el));
+
+        // 4. 2D Interactive Lanyard Badge
+        const badgeContainer = document.getElementById('badge-2d-container');
+        const badgeCard = document.getElementById('badge-card');
+        const badgeGlint = document.getElementById('badge-glint');
+        const formPanel = document.getElementById('registration-form-panel');
+
+        if (badgeContainer && badgeCard && formPanel) {
+            let rafId = null;
+            let currentRotX = 0;
+            let currentRotY = 0;
+            let targetRotX = 0;
+            let targetRotY = 0;
+
+            // Smooth interpolation function
+            const lerp = (start, end, factor) => start + (end - start) * factor;
+
+            const animateBadge = () => {
+                // Lerp current rotations towards target
+                currentRotX = lerp(currentRotX, targetRotX, 0.1);
+                currentRotY = lerp(currentRotY, targetRotY, 0.1);
+
+                // Apply rotation and subtle swing
+                badgeCard.style.transform = `rotateX(${currentRotX}deg) rotateY(${currentRotY}deg) rotateZ(${currentRotY * 0.3}deg)`;
+                
+                // Move glint across surface based on rotation
+                if(badgeGlint) {
+                  const glintPos = (currentRotY / 20) * 100;
+                  badgeGlint.style.transform = `translateX(${glintPos}%)`;
+                }
+
+                rafId = requestAnimationFrame(animateBadge);
+            };
+
+            // Start animation loop
+            animateBadge();
+
+            document.addEventListener('mousemove', (e) => {
+                // Calculate normalized mouse position (-1 to 1) relative to screen
+                const x = (e.clientX / window.innerWidth) * 2 - 1;
+                const y = (e.clientY / window.innerHeight) * 2 - 1;
+                
+                // Set target rotations (max 15 degrees)
+                targetRotY = x * 15;
+                targetRotX = -y * 15;
+            });
+
+            document.addEventListener('mouseleave', () => {
+                // Reset on leave
+                targetRotX = 0;
+                targetRotY = 0;
+            });
+
+            // Double Click to Reveal Form
+            badgeContainer.addEventListener('dblclick', () => {
+                // Fade out badge
+                badgeContainer.style.opacity = '0';
+                
+                setTimeout(() => {
+                    badgeContainer.style.display = 'none';
+                    
+                    // Show and fade in form
+                    formPanel.classList.remove('hidden');
+                    // Trigger reflow
+                    void formPanel.offsetWidth; 
+                    formPanel.style.opacity = '1';
+                    formPanel.style.transform = 'translateY(0)';
+                    
+                    // Stop animation to save CPU
+                    cancelAnimationFrame(rafId);
+                }, 500);
+            });
+        }
 
 </script>
     <script src="transitions.js" defer></script>
