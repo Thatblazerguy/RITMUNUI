@@ -486,11 +486,38 @@
         <span class="material-symbols-outlined text-[72px] text-on-surface-variant/50">person</span>
       </div>
 
-      <!-- Card info placeholder -->
-      <div class="w-full space-y-4">
-        <div class="h-3 w-[85%] bg-on-surface-variant/20 rounded-full mx-auto"></div>
-        <div class="h-2.5 w-[60%] bg-on-surface-variant/20 rounded-full mx-auto"></div>
-        <div class="h-2.5 w-[75%] bg-on-surface-variant/20 rounded-full mx-auto"></div>
+      <!-- Card details -->
+      <div class="w-full flex flex-col gap-4 mt-2">
+        <div class="text-center">
+          <p class="font-label-md text-[9px] uppercase tracking-widest text-on-surface-variant/60 mb-0.5">Delegate Name</p>
+          <p class="font-body-lg text-[18px] font-semibold text-[#f2e9e4] tracking-wide">JANE DOE</p>
+        </div>
+        
+        <div class="flex justify-between border-t border-outline-variant/10 pt-3">
+          <div class="text-left">
+            <p class="font-label-md text-[9px] uppercase tracking-widest text-on-surface-variant/60 mb-0.5">Committee</p>
+            <p class="font-body-md text-[13px] font-medium text-primary">UNSC</p>
+          </div>
+          <div class="text-right">
+            <p class="font-label-md text-[9px] uppercase tracking-widest text-on-surface-variant/60 mb-0.5">Country</p>
+            <p class="font-body-md text-[13px] font-medium text-primary">UNITED STATES</p>
+          </div>
+        </div>
+        
+        <div class="flex justify-between border-t border-outline-variant/10 pt-3 items-end">
+           <div class="text-left">
+            <p class="font-label-md text-[9px] uppercase tracking-widest text-on-surface-variant/60 mb-0.5">ID Number</p>
+            <p class="font-mono text-[11px] font-medium text-[#c9ada7] tracking-wider">RIT-24-042</p>
+          </div>
+          <div class="text-right">
+            <p class="font-label-md text-[9px] uppercase tracking-widest text-on-surface-variant/60 mb-1">Clearance</p>
+            <div class="flex gap-1.5 justify-end">
+              <span class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_#c5c3e4] animate-pulse"></span>
+              <span class="w-2 h-2 rounded-full bg-primary/40"></span>
+              <span class="w-2 h-2 rounded-full bg-primary/40"></span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Barcode decoration -->
