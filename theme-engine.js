@@ -109,7 +109,7 @@
 
     function loadAndApply() {
         const stored = localStorage.getItem('ritmunsoc-theme');
-        applyTheme(stored === 'light');
+        applyTheme(stored !== 'dark');
     }
 
     // Apply immediately to kill flash of unstyled dark content
