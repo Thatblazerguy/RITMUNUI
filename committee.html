@@ -365,8 +365,8 @@
         /* Each panel */
         .haccordion-panel {
             position: relative;
-            flex: 0 0 4.5rem;
-            min-width: 4.5rem;
+            flex: 1;
+            min-width: 0;
             overflow: hidden;
             border-radius: 1.5rem;
             border: 1px solid rgba(154, 140, 152, 0.22);
@@ -379,7 +379,7 @@
         }
 
         .haccordion-panel.is-active {
-            flex: 0 0 clamp(18rem, 40vw, 32rem);
+            flex: 5;
             border-color: rgba(197, 195, 228, 0.5);
             box-shadow: 0 20px 54px rgba(0, 0, 0, 0.44), 0 0 32px rgba(197, 195, 228, 0.14);
         }
@@ -529,14 +529,14 @@
             }
 
             .haccordion-panel {
-                flex: 0 0 3.5rem;
+                flex: 1;
                 min-width: unset;
                 min-height: 3.5rem;
                 border-radius: 1.1rem;
             }
 
             .haccordion-panel.is-active {
-                flex: 0 0 22rem;
+                flex: 5;
                 min-height: 22rem;
             }
 
