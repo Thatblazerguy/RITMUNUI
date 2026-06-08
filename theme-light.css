@@ -3,6 +3,56 @@
  * Purely Additive Thematic Swap Override Matrix
  */
 
+/* Custom Fonts for ID Card Design */
+@font-face {
+    font-family: 'Nomark';
+    src: url('Nomark.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CaviarDreams';
+    src: url('CaviarDreams.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CaviarDreams';
+    src: url('CaviarDreams_Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CaviarDreams';
+    src: url('CaviarDreams_Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'CaviarDreams';
+    src: url('CaviarDreams_BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+/* High-specificity ID card overrides to prevent light-theme overrides */
+#badge-card .nomark-text,
+body.light-theme #badge-card .nomark-text,
+body.dark #badge-card .nomark-text {
+    font-family: 'Nomark', serif !important;
+}
+
+#badge-card .caviar-text,
+body.light-theme #badge-card .caviar-text,
+body.dark #badge-card .caviar-text {
+    font-family: 'CaviarDreams', sans-serif !important;
+}
+
+
 /* ==========================================
    0. Switcher Button Base Styles (Dark & Light)
    ========================================== */
@@ -132,6 +182,84 @@ body.light-theme .committee-hover-details p {
 
 body.light-theme span.committee-hover-code {
     color: #6d466b !important;
+}
+
+/* ==========================================
+   Horizontal Accordion — Light Mode
+   ========================================== */
+
+/* Panel base */
+body.light-theme .haccordion-panel {
+    background: rgba(255, 255, 255, 0.25) !important;
+    border-color: rgba(180, 159, 204, 0.38) !important;
+}
+
+body.light-theme .haccordion-panel.is-active {
+    border-color: rgba(109, 70, 107, 0.48) !important;
+    box-shadow: 0 18px 46px rgba(109, 70, 107, 0.18), 0 0 28px rgba(180, 159, 204, 0.2) !important;
+}
+
+/* Keep overlay DARK in light mode so text over image stays readable */
+body.light-theme .haccordion-panel::after {
+    background:
+        linear-gradient(0deg, rgba(10, 6, 8, 0.88) 0%, rgba(10, 6, 8, 0.45) 50%, rgba(10, 6, 8, 0.15) 100%),
+        linear-gradient(90deg, rgba(10, 6, 8, 0.65) 0%, transparent 65%) !important;
+}
+
+/* Collapsed label — white text + shadow for readability on dark image */
+body.light-theme .haccordion-label span {
+    color: rgba(255, 255, 255, 0.92) !important;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Expanded content text — always white over the dark overlay */
+body.light-theme .haccordion-code {
+    color: rgba(234, 215, 215, 0.95) !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.light-theme .haccordion-title {
+    color: #ffffff !important;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55) !important;
+    font-family: 'Playfair Display', serif !important;
+}
+
+body.light-theme .haccordion-agenda {
+    color: rgba(255, 255, 255, 0.82) !important;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.light-theme .haccordion-director {
+    color: rgba(234, 215, 215, 0.85) !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Action buttons inside the expanded panel */
+body.light-theme .haccordion-content .committee-action {
+    background: rgba(255, 255, 255, 0.18) !important;
+    border-color: rgba(255, 255, 255, 0.42) !important;
+    color: #ffffff !important;
+    backdrop-filter: blur(8px) !important;
+}
+
+body.light-theme .haccordion-content .committee-action:hover {
+    background: rgba(255, 255, 255, 0.32) !important;
+    border-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+body.light-theme .haccordion-content .committee-action-primary {
+    background: linear-gradient(135deg, rgba(65, 34, 52, 0.92), rgba(109, 70, 107, 0.88)) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    color: #fff7f2 !important;
+}
+
+/* Image brightness — slightly brighten so panels don't look washed */
+body.light-theme .haccordion-panel img {
+    opacity: 0.72 !important;
+}
+
+body.light-theme .haccordion-panel.is-active img {
+    opacity: 1 !important;
 }
 
 body.light-theme .committee-spotlight-copy {
