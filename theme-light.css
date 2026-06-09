@@ -11,6 +11,13 @@
     font-style: normal;
 }
 
+/* Make Nomark names bolder and more readable */
+.thick-name {
+    -webkit-text-stroke: 0.8px currentColor;
+    text-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    letter-spacing: 0.02em !important;
+}
+
 @font-face {
     font-family: 'CaviarDreams';
     src: url('CaviarDreams.ttf') format('truetype');
@@ -206,9 +213,9 @@ body.light-theme .haccordion-panel::after {
         linear-gradient(90deg, rgba(10, 6, 8, 0.72) 0%, transparent 65%) !important;
 }
 
-/* Collapsed label — restore Playfair Display (overrides generic span rule) */
+/* Collapsed label — restore Nomark (overrides generic span rule) */
 body.light-theme .haccordion-label span {
-    font-family: 'Playfair Display', serif !important;
+    font-family: 'Nomark', serif !important;
     font-size: 0.9rem !important;
     font-weight: 600 !important;
     color: #ffffff !important;
@@ -221,14 +228,14 @@ body.light-theme .haccordion-label span {
 
 /* Expanded content — always white over the dark overlay */
 body.light-theme .haccordion-code {
-    font-family: 'Inter', sans-serif !important;
+    font-family: 'Manrope', sans-serif !important;
     color: rgba(240, 220, 218, 1) !important;
     text-shadow: 0 1px 5px rgba(0, 0, 0, 0.8) !important;
     letter-spacing: 0.25em !important;
 }
 
 body.light-theme .haccordion-title {
-    font-family: 'Playfair Display', serif !important;
+    font-family: 'Nomark', serif !important;
     font-weight: 700 !important;
     color: #ffffff !important;
     text-shadow:
@@ -237,13 +244,13 @@ body.light-theme .haccordion-title {
 }
 
 body.light-theme .haccordion-agenda {
-    font-family: 'Inter', sans-serif !important;
+    font-family: 'Manrope', sans-serif !important;
     color: rgba(255, 255, 255, 0.92) !important;
     text-shadow: 0 1px 6px rgba(0, 0, 0, 0.75) !important;
 }
 
 body.light-theme .haccordion-director {
-    font-family: 'Inter', sans-serif !important;
+    font-family: 'Manrope', sans-serif !important;
     color: rgba(240, 220, 218, 0.92) !important;
     text-shadow: 0 1px 5px rgba(0, 0, 0, 0.65) !important;
     letter-spacing: 0.18em !important;
@@ -251,7 +258,7 @@ body.light-theme .haccordion-director {
 
 /* Action buttons inside the expanded panel */
 body.light-theme .haccordion-content .committee-action {
-    font-family: 'Inter', sans-serif !important;
+    font-family: 'Manrope', sans-serif !important;
     background: rgba(255, 255, 255, 0.18) !important;
     border-color: rgba(255, 255, 255, 0.48) !important;
     color: #ffffff !important;
@@ -264,7 +271,7 @@ body.light-theme .haccordion-content .committee-action:hover {
 }
 
 body.light-theme .haccordion-content .committee-action-primary {
-    font-family: 'Inter', sans-serif !important;
+    font-family: 'Manrope', sans-serif !important;
     background: linear-gradient(135deg, rgba(65, 34, 52, 0.95), rgba(109, 70, 107, 0.9)) !important;
     border-color: rgba(255, 255, 255, 0.3) !important;
     color: #fff7f2 !important;
@@ -349,7 +356,6 @@ body.light-theme .text-headline-sm,
 body.light-theme [class*="text-[#eae1dc]"],
 body.light-theme [class*="text-[#f2e9e4]"] {
     color: #412234 !important;
-    font-family: 'Playfair Display', serif !important;
     text-shadow: none !important;
 }
 
@@ -367,8 +373,44 @@ body.light-theme .text-lilac-ash:not(.material-symbols-outlined),
 body.light-theme .text-on-surface-variant:not(.material-symbols-outlined),
 body.light-theme [class*="text-[#c8c5ce]"]:not(.material-symbols-outlined) {
     color: #6d466b !important;
-    font-family: 'Inter', sans-serif !important;
     text-shadow: none !important;
+}
+
+/* Font Family Overrides for Light Theme (matching Dark Theme system exactly) */
+body.light-theme h1,
+body.light-theme h2,
+body.light-theme .font-display-lg,
+body.light-theme .font-display-lg-mobile,
+body.light-theme .font-headline-md {
+    font-family: 'Nomark', serif !important;
+}
+
+/* Ensure spans inside display elements inherit the display font rather than generic span rules */
+body.light-theme h1 span,
+body.light-theme h2 span,
+body.light-theme .font-display-lg span,
+body.light-theme .font-display-lg-mobile span,
+body.light-theme .font-headline-md span,
+body.light-theme .nomark-text span {
+    font-family: inherit !important;
+}
+
+body.light-theme h3,
+body.light-theme h4,
+body.light-theme h5,
+body.light-theme h6,
+body.light-theme p,
+body.light-theme span:not(.material-symbols-outlined):not(.bg-primary):not(.bg-primary\/90):not(.text-on-primary):not(.ticker-track *),
+body.light-theme li,
+body.light-theme th,
+body.light-theme td,
+body.light-theme a:not(.bg-primary):not(.bg-primary\/90):not(.bg-primary\/40):not(.text-on-primary):not(.committee-action):not(.committee-action-primary),
+body.light-theme .font-headline-sm,
+body.light-theme .font-body-md,
+body.light-theme .font-body-lg,
+body.light-theme .font-label-md,
+body.light-theme .font-caption {
+    font-family: 'Manrope', sans-serif !important;
 }
 
 /* ==========================================
@@ -820,7 +862,7 @@ body.light-theme .border-l-4.border-primary {
    ========================================== */
 body.light-theme .at-quote-text {
     color: #412234 !important;
-    font-family: 'Playfair Display', serif !important;
+    font-family: 'Nomark', serif !important;
 }
 
 body.light-theme .at-quote-icon {
@@ -829,12 +871,12 @@ body.light-theme .at-quote-icon {
 
 body.light-theme .at-name {
     color: #412234 !important;
-    font-family: 'Playfair Display', serif !important;
+    font-family: 'Nomark', serif !important;
 }
 
 body.light-theme .at-role {
     color: rgba(109, 70, 107, 0.72) !important;
-    font-family: 'Inter', sans-serif !important;
+    font-family: 'Manrope', sans-serif !important;
 }
 
 body.light-theme .at-avatar {
@@ -867,9 +909,9 @@ body.light-theme .at-img.at-prev2 {
    to beat the generic span:not() rule above
    ========================================== */
 
-/* Collapsed label — force white + Playfair Display */
+/* Collapsed label — force white + Nomark */
 body.light-theme #haccordion .haccordion-label span {
-    font-family: 'Playfair Display', serif !important;
+    font-family: 'Nomark', serif !important;
     font-size: 0.9rem !important;
     font-weight: 600 !important;
     color: #ffffff !important;
@@ -882,7 +924,7 @@ body.light-theme #haccordion .haccordion-label span {
 
 /* Expanded panel — code label */
 body.light-theme #haccordion .haccordion-code {
-    font-family: 'Inter', sans-serif !important;
+    font-family: 'Manrope', sans-serif !important;
     color: rgba(255, 240, 235, 1) !important;
     text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9) !important;
     letter-spacing: 0.25em !important;
@@ -890,7 +932,7 @@ body.light-theme #haccordion .haccordion-code {
 
 /* Expanded panel — title */
 body.light-theme #haccordion .haccordion-title {
-    font-family: 'Playfair Display', serif !important;
+    font-family: 'Nomark', serif !important;
     font-weight: 700 !important;
     color: #ffffff !important;
     text-shadow:
@@ -900,14 +942,14 @@ body.light-theme #haccordion .haccordion-title {
 
 /* Expanded panel — agenda */
 body.light-theme #haccordion .haccordion-agenda {
-    font-family: 'Inter', sans-serif !important;
+    font-family: 'Manrope', sans-serif !important;
     color: rgba(255, 255, 255, 0.96) !important;
     text-shadow: 0 1px 8px rgba(0, 0, 0, 0.85) !important;
 }
 
 /* Expanded panel — director */
 body.light-theme #haccordion .haccordion-director {
-    font-family: 'Inter', sans-serif !important;
+    font-family: 'Manrope', sans-serif !important;
     color: rgba(248, 228, 222, 0.97) !important;
     text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8) !important;
     letter-spacing: 0.18em !important;
@@ -915,7 +957,7 @@ body.light-theme #haccordion .haccordion-director {
 
 /* Action buttons inside expanded panel */
 body.light-theme #haccordion .committee-action {
-    font-family: 'Inter', sans-serif !important;
+    font-family: 'Manrope', sans-serif !important;
     background: rgba(255, 255, 255, 0.18) !important;
     border-color: rgba(255, 255, 255, 0.5) !important;
     color: #ffffff !important;
@@ -928,9 +970,202 @@ body.light-theme #haccordion .committee-action:hover {
 }
 
 body.light-theme #haccordion .committee-action-primary {
-    font-family: 'Inter', sans-serif !important;
+    font-family: 'Manrope', sans-serif !important;
     background: linear-gradient(135deg, rgba(65, 34, 52, 0.95), rgba(109, 70, 107, 0.9)) !important;
     border-color: rgba(255, 255, 255, 0.3) !important;
     color: #fff7f2 !important;
 }
+
+/* ==========================================
+   GLOBAL RESPONSIVE FIXES — Tablet & Mobile
+   Applies across all pages (loaded via theme-light.css)
+   ========================================== */
+
+/* ── Base: prevent horizontal scroll everywhere ── */
+html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+/* ── Navbar: reduce horizontal padding on small screens ── */
+@media (max-width: 1024px) {
+    header {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+}
+
+/* ── Index: hero display text — clamp so it never overflows ── */
+@media (max-width: 1024px) {
+    /* RITMUNSOC giant heading */
+    h2.font-display-lg[style*="text-shadow"] {
+        font-size: clamp(3rem, 16vw, 7rem) !important;
+        letter-spacing: -0.02em !important;
+    }
+    /* RITMUN'26 giant text */
+    p.font-display-lg[style*="text-shadow"] {
+        font-size: clamp(3rem, 16vw, 7rem) !important;
+        letter-spacing: -0.02em !important;
+    }
+}
+
+/* ── Bento stats grid: single column on mobile & tablet ── */
+@media (max-width: 1024px) {
+    .grid.grid-cols-1.md\\:grid-cols-12 > div {
+        width: 100% !important;
+    }
+}
+
+/* ── Countdown timer: ensure it fits on narrow screens ── */
+@media (max-width: 1024px) {
+    /* Countdown boxes */
+    #days, #hours, #minutes, #seconds {
+        font-size: 2rem !important;
+    }
+    .flex.gap-4.md\\:gap-8.my-6,
+    div.flex.gap-4 {
+        gap: 0.5rem !important;
+    }
+}
+
+/* ── Carousel cards: adapt width to viewport on mobile & tablet ── */
+@media (max-width: 1024px) {
+    .carousel-track {
+        padding: 0.5rem 1rem 1rem !important;
+        gap: 1rem !important;
+    }
+    /* Achievement cards */
+    .carousel-track a.w-\\[350px\\] {
+        width: clamp(280px, 90vw, 350px) !important;
+        flex-shrink: 0 !important;
+    }
+    /* Event cards */
+    .carousel-track a.w-\\[400px\\] {
+        width: clamp(300px, 90vw, 400px) !important;
+        flex-shrink: 0 !important;
+    }
+    .carousel-scrubber {
+        width: calc(100% - 2rem) !important;
+    }
+}
+
+/* ── Footer: stack vertically on very small screens ── */
+@media (max-width: 1024px) {
+    footer.flex.flex-col.md\\:flex-row {
+        gap: 1.5rem !important;
+        text-align: center !important;
+    }
+    footer .flex.gap-8 {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 1rem !important;
+    }
+}
+
+/* ── Secretariat (sec.html): landscape card full-width on mobile & tablet ── */
+@media (max-width: 1024px) {
+    .landscape-card {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    /* Name heading in secretariat cards */
+    .landscape-card h2.font-display-lg {
+        font-size: 2rem !important;
+    }
+    /* Secretariat metadata panel padding */
+    .landscape-card .flex-1.p-6.md\\:p-12 {
+        padding: 1.5rem !important;
+    }
+}
+
+/* ── Committee page: horizontal accordion cards ── */
+@media (max-width: 1024px) {
+    /* Committee action buttons */
+    #haccordion .committee-action,
+    #haccordion .committee-action-primary {
+        font-size: 0.75rem !important;
+        padding: 0.6rem 0.8rem !important;
+    }
+    #haccordion {
+        flex-direction: column !important;
+    }
+    /* Each panel becomes full-width and stacks vertically */
+    #haccordion > div,
+    #haccordion > section,
+    #haccordion > article,
+    #haccordion .h-panel,
+    #haccordion [class*="panel"] {
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+/* ── Registration page: badge card scales on small screens ── */
+@media (max-width: 1024px) {
+    #badge-card {
+        width: min(340px, 88vw) !important;
+        height: auto !important;
+        min-height: 480px !important;
+    }
+    #badge-2d-container {
+        height: auto !important;
+        min-height: 520px !important;
+    }
+}
+
+/* ── Registration form: toggle shell ── */
+@media (max-width: 1024px) {
+    .toggle-shell {
+        width: 100% !important;
+        max-width: 320px !important;
+    }
+}
+
+/* ── Login / Create Account: glass panel form width ── */
+@media (max-width: 1024px) {
+    .glass-panel {
+        border-radius: 1rem !important;
+        padding: 1.5rem !important;
+    }
+    /* Form container inside main */
+    main > .glass-panel,
+    main > div > .glass-panel {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+/* ── Testimonials (at-wrap): image stack sizing on mobile & tablet ── */
+@media (max-width: 1024px) {
+    .at-images {
+        width: 180px !important;
+        height: 240px !important;
+        flex-shrink: 0 !important;
+    }
+    .at-wrap {
+        padding: 0 1rem !important;
+    }
+}
+
+/* ── General: prevent any fixed-px element from exceeding viewport ── */
+@media (max-width: 1024px) {
+    [style*="width: 320px"],
+    [style*="width:320px"] {
+        width: min(320px, 90vw) !important;
+    }
+    [style*="width: 400px"],
+    [style*="width:400px"] {
+        width: min(400px, 90vw) !important;
+    }
+}
+
+/* ── Mobile menu: ensure close button always visible ── */
+@media (max-width: 1024px) {
+    #mobile-menu {
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
+    }
+}
+
 
